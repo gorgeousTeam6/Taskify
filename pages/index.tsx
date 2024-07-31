@@ -1,5 +1,5 @@
 import Head from 'next/head';
-
+import TodoModal from '@/containers/dashboard/id/modals/todoModal/TodoModal';
 export default function Home() {
   return (
     <>
@@ -9,7 +9,9 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.png' />
       </Head>
-      <main></main>
+      <main>
+        <TodoModal />
+      </main>
     </>
   );
 }
