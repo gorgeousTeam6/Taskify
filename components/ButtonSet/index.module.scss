@@ -1,0 +1,17 @@
+@import '/styles/color';
+@import '/styles/fonts';
+
+.button-set {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+}
+
+.primary {
+  gap: 10px;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}

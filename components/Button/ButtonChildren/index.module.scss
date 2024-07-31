@@ -1,0 +1,89 @@
+@import '/styles/color';
+@import '/styles/fonts';
+
+.standard-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-column {
+  gap: 12px;
+
+  &.desktop {
+    height: 22px;
+  }
+
+  &.tablet {
+    height: 22px;
+  }
+
+  &.mobile {
+    height: 20px;
+  }
+}
+
+.add-board {
+  gap: 12px;
+
+  &.desktop {
+    height: 22px;
+  }
+
+  &.tablet {
+    height: 22px;
+  }
+
+  &.mobile {
+    height: 20px;
+  }
+}
+
+.dashboard {
+  &.desktop {
+    width: 292px;
+  }
+
+  &.tablet {
+    width: 207px;
+  }
+
+  &.mobile {
+    width: 220px;
+  }
+
+  .dashboard-title-box {
+    &.desktop {
+      gap: 16px;
+    }
+
+    &.tablet {
+      gap: 12px;
+    }
+
+    &.mobile {
+      gap: 12px;
+    }
+
+    .dashboard-title-icon-gap {
+      &.desktop {
+        gap: 8px;
+      }
+
+      &.tablet {
+        gap: 6px;
+      }
+
+      &.mobile {
+        gap: 4px;
+      }
+    }
+  }
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $green;
+}

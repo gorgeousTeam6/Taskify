@@ -1,0 +1,226 @@
+@import '/styles/color';
+@import '/styles/fonts';
+
+.common {
+  border: 1px solid $gray-d9;
+  font-family: 'Pretendard', sans-serif;
+  cursor: pointer;
+}
+
+.login {
+  border: none;
+  border-radius: 8px;
+  background: $violet;
+  color: $white;
+  font-weight: 500;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 14px 236px;
+    font-size: 18px;
+  }
+
+  &.tablet {
+    padding: 14px 236px;
+    font-size: 18px;
+  }
+
+  &.mobile {
+    padding: 14px 152px;
+    font-size: 18px;
+  }
+
+  &:disabled {
+    background: $gray-9f;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  border: none;
+  border-radius: 4px;
+  background: $violet;
+  color: $white;
+  font-weight: 500;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 7px 29px;
+    font-size: 14px;
+  }
+
+  &.tablet {
+    padding: 6px 23px;
+    font-size: 14px;
+  }
+
+  &.mobile {
+    padding: 7px 37px;
+    font-size: 12px;
+  }
+}
+
+.secondary {
+  border-radius: 4px;
+  background: $white;
+  color: $violet;
+  font-weight: 500;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 7px 29px;
+    font-size: 14px;
+  }
+
+  &.tablet {
+    padding: 6px 23px;
+    font-size: 14px;
+  }
+
+  &.mobile {
+    padding: 7px 37px;
+    font-size: 12px;
+  }
+}
+
+.delete {
+  border-radius: 4px;
+  background: $white;
+  color: $violet;
+  font-weight: 500;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 7px 29px;
+    font-size: 14px;
+  }
+
+  &.tablet {
+    padding: 7px 29px;
+    font-size: 14px;
+  }
+
+  &.mobile {
+    padding: 6px 15px;
+    font-size: 12px;
+  }
+}
+
+.add-column {
+  border-radius: 8px;
+  background: $white;
+  color: $black-33;
+  font-weight: 700;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 24px 85px;
+    font-size: 18px;
+  }
+
+  &.tablet {
+    padding: 24px 180px;
+    font-size: 18px;
+  }
+
+  &.mobile {
+    padding: 20px 60px;
+    font-size: 16px;
+  }
+}
+
+.add-todo {
+  border-radius: 6px;
+  background: $white;
+
+  &.desktop {
+    padding: 9px 146px;
+  }
+
+  &.tablet {
+    padding: 9px 261px;
+  }
+
+  &.mobile {
+    padding: 6px 132px;
+  }
+}
+
+.delete-dashboard {
+  border-radius: 8px;
+  color: $black-33;
+  font-weight: 700;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 20px 96px;
+    font-size: 18px;
+  }
+
+  &.tablet {
+    padding: 20px 96px;
+    font-size: 18px;
+  }
+
+  &.mobile {
+    padding: 16px 84px;
+    font-size: 16px;
+  }
+}
+
+.pagenation {
+  &.desktop {
+  }
+
+  &.tablet {
+  }
+
+  &.mobile {
+  }
+}
+
+.add-board {
+  border-radius: 8px;
+  background: $white;
+  color: $black-33;
+  font-weight: 600;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 24px 99px;
+    font-size: 16px;
+  }
+
+  &.tablet {
+    padding: 23px 56px;
+    font-size: 16px;
+  }
+
+  &.mobile {
+    padding: 19px 70px;
+    font-size: 14px;
+  }
+}
+
+.dashboard {
+  border-radius: 8px;
+  background: $white;
+  color: $black-33;
+  font-weight: 600;
+  line-height: 1.2em;
+
+  &.desktop {
+    padding: 25px 20px;
+    font-size: 16px;
+  }
+
+  &.tablet {
+    padding: 24px 20px;
+    font-size: 16px;
+  }
+
+  &.mobile {
+    padding: 20px 20px;
+    font-size: 14px;
+  }
+}

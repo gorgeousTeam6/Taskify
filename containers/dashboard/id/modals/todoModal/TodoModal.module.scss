@@ -6,8 +6,7 @@
 }
 
 .modal-container {
-  display: flex;
-  flex-direction: column;
+  @include Flex(column, null, null);
   gap: 24px;
   font-family: pretendard;
   width: 730px;
@@ -18,10 +17,10 @@
 }
 
 .modal-wrapper {
-  display: flex;
-  flex-direction: row;
+  @include Flex(row, null, null);
   gap: 24px;
 }
+
 .title-and-icons {
   @include Flex(row, space-between, center);
 
@@ -32,15 +31,13 @@
   }
 
   .kebab-and-close {
-    display: flex;
+    @include Flex(row, null, center);
     gap: 24px;
-    align-items: center;
   }
 }
 
 .contents {
-  display: flex;
-  flex-direction: column;
+  @include Flex(column, null, null);
   gap: 16px;
   max-width: 450px;
 
@@ -53,15 +50,16 @@
 
 .comment-input-container {
   margin-top: 8px;
-  display: flex;
-  flex-direction: column;
+  @include Flex(column, null, null);
   gap: 10px;
+
   .comment-title {
     font-size: 16px;
     font-weight: 500;
     line-height: 19px;
     color: $black-33;
   }
+
   .comment-input {
     border: 1px solid $gray-d9;
     width: 450px;
@@ -80,40 +78,41 @@
     width: 34px;
     height: 34px;
   }
+
   .comment-contents {
-    display: flex;
-    flex-direction: column;
+    @include Flex(column, null, null);
     gap: 6px;
 
     .writer-and-date {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+      @include Flex(row, null, center);
       gap: 8px;
     }
+
     .writer {
       font-weight: 600;
       font-size: 14px;
       line-height: 16px;
     }
+
     .date {
       font-size: 12px;
       font-weight: 400;
       line-height: 14px;
       color: $gray-9f;
     }
+
     .comment-text {
       font-weight: 400;
       font-size: 14px;
       line-height: 16px;
       color: $black-33;
     }
+    
     .edit-and-delete {
-      display: flex;
+      @include Flex(row, null, null);
       gap: 12px;
       margin-top: 6px;
 
-      flex-direction: row;
       .button {
         text-decoration: underline;
         background-color: transparent;
