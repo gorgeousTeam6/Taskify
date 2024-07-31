@@ -1,14 +1,14 @@
 import styles from './TodoModal.module.scss';
 import { IconKebab, IconClose } from '@/assets/icongroup';
 import Image from 'next/image';
-import sampleImg from '@/assets/images/Group 751.png';
+import sampleImg from '@/assets/images/img_todoSample.png';
 import profileImg from '@/assets/images/img_profileImg.png';
+import ManagerCard from './managerCard/ManagerCard';
 
 export default function TodoModal() {
   return (
     <>
       <div className={styles['modal-container']}>
-        <div className={styles['modal-wrapper']}>
           <div className={styles['title-and-icons']}>
             <p>새로운 일정 관리 Taskify</p>
             <div className={styles['kebab-and-close']}>
@@ -20,6 +20,7 @@ export default function TodoModal() {
               </button>
             </div>
           </div>
+        <div className={styles['modal-wrapper']}>
           <div className={styles['contents']}>
             <div> chips </div>
             <p className={styles['contents-text']}>
@@ -31,7 +32,7 @@ export default function TodoModal() {
             </p>
             <Image src={sampleImg} alt='일정 사진' />
             <div className={styles['comment-input-container']}>
-              <p>댓글</p>
+              <p className={styles['comment-title']}>댓글</p>
               <textarea
                 className={styles['comment-input']}
                 placeholder='댓글 작성하기'
@@ -58,6 +59,7 @@ export default function TodoModal() {
               </div>
             </div>
           </div>
+        <ManagerCard />
         </div>
       </div>
     </>

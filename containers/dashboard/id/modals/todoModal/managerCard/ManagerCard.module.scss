@@ -1,0 +1,42 @@
+@import '@/styles/index.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: pretendard;
+  border: 1px solid $gray-d9;
+  border-radius: 8px;
+  width: 200px;
+  height: 155px;
+  padding: 16px;
+}
+
+.title-and-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.manager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profileImg {
+  width: 34px;
+}
+
+.contents {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: $black-33;
+}
