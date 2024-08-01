@@ -1,20 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import styles from './index.module.scss';
-import Button from '../Button';
 
-type ButtonSetType = 'primary' | 'pagenation';
-
-interface ButtonSetProps {
-  buttonSetType: ButtonSetType;
-  orderReverse?: boolean;
-  children: ReactElement<typeof Button> | ReactElement<typeof Button>[];
-}
-
-const ButtonSet: React.FC<ButtonSetProps> = ({
+export default function ButtonSet({
   buttonSetType,
   orderReverse = false,
   children,
-}) => {
+}: ButtonSetProps) {
   if (buttonSetType === 'primary') {
     const reverse = orderReverse ? 'reverse' : '';
 
@@ -26,6 +17,4 @@ const ButtonSet: React.FC<ButtonSetProps> = ({
       </div>
     );
   }
-};
-
-export default ButtonSet;
+}

@@ -9,20 +9,18 @@
   border: 1px solid $gray-d9;
 
   background-color: $white;
+
   @include Flex(column, null, null);
-  gap: 12px;
+  @include ResponsiveGap(12, 20, 11);
 
   @include tablet {
     height: 93px;
     width: 100%;
-
     @include Flex(row, null, null);
-    gap: 20px;
   }
 
   @include mobile {
     flex-direction: column;
-    gap: 10.18px;
     height: auto;
   }
 
@@ -44,39 +42,31 @@
   // 태그, 캘린더, 프로필 감싸는 div
   .card-information {
     @include Flex(column, null, null);
-    gap: 10px;
+    @include ResponsiveGap(10, 16, 6);
 
     @include tablet {
       @include Flex(row, null, center);
-      gap: 16px;
     }
     @include mobile {
       @include Flex(column, null, flex-start);
-      gap: 6px;
     }
   }
 
   // 이미지 제외 부분
   .card-content {
     @include Flex(column, null, null);
-    gap: 10px;
+    @include ResponsiveGap(10, 10, 6);
 
     @include tablet {
       width: 100%;
-    }
-    @include mobile {
-      gap: 6px;
     }
 
     // 제목
     .title {
       @include FontStyle(16, 500, 16, 14);
+      @include ResponsiveLineHeight(19, 19, 16.7);
       line-height: 19px;
       color: $black-33;
-
-      @include mobile {
-        line-height: 16.7px;
-      }
     }
 
     // 태그들
@@ -100,11 +90,7 @@
       p {
         color: $gray-78;
         @include FontStyle(12, 500, 12, 10);
-        line-height: 14px;
-
-        @include mobile {
-          line-height: 12px;
-        }
+        @include ResponsiveLineHeight(14, 14, 12);
       }
     }
 
