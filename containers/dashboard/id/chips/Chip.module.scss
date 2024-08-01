@@ -37,11 +37,7 @@
   border-radius: 4px;
 
   @include FontStyle(12, 400, 12, 10);
-  line-height: 14.3px;
-
-  @include mobile {
-    line-height: 12px;
-  }
+  @include ResponsiveLineHeight(14.3, 14.3, 12);
 }
 
 // chip - progress 컴포넌트

@@ -1,0 +1,55 @@
+@use '@/styles/index.scss' as *;
+@import '@/styles/mixins/mixinChip';
+
+.column {
+  width: 355px;
+  height: 1010px;
+  border-right: 1px solid $gray-ee;
+  padding: 20px;
+  @include Flex(column, null, null);
+  @include ResponsiveGap(24, 24, 16);
+
+  @include tablet {
+    width: 100%;
+    height: 346px;
+    border-bottom: 1px solid $gray-ee;
+  }
+
+  @include mobile {
+    height: 470px;
+    padding: 16px 12px 12px;
+  }
+
+  svg {
+    @include GetCircleColor('violet');
+  }
+
+  .header {
+    @include Flex(row, space-between, cneter);
+
+    .header-left {
+      @include Flex(row, null, center);
+      gap: 8px;
+    }
+  }
+
+  .title {
+    @include Flex(row, null, center);
+    gap: 12px;
+    .column-title {
+      @include FontStyle(18, 700, 16, 14);
+      @include ResponsiveLineHeight(21.5, 21.5, 19);
+      color: $black-33;
+    }
+  }
+}
+
+.card-list {
+  overflow-y: auto;
+  @include Flex(column, null, null);
+  @include ResponsiveGap(16, 16, 10);
+
+  button > div {
+    justify-content: center;
+  }
+}

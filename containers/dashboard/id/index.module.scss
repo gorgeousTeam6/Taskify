@@ -1,0 +1,31 @@
+@use '@/styles/index.scss' as *;
+
+.main-section {
+  background-color: $gray-fa;
+
+  @include Flex(row, null, flex-start);
+
+  @include tablet {
+    flex-wrap: wrap;
+  }
+
+  .etc-wrapper {
+    width: 100%;
+    padding: 68px 20px 20px;
+    white-space: nowrap;
+
+    button {
+      @include Flex(row, center, center);
+    }
+
+    @include tablet {
+      button {
+        width: 100%;
+      }
+      padding: 20px;
+    }
+    @include mobile {
+      padding: 16px 12px 225px;
+    }
+  }
+}
