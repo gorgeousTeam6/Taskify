@@ -12,7 +12,7 @@ function DashboardId() {
       <Column id={5} title='To Do' />
       <Column id={5} title='To Do' />
       <div className={styles['etc-wrapper']}>
-        <Button deviceType='desktop' buttonType='add-column'>
+        <Button buttonType='add-column'>
           새로운 컬럼 추가하기
         </Button>
       </div>

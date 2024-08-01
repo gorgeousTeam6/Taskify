@@ -99,7 +99,7 @@ function Column({ id, title }: { id: number; title: string }) {
         <IconSetting onClick={() => router.push('/dashboard/id')} />
       </div>
       <div className={styles['card-list']}>
-        <Button deviceType='desktop' buttonType='add-todo' />
+        <Button buttonType='add-todo' />
         {cardList.map((card) => (
           <Card card={card} key={card.id} />
         ))}
