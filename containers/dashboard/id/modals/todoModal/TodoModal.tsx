@@ -9,17 +9,19 @@ export default function TodoModal() {
   return (
     <>
       <div className={styles['modal-container']}>
-          <div className={styles['title-and-icons']}>
-            <p>새로운 일정 관리 Taskify</p>
-            <div className={styles['kebab-and-close']}>
-              <button className={styles['top-button']}>
-                <IconKebab />
-              </button>
-              <button className={styles['top-button']}>
-                <IconClose />
-              </button>
-            </div>
+        <div className={styles['title-and-icons']}>
+          <p className={styles['title']}>새로운 일정 관리 Taskify</p>
+          <div className={styles['empty-block']}></div>
+          <div className={styles['kebab-and-close']}>
+            <button className={styles['top-button']}>
+              <IconKebab className={styles['icon']} />
+            </button>
+            <button className={styles['top-button']}>
+              <IconClose className={styles['icon']} />
+            </button>
           </div>
+        </div>
+        <p className={styles['title-mobile']}>새로운 일정 관리 Taskify</p>
         <div className={styles['modal-wrapper']}>
           <div className={styles['contents']}>
             <div> chips </div>
@@ -30,7 +32,11 @@ export default function TodoModal() {
               할 일도 갈 곳도 모른 채로 꼭 그렇게 서 있었네 When I see her
               smile, oh, distant light
             </p>
-            <Image src={sampleImg} alt='일정 사진' />
+            <Image
+              className={styles['sampleImg']}
+              src={sampleImg}
+              alt='일정 사진'
+            />
             <div className={styles['comment-input-container']}>
               <p className={styles['comment-title']}>댓글</p>
               <textarea
@@ -59,7 +65,7 @@ export default function TodoModal() {
               </div>
             </div>
           </div>
-        <ManagerCard />
+          <ManagerCard />
         </div>
       </div>
     </>

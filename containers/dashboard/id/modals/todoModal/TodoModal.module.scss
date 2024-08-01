@@ -23,51 +23,67 @@
 
 .title-and-icons {
   @include Flex(row, space-between, center);
+}
 
-  p {
-    font-size: 24px;
-    font-weight: 700;
-    color: $black-33;
-  }
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: $black-33;
+}
 
-  .kebab-and-close {
-    @include Flex(row, null, center);
-    gap: 24px;
-  }
+.kebab-and-close {
+  @include Flex(row, null, center);
+  gap: 24px;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+}
+.empty-block {
+  display: none;
+}
+
+.title-mobile {
+  display: none;
 }
 
 .contents {
   @include Flex(column, null, null);
   gap: 16px;
   max-width: 450px;
+}
 
-  p {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 24px;
-  }
+.contents-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.sampleImg {
+  width: 100%;
 }
 
 .comment-input-container {
   margin-top: 8px;
   @include Flex(column, null, null);
   gap: 10px;
+}
 
-  .comment-title {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 19px;
-    color: $black-33;
-  }
+.comment-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  color: $black-33;
+}
 
-  .comment-input {
-    border: 1px solid $gray-d9;
-    width: 450px;
-    height: 110px;
-    padding: 16px;
-    border-radius: 6px;
-    resize: none;
-  }
+.comment-input {
+  border: 1px solid $gray-d9;
+  width: 100%;
+  height: 110px;
+  padding: 16px;
+  border-radius: 6px;
+  resize: none;
 }
 
 .comment-card {
@@ -107,7 +123,7 @@
       line-height: 16px;
       color: $black-33;
     }
-    
+
     .edit-and-delete {
       @include Flex(row, null, null);
       gap: 12px;
@@ -123,5 +139,92 @@
         color: $gray-9f;
       }
     }
+  }
+}
+
+@include tablet {
+  .modal-container {
+    max-width: 678px;
+  }
+  .modal-wrapper {
+    justify-content: center;
+    gap: 6px;
+  }
+  .sampleImg {
+    width: 420px;
+  }
+  .contents-text {
+    width: 349px;
+  }
+}
+//모바일 사이즈
+
+@include mobile {
+  .modal-container {
+    width: 327px;
+    padding: 16px;
+    gap: 0;
+  }
+  .title-mobile {
+    padding: 16px 0 12px 0;
+  }
+
+  .kebab-and-close {
+    @include Flex(row, null, center);
+    gap: 16px;
+  }
+  .top-button {
+    @include Flex(null, center, center);
+  }
+
+  .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .title-mobile {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: $black-33;
+  }
+
+  .modal-wrapper {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+
+  .contents-text {
+    max-width: 295px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .empty-block {
+    display: block;
+  }
+
+  .comment-contents {
+    gap: 16px;
+  }
+  .writer {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .date {
+    font-size: 10px;
+  }
+  .comment-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .button {
+    font-size: 10px;
+    line-height: 12px;
   }
 }
