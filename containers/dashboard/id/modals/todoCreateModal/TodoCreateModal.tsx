@@ -5,7 +5,7 @@ export default function TodoCreateModal() {
   return (
     <div className={styles['container']}>
       <form className={styles['form']}>
-        <p className={styles['modal-title']}>할 일 수정</p>
+        <p className={styles['modal-title']}>할 일 생성</p>
         <div className={styles['owner']}>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>담당자</label>
