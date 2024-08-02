@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import IconLogoLarge from '@/assets/icons/ic_logo_large.svg';
+import IconLogo from '@/assets/icons/ic_logo_large.svg';
 
 export default function TopLogoSection({ text }: { text: string }) {
   return (
@@ -8,7 +8,7 @@ export default function TopLogoSection({ text }: { text: string }) {
       <Link href='/'>
         <div>
           <Image
-            src={IconLogoLarge}
+            src={IconLogo}
             alt='로고 이미지'
             className='Logo-Image'
             priority
