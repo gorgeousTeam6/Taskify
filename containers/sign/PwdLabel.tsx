@@ -22,15 +22,13 @@ export default function PwdInputWithLabel<T extends FieldValues>({
 
   return (
     <div>
-      <label htmlFor={id} className='mb-[10px] block text-[16px] text-black_33'>
+      <label htmlFor={id}>
         {label}
       </label>
       <div className='relative'>
         <input
           {...register(id)}
-          className={`h-[50px] w-full rounded-[8px] border border-gray_d9 bg-white px-[15px] text-[16px] text-black_33 placeholder:text-gray_9f ${
-            error && 'border-2 border-red'
-          }`}
+          className={`input`}
           type={type}
           id={id}
           placeholder={placeholder}
@@ -38,7 +36,6 @@ export default function PwdInputWithLabel<T extends FieldValues>({
         />
         <button
           type='button'
-          className='absolute right-[10px] top-[15px] size-[20px]'
           onClick={() => setVisible(!visible)}
         >
           <Image
@@ -53,7 +50,7 @@ export default function PwdInputWithLabel<T extends FieldValues>({
           />
         </button>
       </div>
-      {error && <p className='mt-2 text-[14px] text-red'>{error}</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 }
