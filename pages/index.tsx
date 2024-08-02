@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import TodoModal from '@/containers/dashboard/id/modals/todoModal/TodoModal';
-import TodoEditModal from '@/containers/dashboard/id/modals/todoEditModal/TodoEditModal';
 export default function Home() {
   return (
     <>
@@ -11,8 +10,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <main>
-        {/* <TodoModal /> */}
-        <TodoEditModal />
+        <TodoModal />
       </main>
     </>
   );

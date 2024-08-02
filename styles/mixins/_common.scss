@@ -69,3 +69,71 @@ $desktop-min: 1200px;
   -moz-border-radius: $value;
   border-radius: $value;
 }
+
+@mixin ResponsiveWidth($desktop, $tablet: null, $mobile: null) {
+  // 데스크탑에서 너비 적용
+  @include desktop {
+    width: #{$desktop};
+  }
+
+  // 태블릿에서 너비 적용
+  @include tablet {
+    width: #{$tablet};
+  }
+
+  // 모바일에서 너비 적용
+  @include mobile {
+    width: #{$mobile};
+  }
+}
+
+@mixin ResponsiveMinWidth($desktop, $tablet: null, $mobile: null) {
+  // 데스크탑에서 너비 적용
+  @include desktop {
+    min-width: #{$desktop};
+  }
+
+  // 태블릿에서 너비 적용
+  @include tablet {
+    min-width: #{$tablet};
+  }
+
+  // 모바일에서 너비 적용
+  @include mobile {
+    min-width: #{$mobile};
+  }
+}
+
+@mixin ResponsiveHeight($desktop, $tablet: null, $mobile: null) {
+  // 데스크탑에서 높이 적용
+  @include desktop {
+    height: #{$desktop};
+  }
+
+  // 태블릿에서 높이 적용
+  @include tablet {
+    height: #{$tablet};
+  }
+
+  // 모바일에서 높이 적용
+  @include mobile {
+    height: #{$mobile};
+  }
+}
+
+@mixin ResponsivePadding($desktop, $tablet: null, $mobile: null) {
+  // 데스크탑에서 패딩 적용
+  @include desktop {
+    padding: #{$desktop};
+  }
+
+  // 태블릿에서 패딩 적용
+  @include tablet {
+    padding: #{$tablet};
+  }
+
+  // 모바일에서 패딩 적용
+  @include mobile {
+    padding: #{$mobile};
+  }
+}

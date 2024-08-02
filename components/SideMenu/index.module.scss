@@ -1,0 +1,85 @@
+@use '@/styles/index.scss' as *;
+
+.side-menu {
+  @include Flex(column, flex-start, center);
+  @include ResponsiveWidth(300px, 160px, 67px);
+  @include ResponsiveMinWidth(300px, 160px, 67px);
+  height: 100vh;
+  padding: 20px 0 0;
+  border-right: 1px solid $gray-d9;
+
+  z-index: 1;
+}
+
+.side-menu-container {
+  @include Flex(column, flex-start, center);
+
+  @include desktop {
+    align-items: start;
+  }
+
+  @include ResponsiveGap(56, 56, 39);
+  @include ResponsiveWidth(280px, 134px, 40px);
+}
+
+.logo-container {
+  @include Flex(row, space-between, center);
+  @include ResponsiveWidth(109px, 109px, 24px);
+  @include ResponsiveHeight(33px, 33px, 28px);
+}
+
+.logo-icon-wrapper {
+  position: relative;
+
+  @include ResponsiveWidth(29px, 29px, 24px);
+  @include ResponsiveHeight(33px, 33px, 28px);
+
+  overflow: hidden;
+}
+
+.logo-text-wrapper {
+  @include mobile {
+    display: none;
+  }
+
+  position: relative;
+
+  width: 80px;
+  height: 22px;
+
+  overflow: hidden;
+}
+
+.dashboard-container {
+  @include Flex(column, space-between, center);
+  @include ResponsiveGap(16, 15, 22);
+  width: 100%;
+}
+
+.dashboard-header {
+  @include Flex(row, space-between, center);
+  @include mobile {
+    @include Flex(column, space-between, center);
+  }
+  width: 100%;
+
+  @include FontStyle('xs', 600, 'xs', '');
+  color: $gray-78;
+
+  > .dashboard-header-text {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  > .dashboard-header-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.dashboard-list {
+  @include Flex(column, space-between, center);
+  width: 100%;
+}

@@ -1,12 +1,16 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import ReactQueryProviders from '@/hooks/useReactQuery';
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang='ko'>
       <Head />
       <body>
-        <Main />
-        <NextScript />
+        <ReactQueryProviders>
+          <Main />
+          <div id='_modal'></div>
+          <NextScript />
+        </ReactQueryProviders>
       </body>
     </Html>
   );
