@@ -38,7 +38,7 @@ export default function TodoEditModal() {
             <label className={styles['essential']}>*</label>
           </div>
           <textarea
-            className={styles['form-input']}
+            className={`${styles['form-input']} ${styles['form-description']}`}
             placeholder='설명을 입력해주세요'
           ></textarea>
         </div>
