@@ -37,11 +37,14 @@ ul {
   list-style: none;
 }
 button,
-input,
 select {
   margin: 0;
   border: none;
   cursor: pointer;
+}
+input {
+  margin: 0;
+  border: none;
 }
 html {
   box-sizing: border-box;
