@@ -1,0 +1,69 @@
+@import '@/styles/index.scss';
+
+.container {
+  @include Flex(column, null, null);
+  gap: 20px;
+  font-family: pretendard;
+  border: 1px solid $gray-d9;
+  border-radius: 8px;
+  width: 200px;
+  height: 155px;
+  padding: 16px;
+}
+
+.title-and-contents {
+  @include Flex(column, null, null);
+  gap: 6px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.manager {
+  @include Flex(row, null, center);
+  gap: 8px;
+}
+
+.profileImg {
+  width: 34px;
+}
+
+.contents {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: $black-33;
+}
+
+@include tablet {
+  .container {
+    width: 181px;
+  }
+}
+
+@include mobile {
+  .container {
+    @include Flex(row, space-between, null);
+    width: 100%;
+    height: 64px;
+    padding: 9px 16px;
+    gap: 8px;
+  }
+  .title-and-contents {
+    @include Flex(column, space-between, null);
+    gap: 0;
+
+    .contents {
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: 400;
+      color: $black-33;
+    }
+    .profileImg {
+      width: 26px;
+    }
+  }
+}

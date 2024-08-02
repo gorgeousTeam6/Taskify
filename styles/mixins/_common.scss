@@ -28,3 +28,44 @@ $desktop-min: 1200px;
     @content;
   }
 }
+
+@mixin ResponsiveGap($desktop, $tablet, $mobile) {
+  gap: #{$desktop}px;
+
+  @include tablet {
+    gap: #{$tablet}px;
+  }
+
+  @include mobile {
+    gap: #{$mobile}px;
+  }
+}
+
+@mixin ResponsiveLineHeight($desktop, $tablet, $mobile) {
+  line-height: #{$desktop}px;
+
+  @include tablet {
+    line-height: #{$tablet}px;
+  }
+
+  @include mobile {
+    line-height: #{$mobile}px;
+  }
+}
+
+@mixin Size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+//rem 사이즈 구할때 사용?
+@function CalculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin border-radius($value) {
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  border-radius: $value;
+}
