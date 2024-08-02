@@ -32,7 +32,10 @@ export default function PwdInputWithLabel<T extends FieldValues>({
           placeholder={placeholder}
           autoComplete='new-password'
         />
-        <button type='button' onClick={() => setVisible(!visible)}>
+        <button
+          type='button'
+          onClick={() => setVisible((prevVisible) => !prevVisible)}
+        >
           <Image
             src={
               visible
