@@ -1,19 +1,12 @@
-import styles from './TodoEditModal.module.scss';
+import styles from './TodoCreateModal.module.scss';
 import Image from 'next/image';
 import putImg from '@/assets/images/img_todoSample.png';
-export default function TodoEditModal() {
+export default function TodoCreateModal() {
   return (
     <div className={styles['container']}>
       <form className={styles['form']}>
         <p className={styles['modal-title']}>할 일 수정</p>
-        <div className={styles['status-and-owner']}>
-          <div className={styles['label-and-form']}>
-            <label className={styles['form-label']}>상태</label>
-            <select className={styles['dropdown-preview']}>
-              <option>to do</option>
-              <option>done</option>
-            </select>
-          </div>
+        <div className={styles['owner']}>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>담당자</label>
             <select className={styles['dropdown-preview']}>
