@@ -1,7 +1,11 @@
 import styles from './TodoEditModal.module.scss';
 import Image from 'next/image';
 import putImg from '@/assets/images/img_todoSample.png';
+import { useForm } from 'react-hook-form';
+
 export default function TodoEditModal() {
+  const { register } = useForm();
+
   return (
     <div className={styles['container']}>
       <form className={styles['form']}>
@@ -30,6 +34,7 @@ export default function TodoEditModal() {
           <textarea
             className={styles['form-input']}
             placeholder='제목을 입력해주세요'
+            {...register('title')}
           ></textarea>
         </div>
         <div className={styles['label-and-form']}>
@@ -40,15 +45,20 @@ export default function TodoEditModal() {
           <textarea
             className={`${styles['form-input']} ${styles['form-description']}`}
             placeholder='설명을 입력해주세요'
+            {...register('description')}
           ></textarea>
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>마감일</label>
-          <input className={styles['date-input']} type='date' />
+          <input className={styles['date-input']} type='date' {...register} />
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>태그</label>
-          <textarea className={styles['date-input']} placeholder='라벨칩' />
+          <textarea
+            className={styles['date-input']}
+            placeholder='라벨칩'
+            {...register}
+          />
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>이미지</label>

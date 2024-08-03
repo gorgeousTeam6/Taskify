@@ -1,10 +1,17 @@
 import styles from './TodoCreateModal.module.scss';
 import Image from 'next/image';
 import putImg from '@/assets/images/img_todoSample.png';
+import { useForm } from 'react-hook-form';
+
 export default function TodoCreateModal() {
+  const { register, handleSubmit } = useForm();
+
   return (
     <div className={styles['container']}>
-      <form className={styles['form']}>
+      <form
+        // onSubmit={handleSubmit(() => ))}
+        className={styles['form']}
+      >
         <p className={styles['modal-title']}>할 일 생성</p>
         <div className={styles['owner']}>
           <div className={styles['label-and-form']}>
@@ -23,6 +30,8 @@ export default function TodoCreateModal() {
           <textarea
             className={styles['form-input']}
             placeholder='제목을 입력해주세요'
+            {...register('title')}
+            required
           ></textarea>
         </div>
         <div className={styles['label-and-form']}>
@@ -33,15 +42,25 @@ export default function TodoCreateModal() {
           <textarea
             className={`${styles['form-input']} ${styles['form-description']}`}
             placeholder='설명을 입력해주세요'
+            {...register('description')}
+            required
           ></textarea>
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>마감일</label>
-          <input className={styles['date-input']} type='date' />
+          <input
+            className={styles['date-input']}
+            type='date'
+            {...register('date')}
+          />
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>태그</label>
-          <textarea className={styles['date-input']} placeholder='라벨칩' />
+          <textarea
+            className={styles['date-input']}
+            placeholder='라벨칩'
+            {...register('label')}
+          />
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>이미지</label>
