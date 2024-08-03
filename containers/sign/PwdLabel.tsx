@@ -22,6 +22,7 @@ export default function PwdInputWithLabel<T extends FieldValues>({
   const type = visible ? 'text' : 'password';
 
   return (
+
     <div className={styles.container}>
       <label htmlFor={id} className={styles.label}>
         {label}
@@ -37,6 +38,7 @@ export default function PwdInputWithLabel<T extends FieldValues>({
         />
         <button
           type='button'
+
           className={styles.button}
           onClick={() => setVisible((prevVisible) => !prevVisible)}
         >
@@ -48,6 +50,7 @@ export default function PwdInputWithLabel<T extends FieldValues>({
         </button>
       </div>
       {error && <p className={styles.errorMessage}>{error}</p>}
+
     </div>
   );
 }

@@ -10,6 +10,7 @@ import TextInputLabel from './TextInputLabel';
 import { postSignUp } from '@/services/postService';
 import styles from './SignForm.module.scss';
 
+
 export type TSignUpInputs = {
   email: string;
   nickname: string;

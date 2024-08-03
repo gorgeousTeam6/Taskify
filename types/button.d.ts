@@ -1,5 +1,4 @@
 type ButtonType =
-  | 'text'
   | 'login'
   | 'primary'
   | 'secondary'
