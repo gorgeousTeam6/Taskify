@@ -1,0 +1,57 @@
+@import '/styles/color';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: var($black-33);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  height: 50px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var($gray-d9);
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 45px; // 아이콘의 너비를 고려하여 오른쪽 패딩을 조정합니다.
+  font-size: 16px;
+  color: var($black-33);
+
+  &::placeholder {
+    color: var($gray-9f);
+  }
+}
+
+.inputError {
+  border: 2px solid red;
+}
+
+.button {
+  position: absolute;
+  right: 15px; // input padding-right과 일치해야 합니다.
+  top: 50%;
+  transform: translateY(-50%); // 버튼을 세로 중앙에 위치시킵니다.
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.errorMessage {
+  margin-top: 2px;
+  font-size: 14px;
+  color: red;
+}

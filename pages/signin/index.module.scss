@@ -1,0 +1,28 @@
+@import '/styles/color';
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .login {
+    width: 350px;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 768px) {
+      width: 520px;
+    }
+    .member {
+      margin-top: 20px;
+      text-align: center;
+      color: var($black-33);
+
+      .link {
+        color: violet;
+      }
+      .underline {
+        text-decoration: underline;
+      }
+    }
+  }
+}

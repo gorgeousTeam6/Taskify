@@ -8,6 +8,7 @@ import PwdLabel from '@/containers/sign/PwdLabel';
 import TextInputLabel from '@/containers/sign/TextInputLabel';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useUserStore } from '@/store/useUserStore';
+import styles from './SignForm.module.scss';
 
 export type TSignInInputs = {
   email: string;
@@ -50,7 +51,7 @@ export default function SignInForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <TextInputLabel
         id='email'
         label='이메일'

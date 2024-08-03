@@ -1,4 +1,5 @@
 import { UseFormRegister, FieldValues, Path } from 'react-hook-form';
+import styles from './PwdLabel.module.scss';
 
 interface Props<T extends FieldValues> {
   id: Path<T>;
@@ -24,18 +25,21 @@ export default function TextInputWithLabel<T extends FieldValues>({
   }
 
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <div className='relative'>
+    <div className={styles.container}>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
+      <div className={styles.inputWrapper}>
         <input
           {...register(id)}
           type={type}
           id={id}
+          className={`${styles.input} ${error ? styles.inputError : ''}`}
           placeholder={placeholder}
           autoComplete={autoComplete}
         />
       </div>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.errorMessage}>{error}</p>}
     </div>
   );
 }

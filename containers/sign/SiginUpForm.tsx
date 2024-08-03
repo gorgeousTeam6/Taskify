@@ -8,6 +8,7 @@ import Button from '@/components/Button';
 import PwdLabel from './PwdLabel';
 import TextInputLabel from './TextInputLabel';
 import { postSignUp } from '@/services/postService';
+import styles from './SignForm.module.scss';
 
 export type TSignUpInputs = {
   email: string;
@@ -66,7 +67,7 @@ export default function SignUpForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <TextInputLabel
         id='email'
         label='이메일'
@@ -104,7 +105,9 @@ export default function SignUpForm() {
             setCheckTerms(!checkTerms);
           }}
         />{' '}
-        <label htmlFor='terms'>이용약관에 동의합니다.</label>
+        <label htmlFor='terms' className={styles.agree}>
+          이용약관에 동의합니다.
+        </label>
       </div>
       <div className='h'>
         <Button

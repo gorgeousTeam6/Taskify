@@ -1,19 +1,14 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import IconLogo from '@/assets/icons/ic_logo_large.svg';
+import { IconLogoLarge } from '@/assets/icongroup';
+import styles from './TopLogoSection.module.scss';
 
 export default function TopLogoSection({ text }: { text: string }) {
   return (
-    <div>
+    <div className={styles.box}>
       <Link href='/'>
-        <div>
-          <Image
-            src={IconLogo}
-            alt='로고 이미지'
-            className='Logo-Image'
-            priority
-          />
-          <p>{text}</p>
+        <div className={styles.Image}>
+          <IconLogoLarge className='Logo-Image' />
+          <p className={styles.text}>{text}</p>
         </div>
       </Link>
     </div>

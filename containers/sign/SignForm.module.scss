@@ -1,0 +1,12 @@
+@import '/styles/color';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.agree {
+  font-size: 16px;
+  color: var($black-33);
+}
