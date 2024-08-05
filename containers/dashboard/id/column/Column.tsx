@@ -7,7 +7,10 @@ import Button from '@/components/Button';
 import Card from '@/containers/dashboard/id/card/Card';
 import ManageModal from '@/containers/dashboard/id/modals/ManageModal';
 
-import { useManageModalStore } from '@/stores/modalStore';
+import {
+  useManageModalStore,
+  useTodoCreateModalStore,
+} from '@/stores/modalStore';
 import styles from './Column.module.scss';
 
 function Column({ id, title }: { id: number; title: string }) {
@@ -25,6 +28,7 @@ function Column({ id, title }: { id: number; title: string }) {
   });
 
   const { ManageModalId, setOpenManageModal } = useManageModalStore();
+  const { setOpenModal } = useTodoCreateModalStore();
 
   if (isLoading) return <h2>loading</h2>;
   if (error) return <h2>error</h2>;
@@ -46,7 +50,7 @@ function Column({ id, title }: { id: number; title: string }) {
         {ManageModalId === id && <ManageModal defaultValue={title} />}
       </div>
       <div className={styles['card-list']}>
-        <Button buttonType='add-todo' />
+        <Button buttonType='add-todo' onClick={setOpenModal} />
         <>
           {cardList.length === 0 ? (
             <h2>empty</h2>

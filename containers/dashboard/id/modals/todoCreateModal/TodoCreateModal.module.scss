@@ -1,15 +1,17 @@
 @use '@/styles/index.scss' as *;
 
 @import '@/styles/index.scss';
+@import '@/styles/mixins/mixinModal';
 
 .container {
+  @include ModalStyle;
   font-family: pretendard;
   @include Flex(column, null, null);
   gap: 32px;
   width: 584px;
   height: auto;
   border-radius: 16px;
-  border: 1px solid $gray-9f;
+  background-color: $white;
   padding: 32px;
 }
 

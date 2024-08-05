@@ -14,7 +14,6 @@ export default function Home() {
       <main>
         <TodoModal />
         <TodoEditModal />
-        <TodoCreateModal />
       </main>
     </>
   );

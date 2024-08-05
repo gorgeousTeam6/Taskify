@@ -1,24 +1,48 @@
 import styles from './TodoCreateModal.module.scss';
 import Image from 'next/image';
 import putImg from '@/assets/images/img_todoSample.png';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-export default function TodoCreateModal() {
-  const { register, handleSubmit } = useForm();
+interface TodoCreateModalProps {
+  onClose: () => void;
+  onSubmit: (data: FormValues) => void;
+}
+
+interface FormValues {
+  owner: string;
+  title: string;
+  description: string;
+  date: string;
+  label: string;
+}
+
+export default function TodoCreateModal({
+  onClose,
+  onSubmit,
+}: TodoCreateModalProps) {
+  const { register, handleSubmit } = useForm<FormValues>();
+
+  const onSubmitHandler: SubmitHandler<FormValues> = (data) => {
+    onSubmit(data);
+  };
 
   return (
     <div className={styles['container']}>
       <form
-        // onSubmit={handleSubmit(() => ))}
         className={styles['form']}
+        onSubmit={handleSubmit(onSubmitHandler)}
+        onReset={onClose}
       >
         <p className={styles['modal-title']}>할 일 생성</p>
         <div className={styles['owner']}>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>담당자</label>
-            <select className={styles['dropdown-preview']}>
-              <option>장아영</option>
-              <option>최민경</option>
+            <select
+              className={styles['dropdown-preview']}
+              {...register('owner', { required: true })}
+            >
+              <option value='장아영'>장아영</option>
+              <option value='최민경'>최민경</option>
             </select>
           </div>
         </div>
@@ -30,8 +54,7 @@ export default function TodoCreateModal() {
           <textarea
             className={styles['form-input']}
             placeholder='제목을 입력해주세요'
-            {...register('title')}
-            required
+            {...register('title', { required: true })}
           ></textarea>
         </div>
         <div className={styles['label-and-form']}>
@@ -42,8 +65,7 @@ export default function TodoCreateModal() {
           <textarea
             className={`${styles['form-input']} ${styles['form-description']}`}
             placeholder='설명을 입력해주세요'
-            {...register('description')}
-            required
+            {...register('description', { required: true })}
           ></textarea>
         </div>
         <div className={styles['label-and-form']}>
@@ -70,8 +92,6 @@ export default function TodoCreateModal() {
             alt='이미지 넣기'
           />
         </div>
-      </form>
-      <div>
         <div className={styles['button-group']}>
           <button type='reset' className={styles['button']}>
             취소
@@ -80,10 +100,10 @@ export default function TodoCreateModal() {
             type='submit'
             className={`${styles['button']} ${styles['violet']}`}
           >
-            수정
+            생성
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
