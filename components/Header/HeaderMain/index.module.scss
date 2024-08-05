@@ -26,34 +26,25 @@
 
 .logo-container {
   @include Flex(row, space-between, center);
-  @include Width(121px, 121px, 24px);
-  @include Height(39px, 39px, 28px);
+  @include Width(144px, 144px, 36px);
+  @include Height(36px, 36px, 36px);
+
+  :first-child {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  :nth-child(2) {
+    display: none;
+    @include mobile {
+      display: inline-block;
+    }
+  }
 }
 
 .dark .logo-container {
   filter: brightness(0) invert(1);
-}
-
-.logo-icon-wrapper {
-  position: relative;
-
-  @include Width(35px, 35px, 24px);
-  @include Height(35px, 35px, 28px);
-
-  overflow: hidden;
-}
-
-.logo-text-wrapper {
-  @include mobile {
-    display: none;
-  }
-
-  position: relative;
-
-  width: 80px;
-  height: 22px;
-
-  overflow: hidden;
 }
 
 .sign-container {

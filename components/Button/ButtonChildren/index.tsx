@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { IconAddChip, IconCrown, IconArrowForward } from '@/assets/icongroup';
+import ChipAdd from '@/containers/dashboard/id/chips/ChipAdd';
 
 const iconSource: Record<
   ButtonType,
@@ -65,10 +66,7 @@ function ButtonChildrenAdd({
     <div className={`${styles['standard-flex']} ${styles[buttonType]}`}>
       {children}
       <div style={{ width: iconSize, height: iconSize }}>
-        <ActionIcon
-          style={{ width: '100%', height: '100%' }}
-          aria-label={`${buttonType} icon`}
-        />
+        <ChipAdd />
       </div>
     </div>
   );
