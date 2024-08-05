@@ -1,6 +1,11 @@
 @use '@/styles/index.scss' as *;
 
 .side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
   @include Flex(column, flex-start, center);
   @include ResponsiveWidth(300px, 160px, 67px);
   @include ResponsiveMinWidth(300px, 160px, 67px);
@@ -8,7 +13,7 @@
   padding: 20px 0 0;
   border-right: 1px solid $gray-d9;
 
-  z-index: 1;
+  background: $white;
 }
 
 .side-menu-container {
@@ -81,5 +86,6 @@
 
 .dashboard-list {
   @include Flex(column, space-between, center);
+  @include ResponsiveGap(8, 2, 6);
   width: 100%;
 }

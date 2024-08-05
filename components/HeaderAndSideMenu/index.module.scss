@@ -1,5 +1,0 @@
-@use '@/styles/index.scss' as *;
-
-.header-side-menu {
-  @include Flex(row, flex-start, flex-start);
-}

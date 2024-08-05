@@ -1,12 +1,17 @@
 @use '@/styles/index.scss' as *;
 
 .header-dashboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
   @include Flex(row, flex-end, center);
   flex-grow: 1;
 
   width: 100%;
   @include ResponsiveHeight(70px, 70px, 60px);
-  @include ResponsivePadding(0 80px 0 40px, 0 32px 0 40px, 0 8px 0 16px);
+  @include ResponsivePadding(0 80px 0 340px, 0 32px 0 200px, 0 8px 0 83px);
   border-bottom: 1px solid $gray-d9;
 
   background: $white;

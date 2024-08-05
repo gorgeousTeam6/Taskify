@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { IconCrown, IconSetting, IconAddBox } from '@/assets/icongroup';
+import UserIcon from '@/components/UserIcon';
 
 export default function HeaderDashboard({ isOwner = true }) {
   return (
@@ -68,7 +69,7 @@ export default function HeaderDashboard({ isOwner = true }) {
             </div>
             <div className={`${styles['dashboard-half-line']}`}></div>
             <div className={`${styles['dashboard-my']}`}>
-              <div className={`${styles['dashboard-my-icon']}`}>　B</div>
+              <UserIcon src='https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg'></UserIcon>
               <p>배유철</p>
             </div>
           </div>

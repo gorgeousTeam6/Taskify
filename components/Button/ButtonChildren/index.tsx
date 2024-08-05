@@ -27,7 +27,7 @@ export default function ButtonChildren({
 
   // 보여줄 버튼이 없는 경우
   if (!ActionIcon) {
-    return children;
+    return <span>{children}</span>;
   }
 
   // 버튼 타입이 add~인 경우
@@ -51,6 +51,8 @@ export default function ButtonChildren({
       </ButtonChildrenLink>
     );
   }
+
+  return null;
 }
 
 function ButtonChildrenAdd({
