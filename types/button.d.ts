@@ -25,5 +25,11 @@ type ButtonSetType = 'primary' | 'pagenation';
 interface ButtonSetProps {
   buttonSetType: ButtonSetType;
   orderReverse?: boolean;
+  widthFill?: boolean;
   children: ReactElement<typeof Button> | ReactElement<typeof Button>[];
+}
+
+interface ButtonSetForPaginationProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  size: 'small' | 'large';
 }

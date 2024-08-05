@@ -1,0 +1,3 @@
+interface UserIconProps {
+  src: string;
+}
