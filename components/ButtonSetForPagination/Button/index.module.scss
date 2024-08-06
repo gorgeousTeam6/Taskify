@@ -1,0 +1,33 @@
+@use '@/styles/index.scss' as *;
+@import '@/styles/mixins/mixinButton';
+
+.button-set {
+  @include Flex(row, space-between, center);
+
+  &.small {
+    width: 72px;
+    height: 36px;
+  }
+
+  &.large {
+    width: 80px;
+    height: 40px;
+  }
+}
+
+.button-pagination {
+  flex-grow: 1;
+  height: inherit;
+  border: 1px solid $gray-d9;
+  font-family: 'Pretendard', sans-serif;
+  cursor: pointer;
+
+  &.left {
+    transform: rotate(180deg);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}

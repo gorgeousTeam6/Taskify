@@ -15,3 +15,11 @@
 .reverse {
   flex-direction: row-reverse;
 }
+
+.fill {
+  width: 100%;
+
+  > button {
+    flex-grow: 1;
+  }
+}

@@ -1,15 +1,22 @@
 import InviteListItem from '../InviteListItem/InviteListItem';
 import styles from './InvitedDashboard.module.scss';
 import { IconEmptyInvitation, IconSearch } from '@/assets/icongroup';
+import { useQuery } from '@tanstack/react-query';
+import instance from '@/services/axios';
 
 function InvitedDashboard() {
-  // 데이터 페칭 전 조건부렌더링을 위한 isInvite값
-  const isInvite = 1;
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['invitations', 1],
+    queryFn: async () => {
+      const response = await instance.get('/invitations?size=1');
+      return response.data;
+    },
+  });
 
   return (
     <div className={styles['container']}>
       <h2 className={styles['title']}>초대받은 대시보드</h2>
-      {isInvite ? (
+      {data && data.invitations.length > 0 ? (
         <>
           <div className={styles['search-wrapper']}>
             <IconSearch />
@@ -30,13 +37,9 @@ function InvitedDashboard() {
               </div>
             </div>
             <div className={styles['invite-list-table-body']}>
-              {/*데이터 페칭후 map함수전 확인을 위한 컴포넌트입니다! */}
-              <InviteListItem />
-              <InviteListItem />
-              <InviteListItem />
-              <InviteListItem />
-              <InviteListItem />
-              <InviteListItem />
+              {data.invitations.map((item: Invitation) => (
+                <InviteListItem key={item.id} item={item} />
+              ))}
             </div>
           </div>
         </>

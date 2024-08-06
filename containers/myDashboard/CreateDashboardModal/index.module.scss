@@ -1,0 +1,48 @@
+@use '@/styles/index.scss' as *;
+
+.modal-container {
+  @include Flex(column, space-around, flex-start);
+  gap: 16px;
+
+  @include ResponsiveWidth(584px, 584px, 327px);
+  @include ResponsivePadding(32px, 32px, 20px 16px);
+  border-radius: 16px;
+
+  background: $white;
+
+  h2 {
+    padding-bottom: 8px;
+    @include FontStyle('2xl', 700, '2xl', 'xl');
+  }
+}
+
+.label-container {
+  @include Flex(column, space-between, flex-start);
+  gap: 8px;
+
+  p {
+    @include FontStyle('2lg', 500, '2lg', 'lg');
+  }
+
+  input {
+    @include ResponsiveWidth(520px, 520px, 295px);
+    height: 50px;
+    border: 1px solid $gray-d9;
+    border-radius: 8px;
+  }
+}
+
+.color-list {
+  @include Flex(row, space-between, center);
+  gap: 8px;
+
+  width: 182px;
+  @include ResponsivePadding(0 0 16px, 0 0 16px, 0 0 8px);
+
+  li {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

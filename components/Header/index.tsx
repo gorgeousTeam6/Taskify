@@ -5,7 +5,7 @@ import Image from 'next/image';
 import logoIcon from '@/assets/images/img_logo_icon.png';
 import logoText from '@/assets/images/img_logo_text.png';
 
-export default function Header({ mode = '' }) {
+function Header({ mode = '' }) {
   return (
     <header className={`${styles['header-container']} ${styles[mode]}`}>
       <Link href='/'>

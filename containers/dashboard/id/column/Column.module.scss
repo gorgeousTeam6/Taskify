@@ -46,10 +46,17 @@
 
 .card-list {
   overflow-y: auto;
+  overscroll-behavior: none;
   @include Flex(column, null, null);
   @include ResponsiveGap(16, 16, 10);
 
   button > div {
     justify-content: center;
+  }
+}
+
+.setting-icon {
+  &:hover {
+    cursor: pointer;
   }
 }

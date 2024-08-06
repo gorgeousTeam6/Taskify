@@ -1,0 +1,58 @@
+@use '@/styles/index' as *;
+
+.footer {
+  border-top: 1px solid $gray-d9;
+  width: 100%;
+  padding: 39px 140px;
+
+  @include tablet {
+    padding: 40.5px 40px;
+  }
+
+  div {
+    @include Flex(row, space-between, center);
+  }
+
+  .footer-wrapper {
+    @include mobile {
+      @include Flex(column, null, null);
+      gap: 12px;
+
+      .socials {
+        margin-top: 56px;
+      }
+    }
+  }
+
+  .links {
+    @include ResponsiveGap(32, 32, 20);
+  }
+
+  .socials {
+    gap: 14px;
+    a {
+      line-height: 0;
+    }
+  }
+
+  p,
+  a {
+    color: $gray-9f;
+    @include FontStyle(lg, 400);
+  }
+
+  svg {
+    fill: $gray-d9;
+    &.facebook:hover {
+      fill: $facebook-color;
+    }
+
+    &.instagram:hover {
+      fill: $instagram-color;
+    }
+
+    &.envelop:hover {
+      fill: $main-yellow;
+    }
+  }
+}

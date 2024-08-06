@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { IconAddChip, IconCrown, IconArrowForward } from '@/assets/icongroup';
+import ChipAdd from '@/containers/dashboard/id/chips/ChipAdd';
 
 const iconSource: Record<
   ButtonType,
@@ -27,7 +28,7 @@ export default function ButtonChildren({
 
   // 보여줄 버튼이 없는 경우
   if (!ActionIcon) {
-    return children;
+    return <span>{children}</span>;
   }
 
   // 버튼 타입이 add~인 경우
@@ -51,6 +52,8 @@ export default function ButtonChildren({
       </ButtonChildrenLink>
     );
   }
+
+  return null;
 }
 
 function ButtonChildrenAdd({
@@ -63,10 +66,7 @@ function ButtonChildrenAdd({
     <div className={`${styles['standard-flex']} ${styles[buttonType]}`}>
       {children}
       <div style={{ width: iconSize, height: iconSize }}>
-        <ActionIcon
-          style={{ width: '100%', height: '100%' }}
-          aria-label={`${buttonType} icon`}
-        />
+        <ChipAdd />
       </div>
     </div>
   );

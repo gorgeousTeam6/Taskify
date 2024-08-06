@@ -1,0 +1,65 @@
+@use '@/styles/index.scss' as *;
+
+.side-menu-item {
+  @include Flex(row, space-between, center);
+
+  width: 100%;
+  @include ResponsiveHeight(42px, 43px, 40px);
+  @include ResponsivePadding(0px 0 0 12px, 0px 0 0 10px, 16px);
+
+  &:hover {
+    background: $violet-8;
+    cursor: pointer;
+  }
+  &:active {
+    background: #e6e2ff;
+  }
+}
+
+.side-menu-item-container {
+  @include Flex(row, space-between, center);
+  @include ResponsiveHeight(42px, 43px, 40px);
+  gap: 16px;
+}
+
+.item-circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  &.green {
+    background: $green;
+  }
+
+  &.purple {
+    background: $purple;
+  }
+
+  &.orange {
+    background: $orange;
+  }
+
+  &.blue {
+    background: $blue;
+  }
+
+  &.pink {
+    background: $pink;
+  }
+}
+
+.item-name-wrapper {
+  @include mobile {
+    display: none;
+  }
+
+  @include Flex(row, flex-start, center);
+  @include ResponsiveGap(6, 4, 0);
+
+  @include FontStyle('2lg', 600, 'lg', '');
+  color: $gray-78;
+}
+
+.icon-wrapper {
+  @include ResponsiveWidth(18px, 15px, 0);
+}
