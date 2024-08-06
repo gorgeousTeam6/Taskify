@@ -19,7 +19,7 @@ function Column({ id, title }: { id: number; title: string }) {
     isLoading,
     error,
   } = useQuery({
-    queryKey: [`getCardList${id}`],
+    queryKey: ['getCardList', id],
     queryFn: () =>
       axios
         .get(`/cards?size=10&columnId=${id}`)
