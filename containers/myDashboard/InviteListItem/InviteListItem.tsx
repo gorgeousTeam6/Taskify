@@ -1,8 +1,24 @@
 import styles from './InviteListItem.module.scss';
 import Button from '@/components/Button';
 import ButtonSet from '@/components/ButtonSet';
+import axios, { AxiosResponse } from 'axios';
+import { useMutation } from '@tanstack/react-query';
 
 function InviteListItem({ item }: { item: IInvitation }) {
+  const mutation = useMutation<AxiosResponse<any>, Error, boolean>({
+    mutationFn: (inviteAccepted: boolean) => {
+      return axios.put(`invitations/${item.dashboard.id}`, { inviteAccepted });
+    },
+  });
+
+  const handleAccept = () => {
+    mutation.mutate(true);
+  };
+
+  const handleReject = () => {
+    mutation.mutate(false);
+  };
+
   return (
     <div className={styles['invite-list-item-wrapper']}>
       <div className={styles['invite-list-item-name']}>
@@ -15,8 +31,12 @@ function InviteListItem({ item }: { item: IInvitation }) {
       </div>
       <div className={styles['invite-list-item-invite-accepted-buttons']}>
         <ButtonSet buttonSetType='primary'>
-          <Button buttonType='primary'>수락</Button>
-          <Button buttonType='secondary'>거절</Button>
+          <Button buttonType='primary' onClick={handleAccept}>
+            수락
+          </Button>
+          <Button buttonType='secondary' onClick={handleReject}>
+            거절
+          </Button>
         </ButtonSet>
       </div>
     </div>
