@@ -3,24 +3,36 @@ import styles from './InvitedDashboard.module.scss';
 import { IconEmptyInvitation, IconSearch } from '@/assets/icongroup';
 import { useQuery } from '@tanstack/react-query';
 import instance from '@/services/axios';
+import { useState } from 'react';
 
 function InvitedDashboard() {
+  const [searchValue, SetSearchValue] = useState('');
+
   const { isLoading, error, data } = useQuery({
     queryKey: ['invitations', 1],
     queryFn: async () => {
       const response = await instance.get('/invitations?size=1');
-      return response.data;
+      return response.data.invitations;
     },
   });
+
+  const searchData = data.filter((item: IInvitation) =>
+    item.dashboard.title.toLowerCase().includes(searchValue.toLowerCase()),
+  );
 
   return (
     <div className={styles['container']}>
       <h2 className={styles['title']}>초대받은 대시보드</h2>
-      {data && data.invitations.length > 0 ? (
+      {data && data.length > 0 ? (
         <>
           <div className={styles['search-wrapper']}>
             <IconSearch />
-            <input type='text' placeholder='검색' />
+            <input
+              type='text'
+              value={searchValue}
+              onChange={(e) => SetSearchValue(e.target.value)}
+              placeholder='검색'
+            />
           </div>
           <div className={styles['invite-list-table']}>
             <div className={styles['invite-list-table-header']}>
@@ -37,7 +49,7 @@ function InvitedDashboard() {
               </div>
             </div>
             <div className={styles['invite-list-table-body']}>
-              {data.invitations.map((item: IInvitation) => (
+              {searchData.map((item: IInvitation) => (
                 <InviteListItem key={item.id} item={item} />
               ))}
             </div>
