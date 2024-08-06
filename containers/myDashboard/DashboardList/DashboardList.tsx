@@ -39,16 +39,17 @@ function DashboardList() {
     <div className={styles['container']}>
       <div className={styles['dash-board-list']}>
         <Button buttonType='add-board'>새로운 대시보드</Button>
-        {data.dashboards.map((item: Dashboard) => (
-          <Button
-            key={item.id}
-            buttonType='dashboard'
-            isOwner={item.createdByMe}
-            onClick={() => handleClickDashboard(item.id)}
-          >
-            {item.title}
-          </Button>
-        ))}
+        {data &&
+          data.dashboards.map((item: Dashboard) => (
+            <Button
+              key={item.id}
+              buttonType='dashboard'
+              isOwner={item.createdByMe}
+              onClick={() => handleClickDashboard(item.id)}
+            >
+              {item.title}
+            </Button>
+          ))}
       </div>
       <div className={styles['pagination']}>
         <div>
