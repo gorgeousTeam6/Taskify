@@ -41,7 +41,7 @@ function DashboardList() {
       <div className={styles['dash-board-list']}>
         <Button buttonType='add-board'>새로운 대시보드</Button>
         {data &&
-          data.map((item: Dashboard) => (
+          data.map((item: IDashboard) => (
             <Button
               key={item.id}
               buttonType='dashboard'

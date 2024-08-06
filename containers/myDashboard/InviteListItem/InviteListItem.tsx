@@ -2,8 +2,7 @@ import styles from './InviteListItem.module.scss';
 import Button from '@/components/Button';
 import ButtonSet from '@/components/ButtonSet';
 
-function InviteListItem({ item }: any) {
-  console.log(item);
+function InviteListItem({ item }: { item: IInvitation }) {
   return (
     <div className={styles['invite-list-item-wrapper']}>
       <div className={styles['invite-list-item-name']}>

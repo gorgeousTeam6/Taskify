@@ -37,7 +37,7 @@ function InvitedDashboard() {
               </div>
             </div>
             <div className={styles['invite-list-table-body']}>
-              {data.invitations.map((item: Invitation) => (
+              {data.invitations.map((item: IInvitation) => (
                 <InviteListItem key={item.id} item={item} />
               ))}
             </div>
