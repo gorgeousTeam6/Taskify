@@ -110,11 +110,7 @@ export default function SignUpForm() {
         </label>
       </div>
       <div className='h'>
-        <Button
-          deviceType='desktop'
-          buttonType='login'
-          disable={!isValid || !checkTerms}
-        >
+        <Button buttonType='login' disabled={!isValid || !checkTerms}>
           가입하기
         </Button>
       </div>

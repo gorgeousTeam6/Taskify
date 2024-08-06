@@ -67,12 +67,8 @@ export default function SignInForm() {
         register={register}
       />
       <div className='h'>
-        <Button
-          deviceType='desktop'
-          buttonType='login'
-          disable={mutation.isLoading || !isValid}
-        >
-          {mutation.isLoading ? '잠시만 기다려주세요..' : '로그인'}
+        <Button buttonType='login' disabled={mutation.isPending || !isValid}>
+          {mutation.isPending ? '잠시만 기다려주세요..' : '로그인'}
         </Button>
       </div>
       {mutation.isError && (

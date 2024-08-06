@@ -1,16 +1,14 @@
-// src/store/useUserStore.ts
-import create from 'zustand';
+// store/useUserStore.ts
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { User } from '@/types/User.interface';
 
 interface UserState {
-  user: { nickname: string; id: number } | null;
+  user: User | null;
   accessToken: string | null;
   loading: boolean;
   error: string | null;
-  setUser: (
-    user: { nickname: string; id: number },
-    accessToken: string,
-  ) => void;
+  setUser: (user: User, accessToken: string) => void;
   clearUser: () => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
@@ -29,7 +27,7 @@ export const useUserStore = create<UserState>()(
       setError: (error) => set({ error }),
     }),
     {
-      name: 'user-storage', // 로컬 스토리지에 저장될 항목의 이름
+      name: 'user-storage',
     },
   ),
 );

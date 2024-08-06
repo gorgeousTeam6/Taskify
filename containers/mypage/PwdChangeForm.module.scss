@@ -1,0 +1,17 @@
+@use '@/styles/index.scss' as *;
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 768px) {
+    gap: 20px;
+    flex-grow: 1;
+  }
+  .password {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
