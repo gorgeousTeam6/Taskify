@@ -1,0 +1,23 @@
+@use '@/styles/index.scss' as *;
+
+.color-circle-list {
+  @include Flex(row, space-between, center);
+  gap: 8px;
+
+  width: 182px;
+  @include ResponsivePadding(0 0 16px, 0 0 16px, 0 0 8px);
+
+  li {
+    @include ResponsiveWidth(30px, 30px, 28px);
+    @include ResponsiveHeight(30px, 30px, 28px);
+    border-radius: 50%;
+    cursor: pointer;
+
+    > svg {
+      display: block;
+      margin: 3px auto;
+      @include ResponsiveWidth(24px, 24px, 22px);
+      @include ResponsiveHeight(24px, 24px, 22px);
+    }
+  }
+}
