@@ -5,6 +5,7 @@
   @include Flex(row, space-between, center);
   width: 80px;
   height: 40px;
+  background: $white;
 
   @include mobile {
     width: 72px;
