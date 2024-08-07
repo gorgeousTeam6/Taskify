@@ -1,4 +1,5 @@
 @import '@/styles/index.scss';
+@import '@/styles/mixins/mixinModal';
 
 .container {
   font-family: pretendard;
@@ -7,8 +8,10 @@
   width: 584px;
   height: auto;
   border-radius: 16px;
-  border: 1px solid $gray-9f;
   padding: 32px;
+  background-color: $white;
+
+  @include ModalStyle;
 }
 
 .form {

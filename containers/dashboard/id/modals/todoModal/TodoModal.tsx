@@ -15,6 +15,8 @@ import Comment from './Comment';
 import useColumnList from '@/hooks/useColumnList';
 import useCommentList from '@/hooks/useCommentList';
 import useTodoModalStore from '@/stores/todoModalStore';
+import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
+import TodoEditModal from '../todoEditModal/TodoEditModal';
 
 export default function TodoModal({ card }: { card: ICard }) {
   const [isKebabOpen, setIsKebabOpen] = useState<boolean>(false);
@@ -43,6 +45,8 @@ export default function TodoModal({ card }: { card: ICard }) {
     (column: IColumn) => column.id === columnId,
   );
 
+  const { EditModalId } = useTodoEditModalStore();
+
   // 나중에 에러처리 하기
   if (!TodoModalId) return <></>;
   if (isLoading) return <>todomodal loading</>;
@@ -55,18 +59,20 @@ export default function TodoModal({ card }: { card: ICard }) {
           <p className={styles['title']}>{title}</p>
           <div className={styles['empty-block']}></div>
           <div className={styles['kebab-and-close']}>
-            <div
-              className={styles['kebab']}
-              onBlur={() => setIsKebabOpen(false)}
-            >
+            <div className={styles['kebab']}>
               <button
                 type='button'
-                onClick={() => setIsKebabOpen((prev) => !prev)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsKebabOpen((prev) => !prev);
+                }}
                 className={styles['top-button']}
               >
                 <IconKebab className={styles['icon']} />
               </button>
-              {isKebabOpen && <KebabDropdown isOpen={isKebabOpen} />}
+              {isKebabOpen && (
+                <KebabDropdown isOpen={isKebabOpen} card={card} />
+              )}
             </div>
             <button
               type='button'
@@ -115,6 +121,7 @@ export default function TodoModal({ card }: { card: ICard }) {
           <ManagerCard assignee={assignee} dueDate={dueDate} />
         </div>
       </div>
+      {/* {EditModalId === card.id && <TodoEditModal card={card} />} */}
     </ModalPortal>
   );
 }
