@@ -8,7 +8,8 @@ type ButtonType =
   | 'delete-dashboard'
   | 'pagenation'
   | 'add-board'
-  | 'dashboard';
+  | 'dashboard'
+  | 'modal-primary';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType: ButtonType;
