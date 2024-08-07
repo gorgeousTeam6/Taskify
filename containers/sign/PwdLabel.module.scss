@@ -1,8 +1,7 @@
-@import '/styles/color';
+@use '@/styles/index.scss' as *;
 
 .container {
-  display: flex;
-  flex-direction: column;
+  @include Flex(column, null, null);
 }
 
 .label {
@@ -43,11 +42,6 @@
   background: none;
   border: none;
   cursor: pointer;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
 }
 
 .errorMessage {

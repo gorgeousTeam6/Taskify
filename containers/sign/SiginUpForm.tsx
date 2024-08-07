@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import Button from '@/components/Button';
+import ButtonSet from '@/components/ButtonSet';
 import PwdLabel from './PwdLabel';
 import TextInputLabel from './TextInputLabel';
 import { postSignUp } from '@/services/postService';
@@ -110,9 +111,11 @@ export default function SignUpForm() {
         </label>
       </div>
       <div className='h'>
-        <Button buttonType='login' disabled={!isValid || !checkTerms}>
-          가입하기
-        </Button>
+        <ButtonSet buttonSetType='primary' widthFill={true}>
+          <Button buttonType='login' disabled={!isValid || !checkTerms}>
+            가입하기
+          </Button>
+        </ButtonSet>
       </div>
     </form>
   );

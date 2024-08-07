@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { ChangeEvent, FormEventHandler, useState } from 'react';
 import Button from '@/components/Button';
+import ButtonSet from '@/components/ButtonSet';
 import PwdInput from '@/components/Input/PwdInput';
 import { putPassword } from '@/services/putService';
 import styles from './PwdChangeForm.module.scss';
@@ -149,10 +150,15 @@ export default function PwdChangeForm() {
             onBlur={handleInputBlur}
           />
         </div>
+        <div className={styles.button}>
+          <Button
+            buttonType='login'
+            disabled={!checkValid(inputData, inputError)}
+          >
+            변경
+          </Button>
+        </div>
       </div>
-      <Button buttonType='login' disabled={!checkValid(inputData, inputError)}>
-        변경
-      </Button>
     </form>
   );
 }

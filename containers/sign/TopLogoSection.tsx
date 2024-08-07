@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { IconLogoLarge } from '@/assets/icongroup';
+import BigLogo from '@/assets/logos/BigLogo.svg';
 import styles from './TopLogoSection.module.scss';
 
 export default function TopLogoSection({ text }: { text: string }) {
@@ -7,7 +7,7 @@ export default function TopLogoSection({ text }: { text: string }) {
     <div className={styles.box}>
       <Link href='/'>
         <div className={styles.Image}>
-          <IconLogoLarge className='Logo-Image' />
+          <BigLogo className='Logo-Image' />
           <p className={styles.text}>{text}</p>
         </div>
       </Link>

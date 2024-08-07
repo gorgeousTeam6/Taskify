@@ -5,6 +5,7 @@ import ImageInput from '@/components/Input/ImageInput';
 import { useUpdateProfile } from '@/hooks/useUpdateProfile';
 import { postImage } from '@/services/postService';
 import Button from '@/components/Button';
+import ButtonSet from '@/components/ButtonSet';
 import styles from './EditProfileForm.module.scss';
 import { UpdateProfileForm } from '@/types/UpdateProfileForm.interface';
 
@@ -137,17 +138,17 @@ export default function EditProfileForm() {
               </p>
             )}
           </div>
+          <div className={styles.button}>
+            <Button
+              buttonType='login'
+              disabled={
+                isPending || !(isNicknameValid.gtZero && isNicknameValid.lteTen)
+              }
+            >
+              {isPending ? '저장중..' : '저장'}
+            </Button>
+          </div>
         </div>
-      </div>
-      <div className={styles.button}>
-        <Button
-          buttonType='login'
-          disabled={
-            isPending || !(isNicknameValid.gtZero && isNicknameValid.lteTen)
-          }
-        >
-          {isPending ? '저장중..' : '저장'}
-        </Button>
       </div>
     </form>
   );
