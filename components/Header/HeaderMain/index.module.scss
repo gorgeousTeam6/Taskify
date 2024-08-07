@@ -1,11 +1,12 @@
 @use '@/styles/index.scss' as *;
 
 .header-container {
-  @include Flex(row, space-between, center);
-
   position: fixed;
   top: 0;
   left: 0;
+  z-index: $header;
+
+  @include Flex(row, space-between, center);
 
   width: 100%;
   @include ResponsiveHeight(70px);
