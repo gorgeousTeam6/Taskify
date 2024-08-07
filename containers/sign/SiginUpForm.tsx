@@ -10,7 +10,6 @@ import TextInputLabel from './TextInputLabel';
 import { postSignUp } from '@/services/postService';
 import styles from './SignForm.module.scss';
 
-
 export type TSignUpInputs = {
   email: string;
   nickname: string;
@@ -111,11 +110,7 @@ export default function SignUpForm() {
         </label>
       </div>
       <div className='h'>
-        <Button
-          deviceType='desktop'
-          buttonType='login'
-          disable={!isValid || !checkTerms}
-        >
+        <Button buttonType='login' disabled={!isValid || !checkTerms}>
           가입하기
         </Button>
       </div>

@@ -8,7 +8,7 @@
 .label {
   margin-bottom: 10px;
   font-size: 16px;
-  color: var($black-33);
+  color: $black-33;
 }
 
 .inputWrapper {
@@ -19,20 +19,20 @@
   height: 50px;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid var($gray-d9);
+  border: 1px solid $gray-d9;
   background-color: white;
   padding-left: 15px;
   padding-right: 45px; // 아이콘의 너비를 고려하여 오른쪽 패딩을 조정합니다.
   font-size: 16px;
-  color: var($black-33);
+  color: $black-33;
 
   &::placeholder {
-    color: var($gray-9f);
+    color: $gray-9f;
   }
 }
 
 .inputError {
-  border: 2px solid red;
+  border: 2px solid $red;
 }
 
 .button {
@@ -53,5 +53,5 @@
 .errorMessage {
   margin-top: 2px;
   font-size: 14px;
-  color: red;
+  color: $red;
 }

@@ -1,4 +1,4 @@
-interface Invitation {
+interface IInvitation {
   id: number;
   inviter: {
     nickname: string;

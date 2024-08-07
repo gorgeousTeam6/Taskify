@@ -1,44 +1,34 @@
 import { useState } from 'react';
-import { UseFormRegister, FieldValues, Path } from 'react-hook-form';
-import styles from './PwdLabel.module.scss';
 import { IconVisible, IconInvisible } from '@/assets/icongroup';
+import styles from './PwdInput.module.scss';
+import React from 'react';
 
-interface Props<T extends FieldValues> {
-  id: Path<T>;
-  label: string;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  id: string;
   placeholder: string;
   error?: string;
-  register: UseFormRegister<T>;
 }
 
-export default function PwdInputWithLabel<T extends FieldValues>({
-  id,
-  label,
-  placeholder,
-  error,
-  register,
-}: Props<T>) {
+export default function PwdInput(props: InputProps) {
+  const { id, placeholder, error, className = '', ...inputProps } = props;
   const [visible, setVisible] = useState(false);
   const type = visible ? 'text' : 'password';
 
   return (
-    <div className={styles.container}>
-      <label htmlFor={id} className={styles.label}>
-        {label}
-      </label>
+    <div className={styles.box}>
       <div className={styles.inputWrapper}>
         <input
-          {...register(id)}
-          className={`${styles.input} ${error ? styles.inputError : ''}`}
+          className={`${styles.input} ${error ? styles.borderRed : ''}`}
           type={type}
           id={id}
           placeholder={placeholder}
           autoComplete='new-password'
+          {...inputProps}
         />
         <button
           type='button'
           className={styles.button}
-          onClick={() => setVisible((prevVisible) => !prevVisible)}
+          onClick={() => setVisible(!visible)}
         >
           {visible ? (
             <IconVisible className={styles.icon} />
@@ -47,7 +37,7 @@ export default function PwdInputWithLabel<T extends FieldValues>({
           )}
         </button>
       </div>
-      {error && <p className={styles.errorMessage}>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 }

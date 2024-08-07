@@ -1,0 +1,107 @@
+@use '@/styles/index.scss' as *;
+
+.ImageBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 16px;
+  }
+  .size {
+    width: 100px;
+    height: 100px;
+    @media (min-width: 768px) {
+      width: 180px;
+      height: 180px;
+    }
+  }
+}
+
+.emailBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 768px) {
+    flex-grow: 1;
+    gap: 20px;
+  }
+  .emailSize {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
+    border-radius: 0.375rem; /* Equivalent to rounded-md */
+    background-color: white; /* Equivalent to bg-white */
+    color: #4b5563; /* Equivalent to text-gray-700 */
+    font-size: 1rem; /* Equivalent to text-base */
+    line-height: 1.5; /* Equivalent to leading-6 */
+
+    &:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
+    }
+
+    color: $gray-9f;
+  }
+}
+
+.nickname {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 10px;
+
+  .input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    background-color: white; /* bg-white */
+    color: #4b5563; /* text-gray-700 */
+    font-size: 1rem; /* text-base */
+    line-height: 1.5; /* leading-6 */
+
+    &:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6); /* focus:ring */
+    }
+
+    &.invalid {
+      border-width: 2px;
+      border-color: $red;
+      &:hover {
+        border-color: $red;
+      }
+    }
+    color: $gray-9f;
+  }
+  .nicknameText {
+    position: absolute;
+    top: 4px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: $red;
+    @media (min-width: 768px) {
+      top: 88px;
+    }
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-left: auto;
+  margin-top: 1rem;
+  @media (min-width: 768px) {
+    margin-top: 1.5rem;
+  }
+}

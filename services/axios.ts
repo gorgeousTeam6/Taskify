@@ -3,6 +3,9 @@ import { useUserStore } from '@/store/useUserStore';
 
 const instance = axios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/7-6',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 instance.interceptors.request.use((config) => {

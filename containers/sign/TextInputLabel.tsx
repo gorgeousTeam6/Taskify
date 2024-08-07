@@ -25,7 +25,6 @@ export default function TextInputWithLabel<T extends FieldValues>({
   }
 
   return (
-
     <div className={styles.container}>
       <label htmlFor={id} className={styles.label}>
         {label}

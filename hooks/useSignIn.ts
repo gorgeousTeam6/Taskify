@@ -1,9 +1,17 @@
 // src/hooks/useSignIn.ts
 import { useMutation } from '@tanstack/react-query';
 import { useUserStore } from '@/store/useUserStore';
+import { User } from '@/types/User.interface';
 
 interface SignInResponse {
-  user: { nickname: string; id: number };
+  user: {
+    nickname: string;
+    id: number;
+    email: string; // 추가
+    profileImageUrl?: string | null; // 추가
+    createdAt?: string; // 추가
+    updatedAt?: string; // 추가
+  };
   accessToken: string;
 }
 
@@ -47,7 +55,13 @@ export const useSignIn = () => {
       setError(null);
     },
     onSuccess: (data) => {
-      setUser(data.user, data.accessToken);
+      // 변환 작업 추가
+      const user: User = {
+        ...data.user,
+        createdAt: data.user.createdAt || '',
+        updatedAt: data.user.updatedAt || '',
+      };
+      setUser(user, data.accessToken);
       setLoading(false);
     },
     onError: (error: Error) => {

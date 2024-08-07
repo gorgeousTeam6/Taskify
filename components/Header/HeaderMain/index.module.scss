@@ -1,5 +1,4 @@
 @use '@/styles/index.scss' as *;
-@import '@/styles/mixins/mixinHeader';
 
 .header-container {
   @include Flex(row, space-between, center);
@@ -9,8 +8,8 @@
   left: 0;
 
   width: 100%;
-  @include Height(70px);
-  @include Padding(0 70px, 0 40px, 0 24px);
+  @include ResponsiveHeight(70px);
+  @include ResponsivePadding(0 70px, 0 40px, 0 24px);
   border-bottom: 1px solid $gray-d9;
 
   background: $white;
@@ -26,10 +25,10 @@
 
 .logo-container {
   @include Flex(row, space-between, center);
-  @include Width(144px, 144px, 36px);
-  @include Height(36px, 36px, 36px);
+  @include ResponsiveWidth(144px, 144px, 36px);
+  @include ResponsiveHeight(36px, 36px, 36px);
 
-  :first-child {
+  :nth-child(1) {
     @include mobile {
       display: none;
     }
@@ -49,7 +48,7 @@
 
 .sign-container {
   @include Flex(row, space-between, center);
-  @include Gap(36px, 36px, 24px);
+  @include ResponsiveGap(36, 36, 24);
   background: inherit;
   color: inherit;
   p {

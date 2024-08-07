@@ -1,0 +1,22 @@
+@use '@/styles/index' as *;
+
+.profileImg {
+  position: relative;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: $white;
+  background-color: $gray-9f;
+  .image {
+    object-fit: cover;
+    border-radius: 9999px;
+  }
+  .substring {
+    position: absolute;
+    left: 11px;
+    top: 6px;
+    font: optional;
+    font-weight: 600;
+    color: $white;
+  }
+}

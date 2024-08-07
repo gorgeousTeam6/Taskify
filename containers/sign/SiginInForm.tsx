@@ -10,7 +10,6 @@ import { useSignIn } from '@/hooks/useSignIn';
 import { useUserStore } from '@/store/useUserStore';
 import styles from './SignForm.module.scss';
 
-
 export type TSignInInputs = {
   email: string;
   password: string;
@@ -52,7 +51,6 @@ export default function SignInForm() {
   };
 
   return (
-
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <TextInputLabel
         id='email'
@@ -69,12 +67,8 @@ export default function SignInForm() {
         register={register}
       />
       <div className='h'>
-        <Button
-          deviceType='desktop'
-          buttonType='login'
-          disable={mutation.isLoading || !isValid}
-        >
-          {mutation.isLoading ? '잠시만 기다려주세요..' : '로그인'}
+        <Button buttonType='login' disabled={mutation.isPending || !isValid}>
+          {mutation.isPending ? '잠시만 기다려주세요..' : '로그인'}
         </Button>
       </div>
       {mutation.isError && (
