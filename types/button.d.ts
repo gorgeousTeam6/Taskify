@@ -32,4 +32,6 @@ interface ButtonSetProps {
 interface ButtonSetForPaginationProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size: 'small' | 'large';
+  onClickToPrev: function;
+  onClickToNext: function;
 }

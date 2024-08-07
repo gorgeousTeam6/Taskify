@@ -3,19 +3,17 @@
 
 .common {
   border: 1px solid $gray-d9;
-  font-family: 'Pretendard', sans-serif;
   line-height: 1.2em;
   box-sizing: border-box;
-  cursor: pointer;
 }
 
 .login {
   border: none;
   border-radius: 8px;
-  background: $violet;
+  background: $main-yellow;
   color: $white;
 
-  @include Padding(14px 236px, 14px 236px, 14px 152px);
+  @include ResponsivePadding(14px 236px, 14px 236px, 14px 152px);
   @include FontStyle(18, 500, 18, 18);
 
   &:disabled {
@@ -25,30 +23,30 @@
 }
 
 .primary {
-  border: 1px solid $violet;
+  border: 1px solid $main-yellow;
   border-radius: 4px;
-  background: $violet;
+  background: $main-yellow;
   color: $white;
 
-  @include Padding(7px 29px, 6px 23px, 7px 37px);
+  @include ResponsivePadding(7px 29px, 6px 23px, 7px 37px);
   @include FontStyle(14, 500, 14, 12);
 }
 
 .secondary {
   border-radius: 4px;
   background: $white;
-  color: $violet;
+  color: $main-yellow;
 
-  @include Padding(7px 29px, 6px 23px, 7px 37px);
+  @include ResponsivePadding(7px 29px, 6px 23px, 7px 37px);
   @include FontStyle(14, 500, 14, 12);
 }
 
 .delete {
   border-radius: 4px;
   background: $white;
-  color: $violet;
+  color: $main-yellow;
 
-  @include Padding(7px 29px, 7px 29px, 6px 15px);
+  @include ResponsivePadding(7px 29px, 7px 29px, 6px 15px);
   @include FontStyle(14, 500, 14, 12);
 }
 
@@ -57,7 +55,7 @@
   background: $white;
   color: $black-33;
 
-  @include Padding(24px 85px, 24px 180px, 20px 60px);
+  @include ResponsivePadding(24px 85px, 24px 180px, 20px 60px);
   @include FontStyle(18, 700, 18, 16);
 }
 
@@ -65,26 +63,15 @@
   border-radius: 6px;
   background: $white;
 
-  @include Padding(9px 146px, 9px 261px, 6px 132px);
+  @include ResponsivePadding(9px 146px, 9px 261px, 6px 132px);
 }
 
 .delete-dashboard {
   border-radius: 8px;
   color: $black-33;
 
-  @include Padding(20px 96px, 20px 96px, 16px 84px);
+  @include ResponsivePadding(20px 96px, 20px 96px, 16px 84px);
   @include FontStyle(18, 700, 18, 16);
-}
-
-.pagenation {
-  @include desktop {
-  }
-
-  @include tablet {
-  }
-
-  @include mobile {
-  }
 }
 
 .add-board {
@@ -92,7 +79,7 @@
   background: $white;
   color: $black-33;
 
-  @include Padding(24px 99px, 23px 56px, 19px 70px);
+  @include ResponsivePadding(24px 99px, 23px 56px, 19px 70px);
   @include FontStyle(16, 600, 16, 14);
 }
 
@@ -101,6 +88,6 @@
   background: $white;
   color: $black-33;
 
-  @include Padding(25px 20px, 24px 20px, 20px 20px);
+  @include ResponsivePadding(25px 20px, 24px 20px, 20px 20px);
   @include FontStyle(16, 600, 16, 14);
 }

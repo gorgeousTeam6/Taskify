@@ -6,10 +6,13 @@ import getDate from '@/utils/getDate';
 
 import TodoModal from '../modals/todoModal/TodoModal';
 import useTodoModalStore from '@/stores/todoModalStore';
+import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
+import TodoEditModal from '../modals/todoEditModal/TodoEditModal';
 
 function Card({ card }: { card: ICard }) {
   const { id, title, tags, dueDate, imageUrl } = card;
   const { TodoModalId, setOpenTodoModal } = useTodoModalStore();
+  const { EditModalId } = useTodoEditModalStore();
 
   return (
     <>
@@ -37,6 +40,7 @@ function Card({ card }: { card: ICard }) {
         </div>
       </div>
       {TodoModalId === id && <TodoModal card={card} />}
+      {EditModalId === card.id ? <TodoEditModal card={card} /> : <></>}
     </>
   );
 }
