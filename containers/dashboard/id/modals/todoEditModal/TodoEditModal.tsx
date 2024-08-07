@@ -76,7 +76,11 @@ export default function TodoEditModal({ card }: { card: ICard }) {
         </form>
         <div>
           <div className={styles['button-group']}>
-            <button type='reset' className={styles['button']}>
+            <button
+              type='reset'
+              className={styles['button']}
+              onClick={setCloseEditModal}
+            >
               취소
             </button>
             <button
