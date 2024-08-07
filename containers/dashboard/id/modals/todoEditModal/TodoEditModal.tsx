@@ -4,11 +4,37 @@ import putImg from '@/assets/images/img_todoSample.png';
 import { useForm } from 'react-hook-form';
 import ModalPortal from '@/components/ModalPortal';
 import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import useColumnList from '@/hooks/useColumnList';
+import { Router, useRouter } from 'next/router';
+import SelectProgressDropdown from '../../dropdown/SelectProgressDropdown';
 
 export default function TodoEditModal({ card }: { card: ICard }) {
-  const { register } = useForm();
+  const {
+    id: cardId,
+    title,
+    description,
+    columnId,
+    dueDate,
+    tags,
+    imageUrl,
+    assignee,
+  } = card;
+  const { register } = useForm({
+    mode: 'onSubmit',
+    defaultValues: {
+      title: title,
+      description: description,
+    },
+  });
   const { setCloseEditModal } = useTodoEditModalStore();
+  const router = useRouter();
+  const { id: dashBoardId } = router.query;
+  const { columnList } = useColumnList(dashBoardId);
+  const currentColumn = columnList.filter(
+    (column: IColumn) => columnId === column.id,
+  );
+  const [selectedValue, setSelectedValue] = useState<IColumn>(currentColumn[0]);
 
   return (
     <ModalPortal onClose={setCloseEditModal}>
@@ -18,16 +44,17 @@ export default function TodoEditModal({ card }: { card: ICard }) {
           <div className={styles['status-and-owner']}>
             <div className={styles['label-and-form']}>
               <label className={styles['form-label']}>상태</label>
-              <select className={styles['dropdown-preview']}>
-                <option>to do</option>
-                <option>done</option>
-              </select>
+              <SelectProgressDropdown
+                columnList={columnList}
+                selectedValue={selectedValue}
+                setSelectedValue={setSelectedValue}
+              />
             </div>
             <div className={styles['label-and-form']}>
               <label className={styles['form-label']}>담당자</label>
               <select className={styles['dropdown-preview']}>
-                <option>장아영</option>
-                <option>최민경</option>
+                <option>to do</option>
+                <option>done</option>
               </select>
             </div>
           </div>

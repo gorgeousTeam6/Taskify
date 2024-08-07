@@ -10,16 +10,17 @@ import { IconArrowDown } from '@/assets/icongroup';
 
 function SelectProgressDropdown({
   columnList,
-  handleClick,
-  currentColumn,
+  selectedValue,
+  setSelectedValue,
 }: {
   columnList: IColumn[];
-  handleClick?: any;
-  currentColumn: IColumn[]; // 현재 컬럼 하나만 들어있는 배열
+  selectedValue: IColumn;
+  setSelectedValue: any;
 }) {
-  const [selectedValue, setSelectedValue] = useState<IColumn>(currentColumn[0]);
+  // const [selectedValue, setSelectedValue] = useState<IColumn>(currentColumn[0]);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { isOpen, setIsOpen } = useDetectClose(dropdownRef, false);
+
 
   const handleOpenDropdown = () => {
     setIsOpen((prev) => !prev);
@@ -43,7 +44,10 @@ function SelectProgressDropdown({
                 key={column.id}
                 value={column.id}
                 className={styles['list']}
-                onClick={handleClick}
+                onClick={() => {
+                  setSelectedValue(column);
+                  setIsOpen(false);
+                }}
               >
                 <ChipProgress title={column.title} />
               </li>
