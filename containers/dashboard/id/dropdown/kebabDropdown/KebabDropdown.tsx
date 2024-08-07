@@ -25,7 +25,6 @@ export default function KebabDropdown({
             onClick={(e) => {
               e.stopPropagation();
               setOpenEditModal(card.id);
-              console.log('클릭');
               setCloseTodoModal();
             }}
           >
