@@ -12,6 +12,8 @@ import axios from '@/services/axios';
 import SelectProgressDropdown from '@/containers/dashboard/id/dropdown/SelectProgressDropdown';
 import SelectAssigneeDropdown from '@/containers/dashboard/id/dropdown/SelectAssigneeDropdown';
 
+//인터페이스 따로 빼기
+
 interface IPostData {
   title: string;
   description: string;
@@ -75,7 +77,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       setCloseEditModal();
     },
     onError: (error) => {
-      console.error('Update Error:', error); // 에러 로그 출력
+      console.error('Update Error:', error);
     },
   });
 
@@ -103,7 +105,6 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       <div className={styles['container']}>
         <form className={styles['form']} onSubmit={handleSubmit(onSubmit)}>
           {' '}
-          {/* 수정: handleSubmit(onSubmit) 추가 */}
           <p className={styles['modal-title']}>할 일 수정</p>
           <div className={styles['status-and-owner']}>
             <div
