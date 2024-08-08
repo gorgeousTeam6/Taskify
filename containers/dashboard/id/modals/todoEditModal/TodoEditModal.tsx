@@ -31,6 +31,16 @@ interface FormValues {
   tags?: string;
 }
 
+
+interface IPostData {
+  title: string;
+  description: string;
+  columnId: number;
+  assigneeUserId: number;
+  tags: string[];
+  dueDate?: string | null;
+  imageUrl?: string | null;
+}
 export default function TodoEditModal({ card }: { card: ICard }) {
   const {
     id: cardId,
@@ -62,6 +72,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   );
   const [selectedProgressValue, setSelectedProgressValue] = useState<IColumn>(
     currentColumn!,
+
   );
   const [selectedAssigneeValue, setSelectedAssigneeValue] = useState<
     IAssignee | IMember | null

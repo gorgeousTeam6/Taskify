@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import Button from '@/components/Button';
+import ButtonSet from '@/components/ButtonSet';
 import PwdLabel from '@/containers/sign/PwdLabel';
 import TextInputLabel from '@/containers/sign/TextInputLabel';
 import { useSignIn } from '@/hooks/useSignIn';
@@ -67,9 +68,11 @@ export default function SignInForm() {
         register={register}
       />
       <div className='h'>
-        <Button buttonType='login' disabled={mutation.isPending || !isValid}>
-          {mutation.isPending ? '잠시만 기다려주세요..' : '로그인'}
-        </Button>
+        <ButtonSet buttonSetType='primary' widthFill={true}>
+          <Button buttonType='login' disabled={mutation.isPending || !isValid}>
+            {mutation.isPending ? '잠시만 기다려주세요..' : '로그인'}
+          </Button>
+        </ButtonSet>
       </div>
       {mutation.isError && (
         <p>
@@ -79,12 +82,6 @@ export default function SignInForm() {
             : '알 수 없는 오류가 발생했습니다.'}
         </p>
       )}
-      {user && (
-        <p>
-          로그인 성공: {user.nickname} ({user.id})
-        </p>
-      )}
-      {error && <p>오류: {error}</p>}
     </form>
   );
 }

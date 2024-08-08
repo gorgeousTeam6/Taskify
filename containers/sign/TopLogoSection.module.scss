@@ -1,3 +1,5 @@
+@use '@/styles/index.scss' as *;
+
 .box {
   margin-bottom: 30px;
   margin-top: 50px;
@@ -6,10 +8,7 @@
   align-items: center;
 
   .Image {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
+    @include Flex(column, center, center);
   }
 
   .text {

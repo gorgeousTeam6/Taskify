@@ -4,6 +4,7 @@ import { IconEmptyInvitation, IconSearch } from '@/assets/icongroup';
 import { useQuery } from '@tanstack/react-query';
 import instance from '@/services/axios';
 import { useState } from 'react';
+import EmptyColumn from '@/containers/dashboard/id/column/EmptyColumn';
 
 function InvitedDashboard() {
   const [searchValue, SetSearchValue] = useState('');
@@ -16,10 +17,11 @@ function InvitedDashboard() {
     },
   });
 
-  const searchData = data.filter((item: IInvitation) =>
-    item.dashboard.title.toLowerCase().includes(searchValue.toLowerCase()),
-  );
-
+  const searchData = data
+    ? data.filter((item: IInvitation) =>
+        item.dashboard.title.toLowerCase().includes(searchValue.toLowerCase()),
+      )
+    : [];
   return (
     <div className={styles['container']}>
       <h2 className={styles['title']}>초대받은 대시보드</h2>
@@ -56,12 +58,7 @@ function InvitedDashboard() {
           </div>
         </>
       ) : (
-        <div className={styles['empty-invitation-wrapper']}>
-          <div className={styles['empty-invitation']}>
-            <IconEmptyInvitation />
-            <p>아직 초대받은 대시보드가 없어요</p>
-          </div>
-        </div>
+        <EmptyColumn />
       )}
     </div>
   );

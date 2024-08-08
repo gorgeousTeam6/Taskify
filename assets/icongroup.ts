@@ -22,8 +22,10 @@ import IconFacebook from './icons/ic_facebook.svg';
 import IconEnvelop from './icons/ic_envelop.svg';
 import IconAddChip from './icons/ic_add_chip.svg';
 import IconCircleChip from './icons/ic_circle_chip.svg';
+import IconEdit from './icons/ic_edit.svg';
 import RightArrow from './icons/ic_arrow_next.svg';
 import LeftArrow from './icons/ic_arrow_previous.svg';
+import IconChecked from './icons/ic_checked.svg';
 
 export {
   IconAddBox,
@@ -50,6 +52,8 @@ export {
   IconEnvelop,
   IconAddChip,
   IconCircleChip,
+  IconEdit,
   LeftArrow,
   RightArrow,
+  IconChecked,
 };
