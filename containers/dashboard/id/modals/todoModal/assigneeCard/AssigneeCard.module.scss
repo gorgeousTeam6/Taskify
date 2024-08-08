@@ -22,7 +22,7 @@
   line-height: 20px;
 }
 
-.manager {
+.assignee {
   @include Flex(row, null, center);
   gap: 8px;
 }

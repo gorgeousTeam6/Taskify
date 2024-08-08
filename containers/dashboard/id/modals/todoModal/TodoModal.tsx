@@ -9,7 +9,7 @@ import ModalPortal from '@/components/ModalPortal';
 import ChipCard from '@/containers/dashboard/id/chips/ChipCard';
 import ChipProgress from '@/containers/dashboard/id/chips/ChipProgress';
 import KebabDropdown from '@/containers/dashboard/id/dropdown/kebabDropdown/KebabDropdown';
-import ManagerCard from './managerCard/ManagerCard';
+import AssigneeCard from '@/containers/dashboard/id/modals/todoModal/assigneeCard/AssigneeCard';
 import Comment from './Comment';
 
 import useColumnList from '@/hooks/useColumnList';
@@ -19,7 +19,7 @@ import useTodoModalStore from '@/stores/todoModalStore';
 import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
 import TodoEditModal from '../todoEditModal/TodoEditModal';
 import CommentForm from './CommentForm';
-        
+
 export default function TodoModal({ card }: { card: ICard }) {
   const [isKebabOpen, setIsKebabOpen] = useState<boolean>(false);
   const { TodoModalId, setCloseTodoModal } = useTodoModalStore();
@@ -116,7 +116,7 @@ export default function TodoModal({ card }: { card: ICard }) {
               ))}
             </div>
           </div>
-          <ManagerCard assignee={assignee} dueDate={dueDate} />
+          <AssigneeCard assignee={assignee} dueDate={dueDate} />
         </div>
       </div>
       {/* {EditModalId === card.id && <TodoEditModal card={card} />} */}

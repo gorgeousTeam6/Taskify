@@ -1,9 +1,9 @@
-import styles from './ManagerCard.module.scss';
+import styles from './assigneeCard.module.scss';
 import Image from 'next/image';
 import profileImg from '@/assets/images/img_profileImg2.png';
 import getDate from '@/utils/getDate';
 
-export default function ManagerCard({
+export default function AssigneeCard({
   assignee,
   dueDate,
 }: {
@@ -15,7 +15,7 @@ export default function ManagerCard({
     <div className={styles['container']}>
       <div className={styles['title-and-contents']}>
         <p className={styles['title']}>담당자</p>
-        <div className={styles['manager']}>
+        <div className={styles['assignee']}>
           {profileImageUrl ? (
             <Image
               className={styles['profileImg']}
