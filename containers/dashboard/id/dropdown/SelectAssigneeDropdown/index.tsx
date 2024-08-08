@@ -57,7 +57,7 @@ function SelectAssigneeDropdown({
                 className={styles['list']}
                 onClick={() => {
                   setSelectedAssigneeValue(member);
-                  setIsOpen
+                  setIsOpen(false);
                 }}
               >
                 <Assignee member={member} />

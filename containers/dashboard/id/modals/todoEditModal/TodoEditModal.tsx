@@ -2,15 +2,15 @@ import styles from './TodoEditModal.module.scss';
 import Image from 'next/image';
 import putImg from '@/assets/images/img_todoSample.png';
 import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 import ModalPortal from '@/components/ModalPortal';
 import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
-import { useEffect, useState } from 'react';
 import useColumnList from '@/hooks/useColumnList';
 import { Router, useRouter } from 'next/router';
-import SelectProgressDropdown from '../../dropdown/SelectProgressDropdown';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from '@/services/axios';
-import SelectAssigneeDropdown from '../../dropdown/SelectAssigneeDropdown';
+import SelectProgressDropdown from '@/containers/dashboard/id/dropdown/SelectProgressDropdown/index';
+import SelectAssigneeDropdown from '@/containers/dashboard/id/dropdown/SelectAssigneeDropdown/index';
 
 interface IPostData {
   title: string;
@@ -39,7 +39,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       description: description,
     },
   });
-  const queryClient = useQueryClient(); 
+  const queryClient = useQueryClient();
 
   const { setCloseEditModal } = useTodoEditModalStore();
   const router = useRouter();
@@ -55,7 +55,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
     IAssignee | IMember | null
   >(assignee ?? null);
 
-//mutation 함수
+  //mutation 함수
   const updateColumnMutation = useMutation({
     mutationFn: ({
       newTitle,

@@ -6,6 +6,7 @@
   @include MenuStyle;
   @include ListStyle;
   @include FontStyle(sm, regular);
+  width: 100%;
   color: $black-33;
 
   position: relative;
@@ -26,13 +27,14 @@
 
 .menu {
   @include MenuStyle;
+  width: 100%;
 }
 
 .list {
   @include ListStyle;
   @include FontStyle(sm, regular);
   color: $black-33;
-
+  
   &:hover {
     background-color: #eeeeee;
   }
@@ -40,9 +42,10 @@
 
 .select-input {
   position: relative;
-
+  
   article {
     position: absolute;
+    width: 100%;
     top: 50px;
   }
 }
