@@ -6,7 +6,8 @@
   @include Flex(column, null, null);
   gap: 32px;
   width: 584px;
-  height: auto;
+  height: 90%;
+  overflow: scroll;
   border-radius: 16px;
   padding: 32px;
   background-color: $white;
