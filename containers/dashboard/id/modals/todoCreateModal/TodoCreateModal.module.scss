@@ -9,7 +9,8 @@
   @include Flex(column, null, null);
   gap: 32px;
   width: 584px;
-  height: auto;
+  height: 90%;
+  overflow: scroll;
   border-radius: 16px;
   background-color: $white;
   padding: 32px;
