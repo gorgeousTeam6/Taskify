@@ -45,7 +45,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
     defaultValues: {
       title: title,
       description: description,
-      dueDate: dueDate ?? '',
+      dueDate: dueDate ? dueDate.slice(0, 16) : '',
       tags: tags?.join(', '),
     },
   });
@@ -67,23 +67,31 @@ export default function TodoEditModal({ card }: { card: ICard }) {
 
   const updateColumnMutation = useMutation({
     mutationFn: (data: IPostData) => {
+      console.log('Request Data:', data);
       return axios.put(`/cards/${cardId}`, data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['getColumnList', dashboardId]);
       setCloseEditModal();
     },
+    onError: (error) => {
+      console.error('Update Error:', error); // 에러 로그 출력
+    },
   });
 
   // onSubmit 핸들러 추가
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const formattedDueDate = data.dueDate
+      ? new Date(data.dueDate).toISOString().slice(0, 16).replace('T', ' ')
+      : null;
+
     const requestData: IPostData = {
       title: data.title,
       description: data.description,
       columnId: selectedProgressValue.id,
       assigneeUserId: selectedAssigneeValue?.id ?? 0,
       tags: data.tags ? data.tags.split(',').map((tag) => tag.trim()) : [],
-      dueDate: data.dueDate || null,
+      dueDate: formattedDueDate,
       imageUrl: imageUrl ?? null,
     };
 
@@ -145,7 +153,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
             <label className={styles['form-label']}>마감일</label>
             <input
               className={styles['date-input']}
-              type='date'
+              type='datetime-local'
               {...register('dueDate')}
             />
           </div>
