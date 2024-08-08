@@ -68,7 +68,7 @@ export default function SignUpForm() {
     }
   };
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles[`form`]} onSubmit={handleSubmit(onSubmit)}>
       <TextInputLabel
         id='email'
         label='이메일'
@@ -106,7 +106,7 @@ export default function SignUpForm() {
             setCheckTerms(!checkTerms);
           }}
         />{' '}
-        <label htmlFor='terms' className={styles.agree}>
+        <label htmlFor='terms' className={styles[`agree`]}>
           이용약관에 동의합니다.
         </label>
       </div>

@@ -12,21 +12,19 @@ import { IconArrowDown } from '@/assets/icongroup';
 
 function SelectAssigneeDropdown({
   dashboardId,
-  assignee,
-  handleClick,
+  selectedAssigneeValue,
+  setSelectedAssigneeValue,
 }: {
   dashboardId: string | string[] | undefined;
-  assignee?: IAssignee;
-  handleClick?: any;
+  selectedAssigneeValue: IAssignee | IMember | null;
+  setSelectedAssigneeValue: any;
 }) {
   const { dashboardMemberList, isLoading } = useDashboardMember(
     Number(dashboardId),
   );
 
   // assignee가 있으면 수정 모달에서 사용할 것
-  const [selectedValue, setSelectedValue] = useState<
-    IAssignee | IMember | null
-  >(assignee ?? null);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { isOpen, setIsOpen } = useDetectClose(dropdownRef, false);
 
@@ -42,7 +40,11 @@ function SelectAssigneeDropdown({
         className={classNames(styles['button'])}
         onClick={handleOpenDropdown}
       >
-        {assignee ? <Assignee member={assignee} /> : <>담당자 선택</>}
+        {selectedAssigneeValue ? (
+          <Assignee member={selectedAssigneeValue} />
+        ) : (
+          <>담당자를 선택해 주세요</>
+        )}
         <IconArrowDown className={isOpen ? styles['open'] : styles['close']} />
       </div>
 
@@ -53,7 +55,10 @@ function SelectAssigneeDropdown({
               <li
                 key={member.id}
                 className={styles['list']}
-                onClick={handleClick}
+                onClick={() => {
+                  setSelectedAssigneeValue(member);
+                  setIsOpen(false);
+                }}
               >
                 <Assignee member={member} />
               </li>

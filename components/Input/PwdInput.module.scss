@@ -1,24 +1,26 @@
-@use '@/styles/index' as *;
+@use '@/styles/index.scss' as *;
 
 .box {
   position: relative;
-  .inputWrapper {
+  .input-Wrapper {
     .input {
       // 기존 input 스타일 정의
-      padding: 8px;
+      padding: 0.5rem 1rem;
       width: 100%;
       border: 1px solid #ccc;
       border-radius: 4px;
       outline: none;
       transition: border-color 0.2s;
       padding-right: 40px;
+      font-size: 1rem;
+      line-height: 1.5;
 
       &:focus {
         border-color: #007bff;
       }
     }
 
-    .borderRed {
+    .border-Red {
       border-width: 2px;
       border-color: $red;
     }
@@ -30,11 +32,10 @@
       transform: translateY(-50%); /* 수직 중앙 정렬 */
       background: transparent;
       border: none;
-      cursor: pointer;
       padding: 0; /* 기본 padding 제거 */
       margin: 0; /* 기본 margin 제거 */
 
-      @media (min-width: 768px) {
+      @include tablet {
         top: 15px;
         width: 20px;
         height: 20px;

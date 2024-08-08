@@ -1,4 +1,4 @@
-@import '/styles/color';
+@use '@/styles/index.scss' as *;
 
 .form {
   display: flex;
@@ -8,5 +8,5 @@
 
 .agree {
   font-size: 16px;
-  color: var($black-33);
+  color: $black-33;
 }

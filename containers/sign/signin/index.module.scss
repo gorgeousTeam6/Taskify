@@ -1,4 +1,4 @@
-@import '/styles/color';
+@use '@/styles/index.scss' as *;
 
 .box {
   display: flex;
@@ -6,10 +6,10 @@
   justify-content: center;
 
   .login {
-    width: 350px;
+    width: 520px;
     align-items: center;
     justify-content: center;
-    @media (min-width: 768px) {
+    @include tablet {
       width: 520px;
     }
     .member {

@@ -110,9 +110,9 @@ export default function PwdChangeForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={styles.box}>
-        <div className={styles.password}>
-          <label htmlFor='password' className='label'>
+      <div className={styles[`box`]}>
+        <div className={styles[`password`]}>
+          <label htmlFor='password' className={styles[`label`]}>
             현재 비밀번호
           </label>
           <PwdInput
@@ -124,8 +124,8 @@ export default function PwdChangeForm() {
             onBlur={handleInputBlur}
           />
         </div>
-        <div className={styles.password}>
-          <label htmlFor='newPassword' className='label'>
+        <div className={styles[`password`]}>
+          <label htmlFor='newPassword' className={styles[`label`]}>
             새 비밀번호
           </label>
           <PwdInput
@@ -137,8 +137,8 @@ export default function PwdChangeForm() {
             onBlur={handleInputBlur}
           />
         </div>
-        <div className={styles.password}>
-          <label htmlFor='NewPasswordCheck' className='label'>
+        <div className={styles[`password`]}>
+          <label htmlFor='NewPasswordCheck' className={styles[`label`]}>
             새 비밀번호 확인
           </label>
           <PwdInput
@@ -150,7 +150,7 @@ export default function PwdChangeForm() {
             onBlur={handleInputBlur}
           />
         </div>
-        <div className={styles.button}>
+        <div className={styles[`button`]}>
           <Button
             buttonType='login'
             disabled={!checkValid(inputData, inputError)}

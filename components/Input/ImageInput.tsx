@@ -38,28 +38,28 @@ export default function ImageInput({
   };
 
   return (
-    <div className={styles.size}>
+    <div className={styles[`size`]}>
       {tempImage ? (
-        <label htmlFor={name} className={styles.label_input}>
+        <label htmlFor={name} className={styles[`label-input`]}>
           <Image
             src={tempImage}
             alt='이미지'
             fill
             style={{ objectFit: 'cover' }}
-            className={styles.tempImage}
+            className={styles[`tempImage`]}
           />
           <button
-            className={styles.button}
+            className={styles[`button`]}
             type='button'
             onClick={handleImageDelete}
           >
             <IconClose fill />
           </button>
-          <IconEdit className={styles.Edit} />
+          <IconEdit className={styles[`Edit`]} />
         </label>
       ) : (
-        <label htmlFor={name} className={styles.plus}>
-          <div className={styles.plus_image}>
+        <label htmlFor={name} className={styles[`plus`]}>
+          <div className={styles[`plus-image`]}>
             <IconAddChip fill />
           </div>
         </label>

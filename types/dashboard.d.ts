@@ -1,4 +1,4 @@
-interface Dashboard {
+interface IDashboard {
   id: number;
   title: string;
   color: string;

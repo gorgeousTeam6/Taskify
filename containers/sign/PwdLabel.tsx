@@ -22,14 +22,14 @@ export default function PwdInputWithLabel<T extends FieldValues>({
   const type = visible ? 'text' : 'password';
 
   return (
-    <div className={styles.container}>
-      <label htmlFor={id} className={styles.label}>
+    <div className={styles[`container`]}>
+      <label htmlFor={id} className={styles[`label`]}>
         {label}
       </label>
-      <div className={styles.inputWrapper}>
+      <div className={styles[`input-Wrapper`]}>
         <input
           {...register(id)}
-          className={`${styles.input} ${error ? styles.inputError : ''}`}
+          className={`${styles[`input`]} ${error ? styles[`input-Error`] : ''}`}
           type={type}
           id={id}
           placeholder={placeholder}
@@ -37,17 +37,17 @@ export default function PwdInputWithLabel<T extends FieldValues>({
         />
         <button
           type='button'
-          className={styles.button}
+          className={styles[`button`]}
           onClick={() => setVisible((prevVisible) => !prevVisible)}
         >
           {visible ? (
-            <IconVisible className={styles.icon} />
+            <IconVisible className={styles[`icon`]} />
           ) : (
-            <IconInvisible className={styles.icon} />
+            <IconInvisible className={styles[`icon`]} />
           )}
         </button>
       </div>
-      {error && <p className={styles.errorMessage}>{error}</p>}
+      {error && <p className={styles[`error-Message`]}>{error}</p>}
     </div>
   );
 }

@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import styles from './TodoCreateModal.module.scss';
 import Image from 'next/image';
 import putImg from '@/assets/images/img_todoSample.png';
 import { useForm, SubmitHandler } from 'react-hook-form';
-
+import Calendar from '@/containers/dashboard/id/modals/calendar/Calendar';
+import { IconCalender } from '@/assets/icongroup';
+import { create } from 'zustand';
+import SelectAssigneeDropdown from '../../dropdown/SelectAssigneeDropdown';
+import { useRouter } from 'next/router';
+import useColumnList
+ from '@/hooks/useColumnList';
+ 
 interface TodoCreateModalProps {
   onClose: () => void;
   onSubmit: (data: FormValues) => void;
@@ -20,10 +28,27 @@ export default function TodoCreateModal({
   onClose,
   onSubmit,
 }: TodoCreateModalProps) {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, setValue } = useForm<FormValues>();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const router = useRouter();
+  const { id: dashboardId } = router.query;
+  const { columnList } = useColumnList(dashboardId);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
 
   const onSubmitHandler: SubmitHandler<FormValues> = (data) => {
-    onSubmit(data);
+    onSubmit({
+      ...data,
+      date: selectedDate ? selectedDate.toISOString().split('T')[0] : '',
+    });
+  };
+  const [selectedAssigneeValue, setSelectedAssigneeValue] = useState<
+    IAssignee | IMember | null
+  >(null);
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+    setValue('date', date ? date.toISOString().split('T')[0] : '');
+    setShowCalendar(false); // 날짜 선택 후 캘린더 닫기
   };
 
   return (
@@ -37,13 +62,11 @@ export default function TodoCreateModal({
         <div className={styles['owner']}>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>담당자</label>
-            <select
-              className={styles['dropdown-preview']}
-              {...register('owner', { required: true })}
-            >
-              <option value='장아영'>장아영</option>
-              <option value='최민경'>최민경</option>
-            </select>
+            <SelectAssigneeDropdown
+              selectedAssigneeValue={selectedAssigneeValue}
+              setSelectedAssigneeValue={setSelectedAssigneeValue}
+              dashboardId={dashboardId}
+            />
           </div>
         </div>
         <div className={styles['label-and-form']}>
@@ -70,11 +93,30 @@ export default function TodoCreateModal({
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>마감일</label>
-          <input
-            className={styles['date-input']}
-            type='date'
-            {...register('date')}
-          />
+          <div className={styles['date-input-wrapper']}>
+            <input
+              className={styles['date-input']}
+              value={
+                selectedDate ? selectedDate.toISOString().split('T')[0] : ''
+              }
+              readOnly
+              {...register('date')}
+            />
+            <span
+              className={styles['calendar-icon-wrapper']}
+              onClick={() => setShowCalendar(!showCalendar)}
+            >
+              <IconCalender className={styles['calendar-icon']} />
+            </span>
+            {showCalendar && (
+              <div className={styles['calendar-popup']}>
+                <Calendar
+                  selectedDate={selectedDate}
+                  setSelectedDate={handleDateChange}
+                />
+              </div>
+            )}
+          </div>
         </div>
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>태그</label>
@@ -87,7 +129,7 @@ export default function TodoCreateModal({
         <div className={styles['label-and-form']}>
           <label className={styles['form-label']}>이미지</label>
           <Image
-            className={styles['sampleImg']}
+            className={styles['sample-img']}
             src={putImg}
             alt='이미지 넣기'
           />
@@ -98,7 +140,7 @@ export default function TodoCreateModal({
           </button>
           <button
             type='submit'
-            className={`${styles['button']} ${styles['violet']}`}
+            className={`${styles['button']} ${styles['yellow']}`}
           >
             생성
           </button>

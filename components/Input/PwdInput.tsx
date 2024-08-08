@@ -15,10 +15,10 @@ export default function PwdInput(props: InputProps) {
   const type = visible ? 'text' : 'password';
 
   return (
-    <div className={styles.box}>
-      <div className={styles.inputWrapper}>
+    <div className={styles[`box`]}>
+      <div className={styles[`input-Wrapper`]}>
         <input
-          className={`${styles.input} ${error ? styles.borderRed : ''}`}
+          className={`${styles[`input`]} ${error ? styles[`border-Red`] : ''}`}
           type={type}
           id={id}
           placeholder={placeholder}
@@ -27,17 +27,17 @@ export default function PwdInput(props: InputProps) {
         />
         <button
           type='button'
-          className={styles.button}
+          className={styles[`button`]}
           onClick={() => setVisible(!visible)}
         >
           {visible ? (
-            <IconVisible className={styles.icon} />
+            <IconVisible className={styles[`icon`]} />
           ) : (
-            <IconInvisible className={styles.icon} />
+            <IconInvisible className={styles[`icon`]} />
           )}
         </button>
       </div>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p className={styles[`error`]}>{error}</p>}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-@use '@/styles/index' as *;
+@use '@/styles/index.scss' as *;
 
 .text {
   display: flex;
@@ -7,18 +7,18 @@
   color: $black-33;
   margin-left: 320px;
   margin-top: 75px;
-  @media (min-width: 768px) {
+  @include tablet {
     padding: 20px;
   }
-  .profilebox {
+  .profile-box {
     height: 422px;
     width: 100%;
-    max-width: 620px;
+    max-width: 670px;
     border-radius: 8px;
     background-color: $white;
     padding: 20px;
 
-    @media (min-width: 768px) {
+    @include tablet {
       height: 355px;
       padding: 28px;
     }
@@ -29,31 +29,31 @@
       font-size: 24px;
       line-height: 32px;
 
-      @media (min-width: 768px) {
+      @include tablet {
         margin-top: 32px;
         margin-bottom: 32px;
       }
     }
   }
-  .Pwdbox {
+  .Pwd-box {
     width: 100%;
-    max-width: 620px;
+    max-width: 670px;
     border-radius: 8px;
     background-color: $white;
     padding: 20px;
 
-    @media (min-width: 768px) {
+    @include tablet {
       padding: 28px;
       padding-top: 0;
     }
-    .Pwdchange {
+    .Pwd-change {
       margin-bottom: 24px;
       margin-top: 28px;
       font-weight: 700;
       font-size: 24px;
       line-height: 32px;
 
-      @media (min-width: 768px) {
+      @include tablet {
         margin-top: 32px;
         margin-bottom: 32px;
       }

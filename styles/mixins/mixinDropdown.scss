@@ -3,7 +3,7 @@
 @mixin MenuStyle {
   width: 217px;
   border-radius: 6px;
-  border: 1px solid $gray-9f;
+  border: 1px solid $gray-d9;
 }
 
 @mixin ListStyle {
@@ -11,4 +11,5 @@
   padding: 10px;
   height: 48px;
   cursor: pointer;
+  background-color: $white;
 }

@@ -97,8 +97,8 @@ export default function EditProfileForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={styles.ImageBox}>
-        <div className={styles.size}>
+      <div className={styles[`Image-Box`]}>
+        <div className={styles[`size`]}>
           <ImageInput
             name='user-profile'
             value={user?.profileImageUrl || null}
@@ -107,18 +107,18 @@ export default function EditProfileForm() {
           />
         </div>
 
-        <div className={styles.emailBox}>
-          <div className={styles.emailSize}>
+        <div className={styles[`email-Box`]}>
+          <div className={styles[`email-Size`]}>
             <label className='label'>이메일</label>
-            <p className={styles.input}>{user?.email}</p>
+            <p className={styles[`input`]}>{user?.email}</p>
           </div>
 
-          <div className={styles.nickname}>
+          <div className={styles[`nickname`]}>
             <label htmlFor='nickname' className='label'>
               닉네임
             </label>
             <input
-              className={`${styles.input} ${
+              className={`${styles[`input`]} ${
                 !(isNicknameValid.gtZero && isNicknameValid.lteTen)
                   ? styles.invalid
                   : ''
@@ -130,15 +130,15 @@ export default function EditProfileForm() {
               onChange={handleNicknameChange}
             />
             {!isNicknameValid.gtZero && (
-              <p className={styles.nicknameText}>닉네임을 입력해주세요</p>
+              <p className={styles[`nickname-Text`]}>닉네임을 입력해주세요</p>
             )}
             {!isNicknameValid.lteTen && (
-              <p className={styles.nicknameText}>
+              <p className={styles[`nickname-Text`]}>
                 닉네임을 10자 이내로 입력해주세요
               </p>
             )}
           </div>
-          <div className={styles.button}>
+          <div className={styles[`button`]}>
             <Button
               buttonType='login'
               disabled={

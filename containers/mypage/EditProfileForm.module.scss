@@ -1,6 +1,6 @@
 @use '@/styles/index.scss' as *;
 
-.ImageBox {
+.Image-Box {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -11,22 +11,25 @@
   .size {
     width: 100px;
     height: 100px;
-    @media (min-width: 768px) {
+    flex-grow: 1;
+
+    @include tablet {
       width: 180px;
       height: 180px;
     }
   }
 }
 
-.emailBox {
+.email-Box {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  @media (min-width: 768px) {
+
+  @include tablet {
     flex-grow: 1;
     gap: 20px;
   }
-  .emailSize {
+  .email-Size {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -57,6 +60,7 @@
   flex-direction: column;
   position: relative;
   gap: 10px;
+  margin-top: 16px;
 
   .input {
     display: block;
@@ -84,13 +88,13 @@
     }
     color: $gray-9f;
   }
-  .nicknameText {
+  .nickname-Text {
     position: absolute;
     top: 4px;
     font-size: 0.875rem;
     line-height: 1.25rem;
     color: $red;
-    @media (min-width: 768px) {
+    @include tablet {
       top: 88px;
     }
   }
@@ -101,5 +105,6 @@
     width: 400px;
     height: 54px;
     padding: 0;
+    margin-top: 16px;
   }
 }

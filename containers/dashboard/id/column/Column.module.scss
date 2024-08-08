@@ -9,6 +9,10 @@
   @include Flex(column, null, null);
   @include ResponsiveGap(24, 24, 16);
 
+  &.is-dragging-over {
+    border: 1.5px solid $main-yellow;
+  }
+
   @include tablet {
     width: 100%;
     height: 346px;
@@ -58,5 +62,24 @@
 .setting-icon {
   &:hover {
     cursor: pointer;
+  }
+}
+
+.empty-column {
+  margin-top: 30px;
+  @include Flex(column, center, center);
+  opacity: 50%;
+
+  .big-logo {
+    fill: $black-33;
+    @include ResponsiveWidth(100px, 75px, 70px);
+    @include ResponsiveHeight(100px, 75px, 50px);
+  }
+
+  .empty {
+    margin-top: -50px;
+    // @include Size(150px);
+    @include ResponsiveWidth(150px, 100px, 100px);
+    @include ResponsiveHeight(150px, 150px, 150px);
   }
 }

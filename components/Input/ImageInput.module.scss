@@ -1,12 +1,12 @@
-@use '@/styles/index' as *;
+@use '@/styles/index.scss' as *;
 
 .size {
-  width: 100%; /* 부모 요소의 크기에 따라 조정됨 */
-  height: 100%; /* 부모 요소의 크기에 따라 조정됨 */
+  width: 182px; /* 부모 요소의 크기에 따라 조정됨 */
+  height: 182px; /* 부모 요소의 크기에 따라 조정됨 */
   position: relative; /* 절대 위치 지정된 자식 요소에 필요함 */
 }
 
-.label_input {
+.label-input {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,6 @@
     top: 6px;
     width: 24px;
     height: 24px;
-    cursor: pointer;
     border-radius: 9999px;
     opacity: 0.4;
     &:hover {
@@ -57,12 +56,12 @@
   background-color: $gray-f5;
   border-radius: 6px;
 
-  .plus_image {
+  .plus-image {
     position: relative;
     width: 20px;
     height: 20px;
 
-    @media (min-width: 768px) {
+    @include tablet {
       width: 30px;
       height: 30px;
     }

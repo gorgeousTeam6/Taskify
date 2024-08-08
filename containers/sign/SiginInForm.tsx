@@ -52,7 +52,7 @@ export default function SignInForm() {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles[`form`]} onSubmit={handleSubmit(onSubmit)}>
       <TextInputLabel
         id='email'
         label='이메일'

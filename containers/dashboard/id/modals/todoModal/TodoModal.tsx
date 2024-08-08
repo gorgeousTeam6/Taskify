@@ -9,12 +9,16 @@ import ModalPortal from '@/components/ModalPortal';
 import ChipCard from '@/containers/dashboard/id/chips/ChipCard';
 import ChipProgress from '@/containers/dashboard/id/chips/ChipProgress';
 import KebabDropdown from '@/containers/dashboard/id/dropdown/kebabDropdown/KebabDropdown';
-import ManagerCard from './managerCard/ManagerCard';
+import AssigneeCard from '@/containers/dashboard/id/modals/todoModal/assigneeCard/AssigneeCard';
 import Comment from './Comment';
 
 import useColumnList from '@/hooks/useColumnList';
 import useCommentList from '@/hooks/useCommentList';
 import useTodoModalStore from '@/stores/todoModalStore';
+
+import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
+import TodoEditModal from '../todoEditModal/TodoEditModal';
+import CommentForm from './CommentForm';
 
 export default function TodoModal({ card }: { card: ICard }) {
   const [isKebabOpen, setIsKebabOpen] = useState<boolean>(false);
@@ -24,7 +28,7 @@ export default function TodoModal({ card }: { card: ICard }) {
   const { id: dashboardId } = router.query;
 
   const {
-    id,
+    id: cardId,
     title,
     description,
     tags,
@@ -32,21 +36,21 @@ export default function TodoModal({ card }: { card: ICard }) {
     assignee,
     imageUrl,
     columnId,
-    createdAt,
-    updatedAt,
   } = card;
 
   const { columnList, isLoading } = useColumnList(dashboardId);
-  const { commentList, isLoading: isCommentLoading } = useCommentList(id);
+  const { commentList, isLoading: isCommentLoading } = useCommentList(cardId);
 
   const currentColumn = columnList.filter(
     (column: IColumn) => column.id === columnId,
   );
 
+  const { EditModalId } = useTodoEditModalStore();
+
   // 나중에 에러처리 하기
   if (!TodoModalId) return <></>;
-  if (isLoading) return <>todomodal loading</>;
-  if (isCommentLoading) return <>comment loading</>;
+  if (isLoading) return <></>;
+  if (isCommentLoading) return <></>;
 
   return (
     <ModalPortal onClose={setCloseTodoModal}>
@@ -55,18 +59,20 @@ export default function TodoModal({ card }: { card: ICard }) {
           <p className={styles['title']}>{title}</p>
           <div className={styles['empty-block']}></div>
           <div className={styles['kebab-and-close']}>
-            <div
-              className={styles['kebab']}
-              onBlur={() => setIsKebabOpen(false)}
-            >
+            <div className={styles['kebab']}>
               <button
                 type='button'
-                onClick={() => setIsKebabOpen((prev) => !prev)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsKebabOpen((prev) => !prev);
+                }}
                 className={styles['top-button']}
               >
                 <IconKebab className={styles['icon']} />
               </button>
-              {isKebabOpen && <KebabDropdown isOpen={isKebabOpen} />}
+              {isKebabOpen && (
+                <KebabDropdown isOpen={isKebabOpen} card={card} />
+              )}
             </div>
             <button
               type='button'
@@ -99,22 +105,21 @@ export default function TodoModal({ card }: { card: ICard }) {
                 alt='일정 사진'
               />
             )}
-            <div className={styles['comment-input-container']}>
-              <p className={styles['comment-title']}>댓글</p>
-              <textarea
-                className={styles['comment-input']}
-                placeholder='댓글 작성하기'
-              />
-            </div>
+            <CommentForm
+              cardId={cardId}
+              columnId={currentColumn[0].id}
+              dashboardId={Number(dashboardId)}
+            />
             <div className={styles['comment-list']}>
               {commentList.map((comment: IComment) => (
                 <Comment comment={comment} />
               ))}
             </div>
           </div>
-          <ManagerCard assignee={assignee} dueDate={dueDate} />
+          <AssigneeCard assignee={assignee} dueDate={dueDate} />
         </div>
       </div>
+      {/* {EditModalId === card.id && <TodoEditModal card={card} />} */}
     </ModalPortal>
   );
 }

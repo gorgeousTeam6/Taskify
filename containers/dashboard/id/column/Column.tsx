@@ -12,20 +12,13 @@ import {
   useTodoCreateModalStore,
 } from '@/stores/modalStore';
 import styles from './Column.module.scss';
+import EmptyColumn from './EmptyColumn';
+import { Droppable } from 'react-beautiful-dnd';
+import useCardList from '@/hooks/useCardList';
+import classNames from 'classnames';
 
 function Column({ id, title }: { id: number; title: string }) {
-  const {
-    data: cardList,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: [`getCardList${id}`],
-    queryFn: () =>
-      axios
-        .get(`/cards?size=10&columnId=${id}`)
-        .then((res) => res.data)
-        .then((data) => data.cards),
-  });
+  const { cardList, isLoading, error } = useCardList(id);
 
   const { ManageModalId, setOpenManageModal } = useManageModalStore();
   const { setOpenModal } = useTodoCreateModalStore();
@@ -34,32 +27,45 @@ function Column({ id, title }: { id: number; title: string }) {
   if (error) return <h2>error</h2>;
 
   return (
-    <div className={styles['column']}>
-      <div className={styles['header']}>
-        <div className={styles['header-left']}>
-          <IconCircleChip />
-          <div className={styles['title']}>
-            <p className={styles['column-title']}>{title}</p>{' '}
-            <ChipNum num={cardList.length} />
+    <Droppable droppableId={String(id)}>
+      {(provided, snapshot) => (
+        <div
+          className={classNames(
+            styles['column'],
+            snapshot.isDraggingOver ? styles['is-dragging-over'] : null,
+          )}
+        >
+          <div className={styles['header']}>
+            <div className={styles['header-left']}>
+              <IconCircleChip />
+              <div className={styles['title']}>
+                <p className={styles['column-title']}>{title}</p>{' '}
+                <ChipNum num={cardList.length} />
+              </div>
+            </div>
+            <IconSetting
+              className={styles['setting-icon']}
+              onClick={() => setOpenManageModal(id)}
+            />
+            {ManageModalId === id && <ManageModal defaultValue={title} />}
+          </div>
+
+          <div
+            className={styles['card-list']}
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            <Button buttonType='add-todo' onClick={setOpenModal} />
+            {cardList.length === 0 ? (
+              <EmptyColumn />
+            ) : (
+              cardList.map((card: ICard) => <Card card={card} key={card.id} />)
+            )}
+            {provided.placeholder}
           </div>
         </div>
-        <IconSetting
-          className={styles['setting-icon']}
-          onClick={() => setOpenManageModal(id)}
-        />
-        {ManageModalId === id && <ManageModal defaultValue={title} />}
-      </div>
-      <div className={styles['card-list']}>
-        <Button buttonType='add-todo' onClick={setOpenModal} />
-        <>
-          {cardList.length === 0 ? (
-            <h2>empty</h2>
-          ) : (
-            cardList.map((card: ICard) => <Card card={card} key={card.id} />)
-          )}
-        </>
-      </div>
-    </div>
+      )}
+    </Droppable>
   );
 }
 
