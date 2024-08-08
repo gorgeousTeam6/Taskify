@@ -43,7 +43,7 @@ function SelectAssigneeDropdown({
         {selectedAssigneeValue ? (
           <Assignee member={selectedAssigneeValue} />
         ) : (
-          <>담당자 선택</>
+          <>담당자를 선택해 주세요</>
         )}
         <IconArrowDown className={isOpen ? styles['open'] : styles['close']} />
       </div>

@@ -104,7 +104,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
         <form className={styles['form']}>
           <p className={styles['modal-title']}>할 일 수정</p>
           <div className={styles['status-and-owner']}>
-            <div className={styles['label-and-form']}>
+            <div className={`${styles['top-form']} ${styles['label-and-form']}`}>
               <label className={styles['form-label']}>상태</label>
               <SelectProgressDropdown
                 columnList={columnList}
@@ -112,7 +112,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
                 setSelectedValue={setSelectedProgressValue}
               />
             </div>
-            <div className={styles['label-and-form']}>
+            <div className={`${styles['top-form']} ${styles['label-and-form']}`}>
               <label className={styles['form-label']}>담당자</label>
               <SelectAssigneeDropdown
                 selectedAssigneeValue={selectedAssigneeValue}

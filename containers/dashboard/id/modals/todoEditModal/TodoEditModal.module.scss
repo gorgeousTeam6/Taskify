@@ -42,6 +42,9 @@
 .label-and-form {
   @include Flex(column, null, null);
   gap: 8px;
+  &.top-form {
+    width: 240px;
+  }
 }
 
 .label-with-star {
