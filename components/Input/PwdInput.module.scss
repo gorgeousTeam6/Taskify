@@ -2,7 +2,7 @@
 
 .box {
   position: relative;
-  .input-Wrapper {
+  .input-wrapper {
     .input {
       // 기존 input 스타일 정의
       padding: 0.5rem 1rem;
@@ -12,15 +12,14 @@
       outline: none;
       transition: border-color 0.2s;
       padding-right: 40px;
-      font-size: 1rem;
-      line-height: 1.5;
+      @include FontStyle(lg, regular);
 
       &:focus {
         border-color: #007bff;
       }
     }
 
-    .border-Red {
+    .border-red {
       border-width: 2px;
       border-color: $red;
     }

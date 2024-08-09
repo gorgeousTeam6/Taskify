@@ -1,9 +1,9 @@
 @use '@/styles/index.scss' as *;
 
 .size {
-  width: 182px; /* 부모 요소의 크기에 따라 조정됨 */
-  height: 182px; /* 부모 요소의 크기에 따라 조정됨 */
-  position: relative; /* 절대 위치 지정된 자식 요소에 필요함 */
+  width: 182px;
+  height: 182px;
+  position: relative;
 }
 
 .label-input {
@@ -16,9 +16,9 @@
 
   .tempImage {
     border-radius: 6px;
-    width: 100%; /* 부모 요소에 맞게 조정됨 */
-    height: 100%; /* 부모 요소에 맞게 조정됨 */
-    object-fit: cover; /* 이미지 크기 조정 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     &:hover {
       filter: brightness(75%);
     }
@@ -40,7 +40,7 @@
     }
   }
 
-  .Edit {
+  .edit {
     width: 30px;
     height: 30px;
     z-index: 10;

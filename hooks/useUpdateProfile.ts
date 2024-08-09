@@ -1,4 +1,3 @@
-// hooks/useUpdateProfile.ts
 import { useMutation } from '@tanstack/react-query';
 import { useUserStore } from '@/store/useUserStore';
 import { putProfile } from '@/services/putService';
@@ -13,14 +12,11 @@ export const useUpdateProfile = () => {
     onMutate: () => {
       setLoading(true);
       setError(null);
-      // 필요한 경우, 이전 상태를 저장하거나 다른 작업을 수행할 수 있음
-      return null; // 반환 값은 나중에 revert 함수에서 사용할 수 있음
+      return null;
     },
     onSuccess: (user) => {
-      // accessToken을 `localStorage`에서 가져온다고 가정
+      console.log('User after update:', user); // 확인을 위한 로그
       const accessToken = localStorage.getItem('accessToken') || '';
-
-      // 두 개의 인수 전달
       setUser(user, accessToken);
       setLoading(false);
     },

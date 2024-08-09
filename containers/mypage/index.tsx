@@ -15,8 +15,8 @@ export default function Mypage() {
           <h2 className={styles[`profile`]}>프로필</h2>
           <EditProfileForm />
         </section>
-        <section className={styles[`Pwd-box`]}>
-          <h2 className={styles[`Pwd-change`]}>비밀번호 변경</h2>
+        <section className={styles[`pwd-box`]}>
+          <h2 className={styles[`pwd-change`]}>비밀번호 변경</h2>
           <PwdChangeForm />
         </section>
       </div>

@@ -107,8 +107,8 @@ export default function EditProfileForm() {
           />
         </div>
 
-        <div className={styles[`email-Box`]}>
-          <div className={styles[`email-Size`]}>
+        <div className={styles[`email-box`]}>
+          <div className={styles[`email-size`]}>
             <label className='label'>이메일</label>
             <p className={styles[`input`]}>{user?.email}</p>
           </div>
@@ -130,10 +130,10 @@ export default function EditProfileForm() {
               onChange={handleNicknameChange}
             />
             {!isNicknameValid.gtZero && (
-              <p className={styles[`nickname-Text`]}>닉네임을 입력해주세요</p>
+              <p className={styles[`nickname-text`]}>닉네임을 입력해주세요</p>
             )}
             {!isNicknameValid.lteTen && (
-              <p className={styles[`nickname-Text`]}>
+              <p className={styles[`nickname-text`]}>
                 닉네임을 10자 이내로 입력해주세요
               </p>
             )}

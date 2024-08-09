@@ -55,7 +55,7 @@ export default function ImageInput({
           >
             <IconClose fill />
           </button>
-          <IconEdit className={styles[`Edit`]} />
+          <IconEdit className={styles[`edit`]} />
         </label>
       ) : (
         <label htmlFor={name} className={styles[`plus`]}>

@@ -1,6 +1,6 @@
 @use '@/styles/index.scss' as *;
 
-.Image-Box {
+.Image-box {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -20,7 +20,7 @@
   }
 }
 
-.email-Box {
+.email-box {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -29,7 +29,7 @@
     flex-grow: 1;
     gap: 20px;
   }
-  .email-Size {
+  .email-size {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -88,8 +88,8 @@
     }
     color: $gray-9f;
   }
-  .nickname-Text {
-    position: absolute;
+  .nickname-text {
+    position: relative;
     top: 4px;
     font-size: 0.875rem;
     line-height: 1.25rem;

@@ -16,9 +16,9 @@ export default function PwdInput(props: InputProps) {
 
   return (
     <div className={styles[`box`]}>
-      <div className={styles[`input-Wrapper`]}>
+      <div className={styles[`input-wrapper`]}>
         <input
-          className={`${styles[`input`]} ${error ? styles[`border-Red`] : ''}`}
+          className={`${styles[`input`]} ${error ? styles[`border-red`] : ''}`}
           type={type}
           id={id}
           placeholder={placeholder}

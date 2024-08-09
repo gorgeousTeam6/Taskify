@@ -70,7 +70,7 @@ export default function SignInForm() {
       <div className='h'>
         <ButtonSet buttonSetType='primary' widthFill={true}>
           <Button buttonType='login' disabled={mutation.isPending || !isValid}>
-            {mutation.isPending ? '잠시만 기다려주세요..' : '로그인'}
+            {mutation.isPending ? '로딩중' : '로그인'}
           </Button>
         </ButtonSet>
       </div>

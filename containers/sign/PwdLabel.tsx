@@ -26,10 +26,10 @@ export default function PwdInputWithLabel<T extends FieldValues>({
       <label htmlFor={id} className={styles[`label`]}>
         {label}
       </label>
-      <div className={styles[`input-Wrapper`]}>
+      <div className={styles[`input-wrapper`]}>
         <input
           {...register(id)}
-          className={`${styles[`input`]} ${error ? styles[`input-Error`] : ''}`}
+          className={`${styles[`input`]} ${error ? styles[`input-error`] : ''}`}
           type={type}
           id={id}
           placeholder={placeholder}
@@ -47,7 +47,7 @@ export default function PwdInputWithLabel<T extends FieldValues>({
           )}
         </button>
       </div>
-      {error && <p className={styles[`error-Message`]}>{error}</p>}
+      {error && <p className={styles[`error-message`]}>{error}</p>}
     </div>
   );
 }

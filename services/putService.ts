@@ -4,7 +4,7 @@ import { UpdatePasswordForm } from '@/types/UpdatePasswordForm.interface';
 import { UpdateProfileForm } from '@/types/UpdateProfileForm.interface';
 
 export const putProfile = async (FormData: UpdateProfileForm) => {
-  const response = await instance.put<User>(`/user/me`, FormData);
+  const response = await instance.put<User>(`/users/me`, FormData);
   return response.data;
 };
 

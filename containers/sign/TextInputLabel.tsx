@@ -29,17 +29,17 @@ export default function TextInputWithLabel<T extends FieldValues>({
       <label htmlFor={id} className={styles[`label`]}>
         {label}
       </label>
-      <div className={styles[`input-Wrapper`]}>
+      <div className={styles[`input-wrapper`]}>
         <input
           {...register(id)}
           type={type}
           id={id}
-          className={`${styles[`input`]} ${error ? styles[`input-Error`] : ''}`}
+          className={`${styles[`input`]} ${error ? styles[`input-error`] : ''}`}
           placeholder={placeholder}
           autoComplete={autoComplete}
         />
       </div>
-      {error && <p className={styles[`error-Message`]}>{error}</p>}
+      {error && <p className={styles[`error-message`]}>{error}</p>}
     </div>
   );
 }
