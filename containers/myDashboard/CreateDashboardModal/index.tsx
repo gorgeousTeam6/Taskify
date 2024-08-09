@@ -52,10 +52,10 @@ export default function CreateDashboardModal() {
         </label>
         <ColorCircleList onClick={handleOnColorClick} />
         <ButtonSet buttonSetType='primary' widthFill={true}>
-          <Button buttonType='secondary' onClick={handleCancelBtnClick}>
+          <Button buttonType='modal-secondary' onClick={handleCancelBtnClick}>
             취소
           </Button>
-          <Button buttonType='primary' onClick={handleCreateBtnClick}>
+          <Button buttonType='modal-primary' onClick={handleCreateBtnClick}>
             생성
           </Button>
         </ButtonSet>

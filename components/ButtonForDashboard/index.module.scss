@@ -1,0 +1,45 @@
+@use '@/styles/index.scss' as *;
+@import '@/styles/mixins/mixinButton';
+
+.common {
+  border: 1px solid $gray-d9;
+  line-height: 1.2em;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.standard-flex {
+  @include Flex(row, space-between, center);
+}
+
+.dashboard-button {
+  border-radius: 8px;
+  background: $white;
+  color: $black-33;
+
+  @include ResponsivePadding(25px 20px, 24px 20px, 20px 20px);
+  @include FontStyle(16, 600, 16, 14);
+}
+
+.dashboard {
+  @include Width(292px, 207px, 220px);
+
+  .dashboard-title-box {
+    @include Gap(16px, 12px, 12px);
+
+    .dashboard-title-icon-gap {
+      @include Gap(8px, 6px, 4px);
+    }
+  }
+}
+
+.crown-size {
+  @include Width(20px, 18px, 15px);
+  @include Height(16px, 14px, 12px);
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}

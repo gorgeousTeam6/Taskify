@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import ButtonSetForPagination from '@/components/ButtonSetForPagination/Button';
 import CreateDashboardModal from '../CreateDashboardModal';
 import { useCreateModalStore } from '@/stores/modalStore';
+import ButtonForDashboard from '@/components/ButtonForDashboard';
 
 const fetchDashboards = async (cursorId: number, page: number) => {
   const response = await instance.get(
@@ -60,14 +61,14 @@ function DashboardList() {
         </Button>
         {data &&
           data.dashboards.map((item: IDashboard) => (
-            <Button
+            <ButtonForDashboard
               key={item.id}
-              buttonType='dashboard'
+              color={item.color}
               isOwner={item.createdByMe}
               onClick={() => handleClickDashboard(item.id)}
             >
               {item.title}
-            </Button>
+            </ButtonForDashboard>
           ))}
       </div>
       <div className={styles['pagination']}>

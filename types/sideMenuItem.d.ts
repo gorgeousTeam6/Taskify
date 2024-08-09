@@ -1,7 +1,6 @@
-type Color = 'green' | 'purple' | 'blue' | 'orange' | 'pink';
-
 interface SideMenuItemProps {
-  color: Color;
+  dashboardId: number;
+  color: string;
   isOwner?: boolean;
   children: string;
 }
