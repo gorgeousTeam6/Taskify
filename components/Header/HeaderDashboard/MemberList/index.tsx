@@ -30,7 +30,11 @@ export default function MemberList({
       }`}
     >
       {data.members.map((member: IMember) => (
-        <ProfileIcon key={member.id} user={member} />
+        <ProfileIcon
+          key={member.id}
+          nickname={member.nickname}
+          imageUrl={member.profileImageUrl}
+        />
       ))}
     </div>
   );
