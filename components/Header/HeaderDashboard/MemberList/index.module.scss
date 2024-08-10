@@ -1,7 +1,7 @@
 @use '@/styles/index.scss' as *;
 @use '@/styles/_levels.scss' as *;
 
-.invite-members {
+.member-list {
   position: relative;
   @include Flex(row, space-between, center);
   @include ResponsiveWidth(138px, 88px, 88px);
@@ -24,7 +24,7 @@
   }
 }
 
-.invited-member {
+.member {
   @include Flex(row, space-between, center);
   position: absolute;
   width: 38px;
@@ -32,4 +32,5 @@
   border: 2px solid $white;
   border-radius: 50%;
   color: $white;
+  background: red;
 }

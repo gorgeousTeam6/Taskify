@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.scss';
 import { IconCrown, IconSetting, IconAddBox } from '@/assets/icongroup';
 import UserIcon from '@/components/UserIcon';
@@ -6,26 +6,37 @@ import instance from '@/services/axios';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useInviteModalStore } from '@/stores/modalStore';
-import InviteList from './InviteList';
+import MemberList from './MemberList';
+import { useUserStore } from '@/store/useUserStore';
+import InviteModal from '@/containers/myDashboard/InviteModal';
 
 const fetchDashboards = async (dashboardId: string) => {
   const response = await instance.get(`/dashboards/${dashboardId}`);
   return response.data;
 };
 
-export default function HeaderDashboard({
-  userData,
-  dashboardId,
-}: HeaderDashboardProps) {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['dashboardDetail', dashboardId],
-    queryFn: () => fetchDashboards(dashboardId),
-  });
+export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
   const router = useRouter();
+  const currentPath = router.pathname;
+  const currentUrl = router.asPath;
+  const startOfId =
+    currentPath === '/dashboard/[id]' ? '/dashboard/'.length : 0;
+  const currentId = dashboardId || currentUrl.substring(startOfId);
+
+  const { user } = useUserStore((state) => ({
+    user: state.user,
+  }));
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['dashboardDetail', currentId],
+    queryFn: () => fetchDashboards(currentId),
+  });
+
   const { isModalOpen, setOpenModal } = useInviteModalStore();
 
-  const userIcon =
-    userData.profileImageUrl ||
+  const nickname = user?.nickname ?? '';
+  const profileImageUrl =
+    user?.profileImageUrl ||
     'https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/7r5X/image/9djEiPBPMLu_IvCYyvRPwmZkM1g.jpg';
 
   const handleManageClick = () => {
@@ -39,8 +50,8 @@ export default function HeaderDashboard({
           className={`${styles['header-dashboard-container']} ${styles['flex-end-force']}`}
         >
           <div className={`${styles['dashboard-my']}`}>
-            <UserIcon src={userIcon}></UserIcon>
-            <p>{userData.nickname}</p>
+            <UserIcon src={profileImageUrl}></UserIcon>
+            <p>{nickname}</p>
           </div>
         </div>
       </header>
@@ -91,15 +102,16 @@ export default function HeaderDashboard({
             </button>
           </div>
           <div className={`${styles['dashboard-member-area']}`}>
-            <InviteList dashboardId={dashboardId}></InviteList>
+            <MemberList dashboardId={currentId}></MemberList>
             <div className={`${styles['dashboard-half-line']}`}></div>
             <div className={`${styles['dashboard-my']}`}>
-              <UserIcon src={userIcon}></UserIcon>
-              <p>{userData.nickname}</p>
+              <UserIcon src={profileImageUrl}></UserIcon>
+              <p>{nickname}</p>
             </div>
           </div>
         </div>
       </div>
+      {isModalOpen && <InviteModal />}
     </header>
   );
 }
