@@ -8,7 +8,9 @@ import Button from '@/components/Button';
 import ButtonSet from '@/components/ButtonSet';
 import PwdLabel from './PwdLabel';
 import TextInputLabel from './TextInputLabel';
+import Modal from './AgreeModal';
 import { postSignUp } from '@/services/postService';
+import useToastStore from '@/stores/toastStore';
 import styles from './SignForm.module.scss';
 
 export type TSignUpInputs = {
@@ -36,7 +38,10 @@ const schema = yup.object().shape({
 
 export default function SignUpForm() {
   const [checkTerms, setCheckTerms] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+
+  const { addToastList } = useToastStore();
 
   const {
     register,
@@ -61,12 +66,43 @@ export default function SignUpForm() {
   const onSubmit = async (data: TSignUpInputs) => {
     try {
       await postSignUp(data);
+      addToastList({
+        id: Date.now().toString(),
+        type: 'success',
+        message: '회원가입 되었습니다.',
+      });
       router.push('/signin'); // 회원가입이 성공되면 로그인 페이지로 리다이렉트
-    } catch (error) {
+    } catch (error: any) {
+      let errorMessage = '회원가입에 실패했습니다. 다시 시도해주세요.';
+
+      if (error.response) {
+        if (error.response.status === 409) {
+          errorMessage = '이미 사용중인 이메일입니다.';
+        } else if (error.response.status === 400) {
+          errorMessage = '이메일 형식으로 작성해주세요.';
+        }
+      }
+
       console.error('회원가입에 실패했습니다:', error);
       // 에러 처리 로직 추가 가능
+      addToastList({
+        id: Date.now().toString(),
+        type: 'error',
+        message: errorMessage,
+      });
     }
   };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCheckTerms(false); // 취소 시 체크박스 해제
+  };
+  const agreeTerms = () => {
+    setCheckTerms(true);
+    setIsModalOpen(false);
+  };
+
   return (
     <form className={styles[`form`]} onSubmit={handleSubmit(onSubmit)}>
       <TextInputLabel
@@ -106,7 +142,7 @@ export default function SignUpForm() {
             setCheckTerms(!checkTerms);
           }}
         />{' '}
-        <label htmlFor='terms' className={styles[`agree`]}>
+        <label htmlFor='terms' className={styles[`agree`]} onClick={openModal}>
           이용약관에 동의합니다.
         </label>
       </div>
@@ -117,6 +153,7 @@ export default function SignUpForm() {
           </Button>
         </ButtonSet>
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal} onAgree={agreeTerms} />
     </form>
   );
 }

@@ -9,7 +9,8 @@ type ButtonType =
   | 'pagenation'
   | 'add-board'
   | 'dashboard'
-  | 'modal-primary';
+  | 'modal-primary'
+  | 'modal-secondary';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType: ButtonType;
@@ -35,4 +36,11 @@ interface ButtonSetForPaginationProps
   size: 'small' | 'large';
   onClickToPrev: function;
   onClickToNext: function;
+}
+
+interface ButtonForDashboardProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  color: string;
+  isOwner?: boolean;
+  children?: string;
 }

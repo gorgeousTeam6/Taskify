@@ -2,15 +2,16 @@
 import { useMutation } from '@tanstack/react-query';
 import { useUserStore } from '@/store/useUserStore';
 import { User } from '@/types/User.interface';
+import { SignInError } from './SignInError';
 
 interface SignInResponse {
   user: {
     nickname: string;
     id: number;
-    email: string; // 추가
-    profileImageUrl?: string | null; // 추가
-    createdAt?: string; // 추가
-    updatedAt?: string; // 추가
+    email: string;
+    profileImageUrl?: string | null;
+    createdAt?: string;
+    updatedAt?: string;
   };
   accessToken: string;
 }
@@ -33,11 +34,11 @@ const signIn = async (
   );
 
   if (!response.ok) {
-    throw new Error('Login failed');
+    const error = new SignInError('Login failed', response);
+    throw error;
   }
 
   const data: SignInResponse = await response.json();
-  // 로그인 성공 시 유저 데이터를 Zustand에 저장 & 로컬 스토리지에 토큰 저장
   localStorage.setItem('accessToken', data.accessToken);
 
   return data;
@@ -48,14 +49,13 @@ export const useSignIn = () => {
   const setLoading = useUserStore((state) => state.setLoading);
   const setError = useUserStore((state) => state.setError);
 
-  return useMutation<SignInResponse, Error, SignInCredentials>({
+  return useMutation<SignInResponse, SignInError, SignInCredentials>({
     mutationFn: signIn,
     onMutate: () => {
       setLoading(true);
       setError(null);
     },
     onSuccess: (data) => {
-      // 변환 작업 추가
       const user: User = {
         ...data.user,
         createdAt: data.user.createdAt || '',
@@ -64,8 +64,20 @@ export const useSignIn = () => {
       setUser(user, data.accessToken);
       setLoading(false);
     },
-    onError: (error: Error) => {
-      setError(error.message);
+    onError: (error: SignInError) => {
+      let errorMessage = '로그인에 실패했습니다. 다시 시도해주세요.';
+
+      if (error.response) {
+        if (error.response.status === 404) {
+          errorMessage = '존재하지 않는 유저입니다.';
+        } else if (error.response.status === 400) {
+          errorMessage = '이메일 형식으로 작성해주세요.';
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      setError(errorMessage);
       setLoading(false);
     },
   });

@@ -102,3 +102,12 @@
   @include ResponsivePadding(14px 0px, 14px 0px, 15px 0px);
   @include FontStyle('lg', 600, 'lg', 'md');
 }
+
+.modal-secondary {
+  width: 100%;
+  border-radius: 8px;
+  background: $white;
+  color: $main-yellow;
+  @include ResponsivePadding(14px 0px, 14px 0px, 15px 0px);
+  @include FontStyle('lg', 600, 'lg', 'md');
+}
