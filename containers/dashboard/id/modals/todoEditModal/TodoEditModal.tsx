@@ -2,7 +2,8 @@ import styles from './TodoEditModal.module.scss';
 import Image from 'next/image';
 import putImg from '@/assets/images/img_todoSample.png';
 import { useForm, SubmitHandler } from 'react-hook-form'; // 수정: SubmitHandler 추가
-import { useState } from 'react';
+import { useState, useEffect, ChangeEvent, MouseEventHandler } from 'react';
+import useImageStore from '@/stores/ImageInputStore';
 import ModalPortal from '@/components/ModalPortal';
 import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
 import useColumnList from '@/hooks/useColumnList';
@@ -11,36 +12,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from '@/services/axios';
 import SelectProgressDropdown from '@/containers/dashboard/id/dropdown/SelectProgressDropdown';
 import SelectAssigneeDropdown from '@/containers/dashboard/id/dropdown/SelectAssigneeDropdown';
-
-//인터페이스 따로 빼기
-
-interface IPostData {
-  title: string;
-  description: string;
-  columnId: number;
-  assigneeUserId: number;
-  tags: string[];
-  dueDate?: string | null;
-  imageUrl?: string | null;
-}
-
-interface FormValues {
-  title: string;
-  description: string;
-  dueDate?: string;
-  tags?: string;
-}
+import ImageInput from '@/components/Input/ImageInput';
 
 
-interface IPostData {
-  title: string;
-  description: string;
-  columnId: number;
-  assigneeUserId: number;
-  tags: string[];
-  dueDate?: string | null;
-  imageUrl?: string | null;
-}
 export default function TodoEditModal({ card }: { card: ICard }) {
   const {
     id: cardId,
@@ -59,6 +33,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       description: description,
       dueDate: dueDate ? dueDate.slice(0, 16) : '',
       tags: tags?.join(', '),
+      imageUrl: imageUrl ?? null,
     },
   });
 
@@ -72,11 +47,37 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   );
   const [selectedProgressValue, setSelectedProgressValue] = useState<IColumn>(
     currentColumn!,
-
   );
   const [selectedAssigneeValue, setSelectedAssigneeValue] = useState<
     IAssignee | IMember | null
   >(assignee ?? null);
+
+  const { imageUrl: storedImageUrl, setImage, clearImage } = useImageStore();
+
+  useEffect(() => {
+    if (storedImageUrl) {
+      setValue('imageUrl', storedImageUrl);
+    }
+  }, [storedImageUrl, setValue]);
+
+  useEffect(() => {
+    if (imageUrl) {
+      setImage(imageUrl);
+    }
+  }, [imageUrl, setImage]);
+
+  const handleImageChange = (file: File) => {
+    const newImageUrl = URL.createObjectURL(file);
+    setImage(newImageUrl); // zustand store 상태 업데이트
+    setValue('imageUrl', newImageUrl); // useForm의 imageUrl 값 업데이트
+  };
+
+  const handleImageDelete: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    clearImage();
+    setValue('imageUrl', null);
+  };
+  /*put*/
 
   const updateColumnMutation = useMutation({
     mutationFn: (data: IPostData) => {
@@ -105,8 +106,10 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       assigneeUserId: selectedAssigneeValue?.id ?? 0,
       tags: data.tags ? data.tags.split(',').map((tag) => tag.trim()) : [],
       dueDate: formattedDueDate,
-      imageUrl: imageUrl ?? null,
+      imageUrl: data.imageUrl ?? '',
     };
+
+    console.log(requestData);
 
     updateColumnMutation.mutate(requestData);
   };
@@ -179,10 +182,11 @@ export default function TodoEditModal({ card }: { card: ICard }) {
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>이미지</label>
-            <Image
-              className={styles['sample-img']}
-              src={putImg}
-              alt='이미지 넣기'
+            <ImageInput
+              name='user-profile'
+              value={storedImageUrl} // 수정: storedImageUrl 상태 전달
+              onChange={handleImageChange} // 수정: handleImageChange 함수 전달
+              onDeleteClick={() => handleImageDelete} // 수정: handleImageDelete 함수 전달
             />
           </div>
           <div className={styles['button-group']}>
