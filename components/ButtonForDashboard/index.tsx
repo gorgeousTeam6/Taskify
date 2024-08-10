@@ -8,8 +8,6 @@ export default function ButtonForDashboard({
   children = '',
   ...rest
 }: ButtonForDashboardProps) {
-  const iconSize = 18;
-
   return (
     <button
       className={`${styles['common']} ${styles['dashboard-button']}`}
@@ -29,20 +27,12 @@ export default function ButtonForDashboard({
             {children}
             {isOwner && (
               <div className={`${styles['crown-size']}`}>
-                <IconCrown
-                  style={{ width: '100%', height: '100%' }}
-                  aria-label={`crown icon`}
-                />
+                <IconCrown aria-label={`crown icon`} />
               </div>
             )}
           </div>
         </div>
-        <div style={{ width: iconSize, height: iconSize }}>
-          <IconArrowForward
-            style={{ width: '100%', height: '100%' }}
-            aria-label={`arrow forward icon`}
-          />
-        </div>
+        <IconArrowForward aria-label={`arrow forward icon`} />
       </div>
     </button>
   );
