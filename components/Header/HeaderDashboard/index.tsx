@@ -17,11 +17,8 @@ const fetchDashboards = async (dashboardId: string) => {
 
 export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
   const router = useRouter();
-  const currentPath = router.pathname;
-  const currentUrl = router.asPath;
-  const startOfId =
-    currentPath === '/dashboard/[id]' ? '/dashboard/'.length : 0;
-  const currentId = dashboardId || currentUrl.substring(startOfId);
+  const { id } = router.query;
+  const currentId = dashboardId || String(id);
 
   const { user } = useUserStore((state) => ({
     user: state.user,
