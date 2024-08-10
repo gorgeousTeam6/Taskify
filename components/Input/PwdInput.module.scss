@@ -2,44 +2,48 @@
 
 .box {
   position: relative;
+
   .input-wrapper {
-    .input {
-      // 기존 input 스타일 정의
-      padding: 0.5rem 1rem;
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      outline: none;
-      transition: border-color 0.2s;
-      padding-right: 40px;
-      @include FontStyle(lg, regular);
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 
-      &:focus {
-        border-color: #007bff;
-      }
+  .input {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    padding-right: 40px;
+
+    @include FontStyle(lg, regular);
+
+    &:focus {
+      border-color: #007bff;
     }
 
-    .border-red {
-      border-width: 2px;
-      border-color: $red;
+    @include mobile {
+      padding: 0.5rem 0.75rem;
     }
+  }
 
-    .button {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%); /* 수직 중앙 정렬 */
-      background: transparent;
-      border: none;
-      padding: 0; /* 기본 padding 제거 */
-      margin: 0; /* 기본 margin 제거 */
+  .border-red {
+    border: 2px solid $red;
+  }
 
-      @include tablet {
-        top: 15px;
-        width: 20px;
-        height: 20px;
-      }
-    }
+  .button {
+    position: absolute;
+    right: 10px;
+    top: 51%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
   }
 }
 

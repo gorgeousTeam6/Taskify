@@ -29,6 +29,10 @@
   @include desktop {
     justify-content: space-between;
   }
+
+  &.flex-end-force {
+    justify-content: flex-end;
+  }
 }
 
 .dashboard-title-container {

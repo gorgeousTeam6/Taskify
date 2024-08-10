@@ -1,10 +1,10 @@
 import { AxiosError } from 'axios';
 import { ChangeEvent, FormEventHandler, useState } from 'react';
 import Button from '@/components/Button';
-import ButtonSet from '@/components/ButtonSet';
 import PwdInput from '@/components/Input/PwdInput';
 import { putPassword } from '@/services/putService';
 import styles from './PwdChangeForm.module.scss';
+import useToastStore from '@/stores/toastStore'; // Toast store 가져오기
 
 interface PasswordChangeForm {
   password: string;
@@ -38,6 +38,9 @@ export default function PwdChangeForm() {
   const [inputData, setInputData] =
     useState<PasswordChangeForm>(INITIAL_INPUT_DATA);
   const [inputError, setInputError] = useState<InputError>({});
+
+  // Toast store의 addToastList 메소드 가져오기
+  const { addToastList } = useToastStore();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -85,26 +88,43 @@ export default function PwdChangeForm() {
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
     const putData = async () => {
       const { password, newPassword } = inputData;
       try {
         await putPassword({ password, newPassword });
         // NOTE: 전체 페이지 리로드보다 시간이 훨씬 적게 걸려서 값만 비우도록 했습니다.
         setInputData(INITIAL_INPUT_DATA);
-        alert('비밀번호가 변경되었습니다.');
+        addToastList({
+          id: Date.now().toString(),
+          type: 'success',
+          message: '비밀번호가 변경되었습니다.',
+        });
       } catch (error) {
         if (error instanceof AxiosError) {
-          alert(error.response?.data.message);
+          addToastList({
+            id: Date.now().toString(),
+            type: 'error',
+            message: error.response?.data.message || '비밀번호 변경 실패',
+          });
         } else if (error instanceof Error) {
-          alert(error.message);
+          addToastList({
+            id: Date.now().toString(),
+            type: 'error',
+            message: error.message || '비밀번호 변경 실패',
+          });
         } else {
-          alert('알 수 없는 오류가 발생했습니다!');
+          addToastList({
+            id: Date.now().toString(),
+            type: 'error',
+            message: '알 수 없는 오류가 발생했습니다!',
+          });
           console.log(error);
         }
       }
     };
 
-    e.preventDefault();
     putData();
   };
 
@@ -138,12 +158,12 @@ export default function PwdChangeForm() {
           />
         </div>
         <div className={styles[`password`]}>
-          <label htmlFor='NewPasswordCheck' className={styles[`label`]}>
+          <label htmlFor='newPasswordCheck' className={styles[`label`]}>
             새 비밀번호 확인
           </label>
           <PwdInput
             id='newPasswordCheck'
-            placeholder='새 비밀번호 입력'
+            placeholder='새 비밀번호 확인 입력'
             value={inputData.newPasswordCheck}
             error={inputError.newPasswordCheck}
             onChange={handleInputChange}

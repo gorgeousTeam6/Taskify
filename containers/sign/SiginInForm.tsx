@@ -9,6 +9,8 @@ import PwdLabel from '@/containers/sign/PwdLabel';
 import TextInputLabel from '@/containers/sign/TextInputLabel';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useUserStore } from '@/store/useUserStore';
+import useToastStore from '@/stores/toastStore';
+import { SignInError } from '@/hooks/SignInError';
 import styles from './SignForm.module.scss';
 
 export type TSignInInputs = {
@@ -39,6 +41,8 @@ export default function SignInForm() {
   const mutation = useSignIn();
   const router = useRouter();
 
+  const { addToastList } = useToastStore();
+
   // Zustand store의 상태를 조회
   const user = useUserStore((state) => state.user);
   const error = useUserStore((state) => state.error);
@@ -46,7 +50,33 @@ export default function SignInForm() {
   const onSubmit = (data: TSignInInputs) => {
     mutation.mutate(data, {
       onSuccess: () => {
+        addToastList({
+          id: Date.now().toString(),
+          type: 'success',
+          message: '로그인 되었습니다.',
+        });
         router.push('/mydashboard');
+      },
+      onError: (error: any) => {
+        let errorMessage = '로그인에 실패했습니다. 다시 시도해주세요.';
+
+        if (error instanceof SignInError) {
+          if (error.response?.status === 404) {
+            errorMessage = '존재하지 않는 유저입니다.';
+          } else if (error.response?.status === 400) {
+            errorMessage = '이메일 형식으로 작성해주세요.';
+          }
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+
+        console.error('로그인에 실패했습니다:', error);
+
+        addToastList({
+          id: Date.now().toString(),
+          type: 'error',
+          message: errorMessage,
+        });
       },
     });
   };
@@ -75,8 +105,7 @@ export default function SignInForm() {
         </ButtonSet>
       </div>
       {mutation.isError && (
-        <p>
-          Error:{' '}
+        <p className={styles['error-message']}>
           {mutation.error instanceof Error
             ? mutation.error.message
             : '알 수 없는 오류가 발생했습니다.'}

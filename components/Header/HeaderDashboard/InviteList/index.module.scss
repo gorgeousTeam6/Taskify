@@ -1,0 +1,35 @@
+@use '@/styles/index.scss' as *;
+@use '@/styles/_levels.scss' as *;
+
+.invite-members {
+  position: relative;
+  @include Flex(row, space-between, center);
+  @include ResponsiveWidth(138px, 88px, 88px);
+  height: 40px;
+
+  &.count1 {
+    @include ResponsiveWidth(38px, 38px, 38px);
+  }
+
+  &.count2 {
+    @include ResponsiveWidth(63px, 63px, 63px);
+  }
+
+  &.count3 {
+    @include ResponsiveWidth(88px, 88px, 88px);
+  }
+
+  &.count4 {
+    @include ResponsiveWidth(113px, 88px, 88px);
+  }
+}
+
+.invited-member {
+  @include Flex(row, space-between, center);
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border: 2px solid $white;
+  border-radius: 50%;
+  color: $white;
+}

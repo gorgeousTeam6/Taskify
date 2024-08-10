@@ -3,14 +3,18 @@ import styles from './index.module.scss';
 import { IconCrown } from '@/assets/icongroup';
 
 export default function SideMenuItem({
+  dashboardId,
   color = 'green',
   isOwner = false,
   children,
 }: SideMenuItemProps) {
   return (
-    <div className={`${styles['side-menu-item']}`}>
+    <div data-id={dashboardId} className={`${styles['side-menu-item']}`}>
       <div className={`${styles['side-menu-item-container']}`}>
-        <div className={`${styles['item-circle']} ${styles[color]}`}></div>
+        <div
+          className={`${styles['item-circle']}`}
+          style={{ background: color }}
+        ></div>
         <div className={`${styles['item-name-wrapper']}`}>
           <p>{children}</p>
           {isOwner && (

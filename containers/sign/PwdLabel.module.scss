@@ -35,16 +35,17 @@
 }
 
 .button {
+  display: flex;
   position: absolute;
-  right: 15px; // input padding-right과 일치해야 합니다.
+  right: 15px;
   top: 50%;
-  transform: translateY(-50%); // 버튼을 세로 중앙에 위치시킵니다.
+  transform: translateY(-50%);
   background: none;
   border: none;
 }
 
 .error-message {
-  margin-top: 2px;
+  margin-top: 8px;
   font-size: 14px;
   color: $red;
 }

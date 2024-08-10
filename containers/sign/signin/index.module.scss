@@ -12,6 +12,9 @@
     @include tablet {
       width: 520px;
     }
+    @include mobile {
+      width: 375px;
+    }
     .member {
       margin-top: 20px;
       text-align: center;
@@ -19,6 +22,9 @@
 
       .link {
         color: $violet;
+        &:hover {
+          color: $main-yellow;
+        }
       }
       .underline {
         text-decoration: underline;

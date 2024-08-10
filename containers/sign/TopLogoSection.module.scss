@@ -9,6 +9,8 @@
 
   .image {
     @include Flex(column, center, center);
+    width: 400px;
+    height: 400px;
   }
 
   .text {
