@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './index.module.scss';
 import { IconCrown, IconSetting, IconAddBox } from '@/assets/icongroup';
-import UserIcon from '@/components/UserIcon';
 import instance from '@/services/axios';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -10,6 +9,7 @@ import MemberList from './MemberList';
 import { useUserStore } from '@/store/useUserStore';
 import InviteModal from '@/containers/myDashboard/InviteModal';
 import { ProfileIcon } from '@/components/ProfileIcon/ProfileIcon';
+import { ProfileDropdown } from '@/components/ProfileDropdown';
 
 const fetchDashboards = async (dashboardId: string) => {
   const response = await instance.get(`/dashboards/${dashboardId}`);
@@ -45,16 +45,7 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
         <div
           className={`${styles['header-dashboard-container']} ${styles['flex-end-force']}`}
         >
-          {user && (
-            <div className={`${styles['dashboard-my']}`}>
-              <ProfileIcon
-                key={user.id}
-                nickname={user.nickname}
-                imageUrl={user.profileImageUrl as string | null}
-              />
-              <p>{nickname}</p>
-            </div>
-          )}
+          {user && <ProfileDropdown />}
         </div>
       </header>
     );
@@ -106,20 +97,11 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
           <div className={`${styles['dashboard-member-area']}`}>
             <MemberList dashboardId={currentId}></MemberList>
             <div className={`${styles['dashboard-half-line']}`}></div>
-            {user && (
-              <div className={`${styles['dashboard-my']}`}>
-                <ProfileIcon
-                  key={user.id}
-                  nickname={user.nickname}
-                  imageUrl={user.profileImageUrl as string | null}
-                />
-                <p>{nickname}</p>
-              </div>
-            )}
+            {user && <ProfileDropdown />}
           </div>
         </div>
       </div>
-      {isModalOpen && <InviteModal />}
+      {isModalOpen && <InviteModal id={currentId} />}
     </header>
   );
 }

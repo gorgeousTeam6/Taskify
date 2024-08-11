@@ -4,23 +4,22 @@
 .member-list {
   position: relative;
   @include Flex(row, space-between, center);
-  @include ResponsiveWidth(138px, 88px, 88px);
   height: 40px;
 
   &.count1 {
-    @include ResponsiveWidth(38px, 38px, 38px);
+    @include ResponsiveWidth(38px, 38px, 34px);
   }
 
   &.count2 {
-    @include ResponsiveWidth(63px, 63px, 63px);
+    @include ResponsiveWidth(63px, 63px, 54px);
   }
 
   &.count3 {
-    @include ResponsiveWidth(88px, 88px, 88px);
+    @include ResponsiveWidth(88px, 88px, 74px);
   }
 
   &.count4 {
-    @include ResponsiveWidth(113px, 88px, 88px);
+    @include ResponsiveWidth(113px, 88px, 94px);
   }
   > div {
     position: absolute;
