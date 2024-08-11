@@ -75,6 +75,10 @@
   line-height: 26px;
   color: $black-33;
   resize: none;
+  &:focus {
+    border-color: $main-yellow;
+    outline: none;
+  }
 }
 
 .form-input.form-description {
@@ -93,6 +97,10 @@
   color: $black-33;
   font-weight: 400;
   resize: none;
+  &:focus {
+    border-color: $main-yellow;
+    outline: none;
+  }
 }
 
 .sampleImg {

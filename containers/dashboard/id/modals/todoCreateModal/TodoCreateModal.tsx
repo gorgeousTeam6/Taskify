@@ -11,9 +11,11 @@ import { useEffect, useState } from 'react';
 import useToast from '@/hooks/useToast';
 import getDate from '@/utils/getDate';
 import useTodoCreateModalStore from '@/stores/TodoCreateModalStore';
+import HashTagsInput from '../components/\bhastagsInput/HashtagsInput';
 
 export default function TodoCreateModal({ columnId }: { columnId: number }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [tags, setTags] = useState<string[]>([]);
   const { toast } = useToast();
   const { register, handleSubmit, reset, setValue } = useForm<FormValues>();
   const queryClient = useQueryClient();
@@ -89,7 +91,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const { title, description, tags, dueDate, imageUrl } = data;
+    const { title, description, dueDate, imageUrl } = data;
 
     // 선택된 담당자의 ID 추가
     const assigneeUserId =
@@ -102,7 +104,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
       columnId: columnId, // 필요한 경우 columnId 추가
       title,
       description,
-      tags: tags.length === 0 ? [] : tags,
+      tags: tags,
       imageUrl: imageUrl,
     };
 
@@ -168,11 +170,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>태그</label>
-            <textarea
-              className={styles['date-input']}
-              placeholder='라벨칩'
-              {...register('tags')}
-            />
+            <HashTagsInput tags={tags} setTags={setTags} />
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>이미지</label>

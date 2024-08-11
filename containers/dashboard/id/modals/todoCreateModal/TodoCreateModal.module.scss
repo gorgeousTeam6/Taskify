@@ -73,6 +73,11 @@
   color: $black-33;
   resize: none;
   position: relative;
+
+  &:focus {
+    border-color: $main-yellow;
+    outline: none;
+  }
 }
 
 .form-input.form-description {
@@ -96,27 +101,10 @@
   color: $black-33;
   font-weight: 400;
   resize: none;
-}
-
-.calendar-icon-wrapper {
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.calendar-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.calendar-popup {
-  position: absolute;
-  top: 50px; /* 필요에 따라 조정 */
-  left: 0;
-  z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
+  &:focus {
+    border-color: $main-yellow;
+    outline: none;
+  }
 }
 
 .sample-img {
