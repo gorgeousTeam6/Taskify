@@ -14,12 +14,12 @@
 }
 
 .tags-input-error {
-    border-color: $red !important; // 에러 상태에서의 스타일
-  }
-  
-  .tags-input-normal {
-    border-color: $main-yellow; // 정상 상태에서의 스타일
-  }
+  border-color: $red !important; // 에러 상태에서의 스타일
+}
+
+.tags-input-normal {
+  border-color: $main-yellow;
+}
 
 .tags {
   @include Flex(row, null, center);

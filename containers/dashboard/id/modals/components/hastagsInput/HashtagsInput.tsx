@@ -44,7 +44,8 @@ export default function HashTagsInput({ tags, setTags }: HashTagsInputProps) {
     <div className={styles.todoStyle}>
       <input
         className={`${styles['tags-input']} ${
-          error ? styles['tags-input-error'] :styles['tags-input']}
+          error ? styles['tags-input-error'] : styles['tags-input']
+        }
         }`}
         name='textValue'
         value={textValue}
