@@ -4,10 +4,11 @@ import { IconAddBox } from '@/assets/icongroup';
 import SideMenuItem from './SideMenuItem';
 import instance from '@/services/axios';
 import { useQuery } from '@tanstack/react-query';
-import { useCreateModalStore } from '@/stores/modalStore';
+import { useCreateDashboardModalStore } from '@/stores/modalStore';
 import Logo from '@/assets/logos/Logo.svg';
 import LogoMobile from '@/assets/logos/LogoImage.svg';
 import { useRouter } from 'next/router';
+import CreateDashboardModal from '@/containers/myDashboard/CreateDashboardModal';
 
 const fetchDashboards = async (cursorId: number, page: number) => {
   const response = await instance.get(
@@ -19,11 +20,11 @@ const fetchDashboards = async (cursorId: number, page: number) => {
 export default function SideMenu({ onItemClick }: SideMenuProps) {
   const [page, setPage] = useState(1);
   const [cursorId, setCursorId] = useState(1);
-  const { isModalOpen, setOpenModal } = useCreateModalStore();
+  const { isModalOpen, setOpenModal } = useCreateDashboardModalStore();
   const router = useRouter();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ['dashboards', cursorId, page, 1000],
+    queryKey: ['dashboard', cursorId, page, 1000],
     queryFn: () => fetchDashboards(cursorId, page),
   });
 
@@ -80,6 +81,7 @@ export default function SideMenu({ onItemClick }: SideMenuProps) {
           </div>
         </div>
       </div>
+      {isModalOpen && <CreateDashboardModal />}
     </section>
   );
 }

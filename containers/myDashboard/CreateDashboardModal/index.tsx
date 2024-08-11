@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './index.module.scss';
 import Button from '@/components/Button';
 import ButtonSet from '@/components/ButtonSet';
-import { useCreateModalStore } from '@/stores/modalStore';
+import { useCreateDashboardModalStore } from '@/stores/modalStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from '@/services/axios';
 import ColorCircleList from '@/components/ColorCircleList';
@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 export default function CreateDashboardModal() {
   const router = useRouter();
-  const { isModalOpen, setCloseModal } = useCreateModalStore();
+  const { isModalOpen, setCloseModal } = useCreateDashboardModalStore();
   const queryClient = useQueryClient();
 
   const [title, setTitle] = useState<string | null>('');

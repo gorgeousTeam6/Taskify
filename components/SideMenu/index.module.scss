@@ -110,6 +110,7 @@
   height: 82vh;
   white-space: nowrap;
   overflow-y: scroll;
+  overscroll-behavior: contain;
 
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
