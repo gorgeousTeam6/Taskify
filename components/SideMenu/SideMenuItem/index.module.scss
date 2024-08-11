@@ -5,19 +5,22 @@
 
   width: 100%;
   @include ResponsiveHeight(42px, 43px, 40px);
-  @include ResponsivePadding(0px 0 0 12px, 0px 0 0 10px, 16px);
+  @include ResponsivePadding(0px 12px 0, 0px 10px 0, 16px);
+
+  transition: background-color 0.5s ease;
 
   &:hover {
-    background: $violet-8;
+    background: $back-yellow;
     cursor: pointer;
   }
   &:active {
-    background: #e6e2ff;
+    background: $main-yellow-active;
   }
 }
 
 .side-menu-item-container {
-  @include Flex(row, space-between, center);
+  @include Flex(row, flex-start, center);
+  @include ResponsiveWidth(280px, 134px, 40px);
   @include ResponsiveHeight(42px, 43px, 40px);
   gap: 16px;
 }
@@ -60,7 +63,7 @@
   color: $gray-78;
 
   > p {
-    @include ResponsiveMaxWidth(220px, 80px, 0);
+    @include ResponsiveMaxWidth(210px, 72px, 0);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

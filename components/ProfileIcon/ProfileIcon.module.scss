@@ -1,8 +1,8 @@
 @use '@/styles/index' as *;
 
 .profile-img {
-  @include ResponsiveWidth(34px, 34px, 26px);
-  @include ResponsiveHeight(34px, 34px, 26px);
+  @include ResponsiveWidth(38px, 38px, 34px);
+  @include ResponsiveHeight(38px, 38px, 34px);
 
   padding: 7px 12px;
 
@@ -17,8 +17,8 @@
     border-radius: 9999px;
   }
   .substring {
-    @include FontStyle(16, 600, 16, 12);
-    @include ResponsiveLineHeight(20, 20, 14.6);
+    @include FontStyle(16, 600, 16, 14);
+    @include ResponsiveLineHeight(20, 20, 17);
 
     color: $white;
   }

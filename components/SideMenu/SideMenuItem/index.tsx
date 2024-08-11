@@ -30,5 +30,3 @@ export default function SideMenuItem({
     </div>
   );
 }
-
-//green purple blue yellow pink
