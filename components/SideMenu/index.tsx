@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 const fetchDashboards = async (cursorId: number, page: number) => {
   const response = await instance.get(
-    `/dashboards?navigationMethod=pagination&cursorId=${cursorId}&page=${page}&size=5`,
+    `/dashboards?navigationMethod=pagination&page=1&size=1000`,
   );
   return response.data;
 };
@@ -23,9 +23,13 @@ export default function SideMenu({ onItemClick }: SideMenuProps) {
   const router = useRouter();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ['dashboards', cursorId, page, 5],
+    queryKey: ['dashboards', cursorId, page, 1000],
     queryFn: () => fetchDashboards(cursorId, page),
   });
+
+  const handleLogoClick = () => {
+    router.push('/mydashboard');
+  };
 
   const handleItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
@@ -42,7 +46,10 @@ export default function SideMenu({ onItemClick }: SideMenuProps) {
     <section className={`${styles['side-menu']}`}>
       <div className={`${styles['side-menu-container']}`}>
         <div className={`${styles['logo-container']}`}>
-          <div className={`${styles['logo-icon-wrapper']}`}>
+          <div
+            className={`${styles['logo-icon-wrapper']}`}
+            onClick={handleLogoClick}
+          >
             <Logo></Logo>
             <LogoMobile></LogoMobile>
           </div>

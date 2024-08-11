@@ -24,7 +24,7 @@ export default function ButtonForDashboard({
           <div
             className={`${styles['standard-flex']} ${styles['dashboard-title-icon-gap']}`}
           >
-            {children}
+            <p>{children}</p>
             {isOwner && (
               <div className={`${styles['crown-size']}`}>
                 <IconCrown aria-label={`crown icon`} />

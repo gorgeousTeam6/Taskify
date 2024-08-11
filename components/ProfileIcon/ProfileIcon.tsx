@@ -6,10 +6,17 @@ import getBackgroundColor from '@/utils/getBackgroundColor';
 interface ProfileIconProps {
   nickname: string;
   imageUrl: string | null;
+  compressRemain?: boolean;
 }
 
-export function ProfileIcon({ nickname, imageUrl }: ProfileIconProps) {
+export function ProfileIcon({
+  nickname,
+  imageUrl,
+  compressRemain = false,
+}: ProfileIconProps) {
   const backColor = getBackgroundColor(nickname);
+  const name = compressRemain ? nickname : nickname.substring(0, 1);
+
   return (
     <div
       style={{ backgroundColor: backColor }}
@@ -18,7 +25,7 @@ export function ProfileIcon({ nickname, imageUrl }: ProfileIconProps) {
       {imageUrl ? (
         <Image src={imageUrl} alt='프로필' fill className={styles['image']} />
       ) : (
-        <p className={styles['substring']}>{nickname.substring(0, 1)}</p>
+        <p className={styles['substring']}>{name}</p>
       )}
     </div>
   );

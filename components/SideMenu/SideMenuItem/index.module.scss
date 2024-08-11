@@ -58,6 +58,13 @@
 
   @include FontStyle('2lg', 600, 'lg', '');
   color: $gray-78;
+
+  > p {
+    @include ResponsiveMaxWidth(220px, 80px, 0);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .icon-wrapper {

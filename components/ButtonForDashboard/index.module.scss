@@ -33,6 +33,13 @@
 
     .dashboard-title-icon-gap {
       @include Gap(8px, 6px, 4px);
+
+      > p {
+        @include ResponsiveMaxWidth(244px, 159px, 172px);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
   }
 

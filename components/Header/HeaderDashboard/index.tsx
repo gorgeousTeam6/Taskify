@@ -28,17 +28,15 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
   const { isLoading, error, data } = useQuery({
     queryKey: ['dashboardDetail', currentId],
     queryFn: () => fetchDashboards(currentId),
+    enabled: currentId != 'undefined',
   });
 
   const { isModalOpen, setOpenModal } = useInviteModalStore();
 
   const nickname = user?.nickname ?? '';
-  const profileImageUrl =
-    user?.profileImageUrl ||
-    'https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/7r5X/image/9djEiPBPMLu_IvCYyvRPwmZkM1g.jpg';
 
   const handleManageClick = () => {
-    router.push(`/dashboard/${dashboardId}/edit`);
+    router.push(`/dashboard/${currentId}/edit`);
   };
 
   if (!data) {

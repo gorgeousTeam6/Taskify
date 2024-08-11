@@ -6,7 +6,7 @@ import { ProfileIcon } from '@/components/ProfileIcon/ProfileIcon';
 
 const fetchDashboardMembers = async (dashboardId: string) => {
   const response = await instance.get(
-    `/members?page=1&size=4&dashboardId=${dashboardId}`,
+    `/members?page=1&size=2&dashboardId=${dashboardId}`,
   );
   return response.data;
 };
@@ -36,6 +36,13 @@ export default function MemberList({
           imageUrl={member.profileImageUrl}
         />
       ))}
+      {data.totalCount > 2 && (
+        <ProfileIcon
+          nickname={`+${data.totalCount - 2}`}
+          imageUrl={null}
+          compressRemain={true}
+        />
+      )}
     </div>
   );
 }

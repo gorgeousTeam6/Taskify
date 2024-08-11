@@ -23,6 +23,8 @@
 
 .header-dashboard-container {
   @include Flex(row, flex-end, center);
+  gap: 24px;
+
   width: 100%;
   height: 40px;
 
@@ -38,11 +40,20 @@
 .dashboard-title-container {
   display: none;
 
+  width: 0px;
+  flex-grow: 1;
+
   @include desktop {
-    @include Flex(row, space-between, center);
+    @include Flex(row, flex-start, center);
     gap: 8px;
 
     @include FontStyle('xl', 700);
+  }
+
+  > p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
@@ -152,6 +163,7 @@
   @include Flex(row, flex-start, center);
   gap: 12px;
   height: 40px;
+  @include FontStyle('lg', 500, 'lg', 'lg');
 }
 
 .dashboard-my-icon {

@@ -40,6 +40,8 @@
   @include ResponsiveWidth(144px, 144px, 36px);
   @include ResponsiveHeight(36px, 36px, 36px);
 
+  cursor: pointer;
+
   :nth-child(1) {
     @include mobile {
       display: none;
@@ -105,4 +107,11 @@
   @include Flex(column, space-between, center);
   @include ResponsiveGap(8, 2, 6);
   width: 100%;
+  height: 82vh;
+  white-space: nowrap;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 }
