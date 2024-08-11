@@ -13,11 +13,10 @@
     width: 100%;
     max-width: 100%;
     padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid $gray-d9;
+    border-radius: 8px;
     outline: none;
     transition: border-color 0.2s;
-    padding-right: 40px;
 
     @include FontStyle(lg, regular);
 

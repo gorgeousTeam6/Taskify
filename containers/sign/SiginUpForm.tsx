@@ -10,7 +10,8 @@ import PwdLabel from './PwdLabel';
 import TextInputLabel from './TextInputLabel';
 import Modal from './AgreeModal';
 import { postSignUp } from '@/services/postService';
-import useToastStore from '@/stores/toastStore';
+import useToast from '@/hooks/useToast';
+import { useModalStore } from '@/stores/modalStore';
 import styles from './SignForm.module.scss';
 
 export type TSignUpInputs = {
@@ -38,10 +39,10 @@ const schema = yup.object().shape({
 
 export default function SignUpForm() {
   const [checkTerms, setCheckTerms] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+  const { isModalOpen, setOpenModal, setCloseModal } = useModalStore();
 
-  const { addToastList } = useToastStore();
+  const { toast } = useToast();
 
   const {
     register,
@@ -66,11 +67,7 @@ export default function SignUpForm() {
   const onSubmit = async (data: TSignUpInputs) => {
     try {
       await postSignUp(data);
-      addToastList({
-        id: Date.now().toString(),
-        type: 'success',
-        message: '회원가입 되었습니다.',
-      });
+      toast('success', '회원가입 되었습니다.');
       router.push('/signin'); // 회원가입이 성공되면 로그인 페이지로 리다이렉트
     } catch (error: any) {
       let errorMessage = '회원가입에 실패했습니다. 다시 시도해주세요.';
@@ -85,22 +82,13 @@ export default function SignUpForm() {
 
       console.error('회원가입에 실패했습니다:', error);
       // 에러 처리 로직 추가 가능
-      addToastList({
-        id: Date.now().toString(),
-        type: 'error',
-        message: errorMessage,
-      });
+      toast('error', errorMessage);
     }
   };
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setCheckTerms(false); // 취소 시 체크박스 해제
-  };
-  const agreeTerms = () => {
+  const handleAgree = () => {
     setCheckTerms(true);
-    setIsModalOpen(false);
+    setCloseModal();
   };
 
   return (
@@ -141,10 +129,12 @@ export default function SignUpForm() {
           onChange={() => {
             setCheckTerms(!checkTerms);
           }}
+          onClick={setOpenModal}
         />{' '}
-        <label htmlFor='terms' className={styles[`agree`]} onClick={openModal}>
+        <label htmlFor='terms' className={styles[`agree`]}>
           이용약관에 동의합니다.
         </label>
+        {isModalOpen && <Modal onAgree={handleAgree} />}
       </div>
       <div className='h'>
         <ButtonSet buttonSetType='primary' widthFill={true}>
@@ -153,7 +143,6 @@ export default function SignUpForm() {
           </Button>
         </ButtonSet>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} onAgree={agreeTerms} />
     </form>
   );
 }

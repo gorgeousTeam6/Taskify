@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import PwdInput from '@/components/Input/PwdInput';
 import { putPassword } from '@/services/putService';
 import styles from './PwdChangeForm.module.scss';
-import useToastStore from '@/stores/toastStore'; // Toast store 가져오기
+import useToast from '@/hooks/useToast';
 
 interface PasswordChangeForm {
   password: string;
@@ -40,7 +40,7 @@ export default function PwdChangeForm() {
   const [inputError, setInputError] = useState<InputError>({});
 
   // Toast store의 addToastList 메소드 가져오기
-  const { addToastList } = useToastStore();
+  const { toast } = useToast();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -96,30 +96,14 @@ export default function PwdChangeForm() {
         await putPassword({ password, newPassword });
         // NOTE: 전체 페이지 리로드보다 시간이 훨씬 적게 걸려서 값만 비우도록 했습니다.
         setInputData(INITIAL_INPUT_DATA);
-        addToastList({
-          id: Date.now().toString(),
-          type: 'success',
-          message: '비밀번호가 변경되었습니다.',
-        });
+        toast('success', '비밀번호가 변경되었습니다.');
       } catch (error) {
         if (error instanceof AxiosError) {
-          addToastList({
-            id: Date.now().toString(),
-            type: 'error',
-            message: error.response?.data.message || '비밀번호 변경 실패',
-          });
+          toast('error', error.response?.data.message || '비밀번호 변경 실패');
         } else if (error instanceof Error) {
-          addToastList({
-            id: Date.now().toString(),
-            type: 'error',
-            message: error.message || '비밀번호 변경 실패',
-          });
+          toast('error', error.message || '비밀번호 변경 실패');
         } else {
-          addToastList({
-            id: Date.now().toString(),
-            type: 'error',
-            message: '알 수 없는 오류가 발생했습니다!',
-          });
+          toast('error', '알 수 없는 오류가 발생했습니다!');
           console.log(error);
         }
       }

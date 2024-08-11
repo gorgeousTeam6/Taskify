@@ -15,13 +15,17 @@
 .dashboard-button {
   border-radius: 8px;
   background: $white;
+  transition: background-color 0.5s ease;
   color: $black-33;
 
   @include ResponsivePadding(25px 20px, 24px 20px, 20px 20px);
   @include FontStyle(16, 600, 16, 14);
 
   &:hover {
-    background: $violet-8;
+    background: $back-yellow;
+  }
+  &:active {
+    background: $main-yellow-active;
   }
 }
 

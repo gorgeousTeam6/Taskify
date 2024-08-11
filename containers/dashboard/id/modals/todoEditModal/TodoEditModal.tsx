@@ -135,11 +135,13 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       description: description,
       columnId: selectedProgressValue.id,
       assigneeUserId: selectedAssigneeValue
+
         ? 'userId' in selectedAssigneeValue
           ? selectedAssigneeValue?.userId ?? null
           : selectedAssigneeValue?.id ?? null
         : null,
-      tags: tags, // 태그 상태를 여기서 사용
+      tags: tags, 
+      
       dueDate: dueDate ? getDate(dueDate, true) : null,
       imageUrl: currentImageUrl ?? null,
     };

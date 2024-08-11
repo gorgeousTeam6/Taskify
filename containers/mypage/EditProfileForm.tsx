@@ -7,7 +7,7 @@ import { useUpdateProfile } from '@/hooks/useUpdateProfile';
 import { postImage } from '@/services/postService';
 import Button from '@/components/Button';
 import ButtonSet from '@/components/ButtonSet';
-import useToastStore from '@/stores/toastStore';
+import useToast from '@/hooks/useToast';
 import styles from './EditProfileForm.module.scss';
 import { UpdateProfileForm } from '@/types/UpdateProfileForm.interface';
 
@@ -26,7 +26,7 @@ export default function EditProfileForm() {
     lteTen: true,
   });
 
-  const { addToastList } = useToastStore();
+  const { toast } = useToast();
 
   useEffect(() => {
     setIsClient(true);
@@ -93,18 +93,10 @@ export default function EditProfileForm() {
       if (Object.keys(formData).length !== 0) {
         mutate(formData, {
           onSuccess: () => {
-            addToastList({
-              id: Date.now().toString(),
-              type: 'success',
-              message: '프로필이 변경되었습니다.',
-            });
+            toast('success', '프로필이 변경되었습니다.');
           },
           onError: (error: any) => {
-            addToastList({
-              id: Date.now().toString(),
-              type: 'error',
-              message: '프로필 변경에 실패했습니다. 다시 시도해주세요.',
-            });
+            toast('error', '프로필 변경에 실패했습니다. 다시 시도해주세요.');
           },
         });
       }

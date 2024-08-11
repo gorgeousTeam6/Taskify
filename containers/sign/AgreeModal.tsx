@@ -1,17 +1,19 @@
 import React from 'react';
+import ModalPortal from '@/components/ModalPortal';
+import { useModalStore } from '@/stores/modalStore';
 import styles from './AgreeModal.module.scss';
 
 interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
   onAgree: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onAgree }) => {
-  if (!isOpen) return null;
+const Modal: React.FC<ModalProps> = ({ onAgree }) => {
+  const { isModalOpen, setCloseModal } = useModalStore();
+
+  if (!isModalOpen) return null;
 
   return (
-    <div className={styles[`modal-backdrop`]}>
+    <ModalPortal onClose={setCloseModal}>
       <div className={styles[`modal`]}>
         <h2>이용약관</h2>
         <div className={styles[`modal-content`]}>
@@ -57,7 +59,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onAgree }) => {
           </p>
         </div>
         <div className={styles[`modal-actions`]}>
-          <button onClick={onClose} className={styles[`close-button`]}>
+          <button onClick={setCloseModal} className={styles[`close-button`]}>
             취소
           </button>
           <button onClick={onAgree} className={styles[`agree-button`]}>
@@ -65,7 +67,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onAgree }) => {
           </button>
         </div>
       </div>
-    </div>
+    </ModalPortal>
   );
 };
 

@@ -65,32 +65,44 @@
 
 .dashboard-info-container {
   @include Flex(row, space-between, center);
-  gap: 40px;
+  @include ResponsiveGap(40, 32, 16);
 }
 
 .dashboard-manage-button-area {
   @include Flex(row, space-between, center);
-  gap: 16px;
+  @include ResponsiveGap(16, 12, 6);
 }
 
 .dashboard-manage-button {
-  padding: 7px 16px;
+  @include ResponsivePadding(6px 15px, 5px 15px, 2px 11px);
   border: 1px solid $gray-d9;
   border-radius: 8px;
   background: $white;
+  white-space: nowrap;
+
+  @include mobile {
+    border-radius: 6px;
+  }
+
   > div {
     @include Flex(row, space-between, center);
     gap: 8px;
-    height: 26px;
-    @include FontStyle('lg', 500, 'lg', 'lg');
+    height: 24px;
+    @include FontStyle('lg', 500, 'md', 'md');
     font-family: pretendard;
     color: $gray-78;
+
+    @include mobile {
+      > svg {
+        display: none;
+      }
+    }
   }
 }
 
 .dashboard-member-area {
   @include Flex(row, space-between, center);
-  gap: 36px;
+  @include ResponsiveGap(40, 32, 16);
 }
 
 .dashboard-members {
@@ -164,14 +176,10 @@
   gap: 12px;
   height: 40px;
   @include FontStyle('lg', 500, 'lg', 'lg');
-}
 
-.dashboard-my-icon {
-  @include Flex(row, space-between, center);
-  width: 38px;
-  height: 38px;
-  border: 2px solid $white;
-  border-radius: 50%;
-  color: $white;
-  background: pink;
+  @include mobile {
+    > p {
+      display: none;
+    }
+  }
 }

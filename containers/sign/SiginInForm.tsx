@@ -9,7 +9,7 @@ import PwdLabel from '@/containers/sign/PwdLabel';
 import TextInputLabel from '@/containers/sign/TextInputLabel';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useUserStore } from '@/store/useUserStore';
-import useToastStore from '@/stores/toastStore';
+import useToast from '@/hooks/useToast';
 import { SignInError } from '@/hooks/SignInError';
 import styles from './SignForm.module.scss';
 
@@ -41,7 +41,7 @@ export default function SignInForm() {
   const mutation = useSignIn();
   const router = useRouter();
 
-  const { addToastList } = useToastStore();
+  const { toast } = useToast();
 
   // Zustand store의 상태를 조회
   const user = useUserStore((state) => state.user);
@@ -50,11 +50,7 @@ export default function SignInForm() {
   const onSubmit = (data: TSignInInputs) => {
     mutation.mutate(data, {
       onSuccess: () => {
-        addToastList({
-          id: Date.now().toString(),
-          type: 'success',
-          message: '로그인 되었습니다.',
-        });
+        toast('success', '로그인 되었습니다.');
         router.push('/mydashboard');
       },
       onError: (error: any) => {
@@ -72,11 +68,7 @@ export default function SignInForm() {
 
         console.error('로그인에 실패했습니다:', error);
 
-        addToastList({
-          id: Date.now().toString(),
-          type: 'error',
-          message: errorMessage,
-        });
+        toast('error', errorMessage);
       },
     });
   };

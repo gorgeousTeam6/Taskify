@@ -104,12 +104,13 @@
 }
 
 .dashboard-list {
-  @include Flex(column, space-between, center);
+  @include Flex(column, flex-start, center);
   @include ResponsiveGap(8, 2, 6);
   width: 100%;
   height: 82vh;
   white-space: nowrap;
   overflow-y: scroll;
+  overscroll-behavior: contain;
 
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/

@@ -1,15 +1,11 @@
 import EditProfileForm from '@/containers/mypage/EditProfileForm';
 import PwdChangeForm from '@/containers/mypage/PwdChangeForm';
 import styles from './index.module.scss';
-import HeaderDashboard from '@/components/Header/HeaderDashboard';
-import SideMenu from '@/components/SideMenu';
-import { Fragment } from 'react';
+import DashboardLayout from '../dashboardLayout';
 
 export default function Mypage() {
   return (
-    <Fragment>
-      <HeaderDashboard />
-      <SideMenu />
+    <DashboardLayout>
       <div className={styles[`text`]}>
         <section className={styles[`profile-box`]}>
           <h2 className={styles[`profile`]}>프로필</h2>
@@ -20,6 +16,6 @@ export default function Mypage() {
           <PwdChangeForm />
         </section>
       </div>
-    </Fragment>
+    </DashboardLayout>
   );
 }

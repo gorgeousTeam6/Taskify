@@ -5,7 +5,7 @@ import instance from '@/services/axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import CreateDashboardModal from '../CreateDashboardModal';
-import { useCreateModalStore } from '@/stores/modalStore';
+import { useCreateDashboardModalStore } from '@/stores/modalStore';
 import ButtonForDashboard from '@/components/ButtonForDashboard';
 import { usePagination } from '@/hooks/usePagination';
 import Pagination from '@/components/Pagination';
@@ -19,7 +19,7 @@ const fetchDashboards = async (page: number) => {
 
 function DashboardList() {
   const [page, setPage] = useState(1);
-  const { isModalOpen, setOpenModal } = useCreateModalStore();
+  const { isModalOpen, setOpenModal } = useCreateDashboardModalStore();
   const router = useRouter();
 
   const { isLoading, error, data } = useQuery({
