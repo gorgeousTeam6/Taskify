@@ -52,7 +52,6 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   const [selectedProgressValue, setSelectedProgressValue] = useState<IColumn>(
     currentColumn!,
   );
- 
 
   const [selectedAssigneeValue, setSelectedAssigneeValue] = useState<
     IAssignee | IMember | null
@@ -95,13 +94,10 @@ export default function TodoEditModal({ card }: { card: ICard }) {
     if (res) {
       setCurrentImageUrl(res);
     }
-
   };
 
   const handleImageDelete = () => {
-
     setCurrentImageUrl(null);
-
   };
   /*put*/
 
@@ -136,10 +132,11 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       title: title,
       description: description,
       columnId: selectedProgressValue.id,
-      assigneeUserId:
-        'userId' in selectedAssigneeValue!
+      assigneeUserId: selectedAssigneeValue
+        ? 'userId' in selectedAssigneeValue!
           ? selectedAssigneeValue?.userId ?? null
-          : selectedAssigneeValue?.id ?? 0,
+          : selectedAssigneeValue?.id ?? null
+        : null,
       tags: tags,
       dueDate: dueDate ? getDate(dueDate, true) : null,
       imageUrl: currentImageUrl ?? null,

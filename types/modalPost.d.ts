@@ -1,9 +1,9 @@
 interface IPostData {
-    title: string;
-    description: string;
-    columnId: number;
-    assigneeUserId?: number;
-    tags?: string[];
-    dueDate?: string | null;
-    imageUrl?: string | null;
-  }
+  title: string;
+  description: string;
+  columnId: number;
+  assigneeUserId?: number | null;
+  tags?: string[];
+  dueDate?: string | null;
+  imageUrl?: string | null;
+}
