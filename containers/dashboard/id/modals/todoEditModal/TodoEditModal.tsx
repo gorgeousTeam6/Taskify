@@ -20,7 +20,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
     id: cardId,
     title,
     description,
-    columnId, // 기존 컬럼
+    columnId,
     dueDate,
     tags,
     imageUrl,
@@ -31,7 +31,6 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   );
 
   const { toast } = useToast();
-  const { imageUrl: storedImageUrl, setImage, clearImage } = useImageStore();
   const { register, handleSubmit, setValue } = useForm<FormValues>({
     defaultValues: {
       title: title,
@@ -53,7 +52,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   const [selectedProgressValue, setSelectedProgressValue] = useState<IColumn>(
     currentColumn!,
   );
-  // 바뀐 컬럼
+ 
 
   const [selectedAssigneeValue, setSelectedAssigneeValue] = useState<
     IAssignee | IMember | null
@@ -87,32 +86,22 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       return res;
     } catch (e: any) {
       console.error(e.message);
-      // toast('error', e.message);
     }
   }
 
   const handleImageChange = async (image: any) => {
-    const newImageUrl = URL.createObjectURL(image);
     const res = await handlePostImage(image);
 
     if (res) {
       setCurrentImageUrl(res);
     }
-    console.log('바꾸기');
-    console.log(newImageUrl);
-    console.log(handlePostImage(image));
 
-    // setImage(newImageUrl); // zustand store 상태 업데이트
-    // setValue('imageUrl', newImageUrlf); // useForm의 imageUrl 값 업데이트
   };
 
   const handleImageDelete = () => {
-    console.log('지우기');
 
-    // clearImage();
     setCurrentImageUrl(null);
 
-    // setValue('imageUrl', null);
   };
   /*put*/
 
