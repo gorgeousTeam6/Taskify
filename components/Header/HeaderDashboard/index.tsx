@@ -9,6 +9,7 @@ import { useInviteModalStore } from '@/stores/modalStore';
 import MemberList from './MemberList';
 import { useUserStore } from '@/store/useUserStore';
 import InviteModal from '@/containers/myDashboard/InviteModal';
+import { ProfileIcon } from '@/components/ProfileIcon/ProfileIcon';
 
 const fetchDashboards = async (dashboardId: string) => {
   const response = await instance.get(`/dashboards/${dashboardId}`);
@@ -46,10 +47,16 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
         <div
           className={`${styles['header-dashboard-container']} ${styles['flex-end-force']}`}
         >
-          <div className={`${styles['dashboard-my']}`}>
-            <UserIcon src={profileImageUrl}></UserIcon>
-            <p>{nickname}</p>
-          </div>
+          {user && (
+            <div className={`${styles['dashboard-my']}`}>
+              <ProfileIcon
+                key={user.id}
+                nickname={user.nickname}
+                imageUrl={user.profileImageUrl as string | null}
+              />
+              <p>{nickname}</p>
+            </div>
+          )}
         </div>
       </header>
     );
@@ -101,10 +108,16 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
           <div className={`${styles['dashboard-member-area']}`}>
             <MemberList dashboardId={currentId}></MemberList>
             <div className={`${styles['dashboard-half-line']}`}></div>
-            <div className={`${styles['dashboard-my']}`}>
-              <UserIcon src={profileImageUrl}></UserIcon>
-              <p>{nickname}</p>
-            </div>
+            {user && (
+              <div className={`${styles['dashboard-my']}`}>
+                <ProfileIcon
+                  key={user.id}
+                  nickname={user.nickname}
+                  imageUrl={user.profileImageUrl as string | null}
+                />
+                <p>{nickname}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
