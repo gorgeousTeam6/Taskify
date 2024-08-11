@@ -15,9 +15,17 @@ import HashTagsInput from '../components/\bhastagsInput/HashtagsInput';
 
 export default function TodoCreateModal({ columnId }: { columnId: number }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [tags, setTags] = useState<string[]>([]);
   const { toast } = useToast();
-  const { register, handleSubmit, reset, setValue } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+    formState: { errors, isValid },
+  } = useForm<FormValues>({ mode: 'onChange' });
   const queryClient = useQueryClient();
   const router = useRouter();
   const { id: dashboardId } = router.query;
@@ -28,6 +36,14 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
 
   const [selectedAssigneeValue, setSelectedAssigneeValue] =
     useState<IMember | null>(null);
+
+  /*폼 유효성 검사*/
+
+  useEffect(() => {
+    const title = watch('title');
+    const description = watch('description');
+    setIsFormValid(title?.trim() !== '' && description?.trim() !== '');
+  }, [watch('title'), watch('description')]);
 
   useEffect(() => {
     if (imageUrl) {
@@ -93,15 +109,13 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const { title, description, dueDate, imageUrl } = data;
 
-    // 선택된 담당자의 ID 추가
     const assigneeUserId =
       selectedAssigneeValue?.userId ?? selectedAssigneeValue?.id;
 
-    // 전송할 데이터 생성
     const requestData: FormValues = {
       assigneeUserId,
       dashboardId: Number(dashboardId),
-      columnId: columnId, // 필요한 경우 columnId 추가
+      columnId: columnId,
       title,
       description,
       tags: tags,
@@ -143,11 +157,16 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
               <label className={styles['form-label']}>제목</label>
               <label className={styles['essential']}>*</label>
             </div>
-            <textarea
-              className={styles['form-input']}
+            <input
+              className={`${styles['form-input']} ${
+                errors.title ? styles['error-border'] : ''
+              }`}
               placeholder='제목을 입력해주세요'
-              {...register('title', { required: true })}
-            ></textarea>
+              {...register('title', { required: '* 필수 입력 항목입니다' })}
+            />
+            {errors.title && (
+              <p className={styles['error-message']}>{errors.title.message}</p>
+            )}
           </div>
           <div className={styles['label-and-form']}>
             <div className={styles['label-with-star']}>
@@ -155,10 +174,19 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
               <label className={styles['essential']}>*</label>
             </div>
             <textarea
-              className={`${styles['form-input']} ${styles['form-description']}`}
+              className={`${styles['form-input']} ${
+                styles['form-description']
+              } ${errors.description ? styles['error-border'] : ''}`}
               placeholder='설명을 입력해주세요'
-              {...register('description', { required: true })}
+              {...register('description', {
+                required: '* 필수 입력 항목입니다',
+              })}
             ></textarea>
+            {errors.description && (
+              <p className={styles['error-message']}>
+                {errors.description.message}
+              </p>
+            )}
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>마감일</label>
@@ -188,6 +216,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
             <button
               type='submit'
               className={`${styles['button']} ${styles['yellow']}`}
+              disabled={!isFormValid}
             >
               생성
             </button>

@@ -84,10 +84,8 @@
   height: 126px;
 }
 
-.date-input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
+.error-border {
+  border: 1px solid $red;
 }
 
 .date-input {
@@ -134,9 +132,18 @@
     color: $white;
     background-color: $main-yellow;
     border: 1px solid $main-yellow;
+
+    &:disabled {
+      background-color: $gray-d9 !important;
+      border: 1px solid $gray-d9;
+      color: $gray-78;
+      cursor: auto;
+    }
   }
 }
-
+.error-message {
+  color: $red;
+}
 @include mobile {
   .container {
     padding: 24px 16px;
