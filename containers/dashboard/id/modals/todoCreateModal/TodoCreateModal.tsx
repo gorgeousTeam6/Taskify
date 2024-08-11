@@ -7,15 +7,15 @@ import SelectAssigneeDropdown from '../../dropdown/SelectAssigneeDropdown';
 import ModalPortal from '@/components/ModalPortal';
 import styles from './TodoCreateModal.module.scss';
 import ImageInput from '@/components/Input/ImageInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useToast from '@/hooks/useToast';
-
 import getDate from '@/utils/getDate';
 import useTodoCreateModalStore from '@/stores/TodoCreateModalStore';
 
 export default function TodoCreateModal({ columnId }: { columnId: number }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { toast } = useToast();
-  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const { register, handleSubmit, reset, setValue } = useForm<FormValues>();
   const queryClient = useQueryClient();
   const router = useRouter();
   const { id: dashboardId } = router.query;
@@ -27,7 +27,44 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
   const [selectedAssigneeValue, setSelectedAssigneeValue] =
     useState<IMember | null>(null);
 
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (imageUrl) {
+      setValue('imageUrl', imageUrl);
+    }
+  }, [imageUrl, setValue]);
+
+  interface postType {
+    imageUrl: string;
+  }
+
+  async function handlePostImage(file: File) {
+    try {
+      const res = await axios
+        .post<postType>(
+          `/columns/${columnId}/card-image`,
+          { image: file },
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          },
+        )
+        .then((res) => res.data)
+        .then((data) => data.imageUrl);
+      console.log(res);
+      return res;
+    } catch (e: any) {
+      console.error(e.message);
+    }
+  }
+
+  const handleImageInput = async (image: any) => {
+    const res = await handlePostImage(image);
+
+    if (res) {
+      setImageUrl(res);
+    }
+  };
 
   const postTodoMutation = useMutation({
     mutationFn: (formData: FormValues) => {
@@ -52,9 +89,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const { title, description, tags, dueDate } = data;
-    console.log('selectedAssigneeValue');
-    console.log(selectedAssigneeValue);
+    const { title, description, tags, dueDate, imageUrl } = data;
 
     // 선택된 담당자의 ID 추가
     const assigneeUserId =
@@ -68,16 +103,12 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
       title,
       description,
       tags: tags.length === 0 ? [] : tags,
+      imageUrl: imageUrl,
     };
 
     if (dueDate) {
       requestData.dueDate = getDate(dueDate, true);
     }
-    if (imageUrl) {
-      requestData.imageUrl = imageUrl;
-    }
-
-    console.log('Form Data:', requestData); // 디버깅을 위한 콘솔 출력
 
     postTodoMutation.mutate(requestData); // 폼 데이터 전송
   };
@@ -148,10 +179,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
             <ImageInput
               name='task-image'
               value={imageUrl}
-              onChange={(file) => {
-                const url = URL.createObjectURL(file);
-                setImageUrl(url); // 이미지 URL 상태 업데이트
-              }}
+              onChange={handleImageInput}
               onDeleteClick={() => setImageUrl(null)}
             />
           </div>
