@@ -1,0 +1,6 @@
+@use '@/styles/index' as *;
+
+.tags {
+  @include Flex(row, null, center);
+  gap: 6px;
+}
