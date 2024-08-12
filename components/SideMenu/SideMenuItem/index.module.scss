@@ -6,15 +6,24 @@
   width: 100%;
   @include ResponsiveHeight(42px, 43px, 40px);
   @include ResponsivePadding(0px 12px 0, 0px 10px 0, 16px);
+  border-radius: 8px;
 
-  transition: background-color 0.5s ease;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background: $back-yellow;
     cursor: pointer;
+    background: $back-yellow;
+
+    &.dark {
+      background: $dark-theme-hover;
+    }
   }
   &:active {
     background: $main-yellow-active;
+
+    &.dark {
+      background: $dark-theme-active;
+    }
   }
 }
 
@@ -61,6 +70,12 @@
 
   @include FontStyle('2lg', 600, 'lg', '');
   color: $gray-78;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.dark {
+    color: rgba($white, 0.6);
+  }
 
   > p {
     @include ResponsiveMaxWidth(210px, 72px, 0);

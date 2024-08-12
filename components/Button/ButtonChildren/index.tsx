@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { IconAddChip, IconCrown, IconArrowForward } from '@/assets/icongroup';
+import { IconAddChip, IconArrowForward } from '@/assets/icongroup';
 import ChipAdd from '@/containers/dashboard/id/chips/ChipAdd';
+import { useTheme } from '@/hooks/useThemeContext';
 
 const iconSource: Record<
   ButtonType,
@@ -17,6 +18,8 @@ const iconSource: Record<
   pagenation: null,
   'add-board': IconAddChip,
   dashboard: IconArrowForward,
+  'modal-primary': null,
+  'modal-secondary': null,
 };
 
 export default function ButtonChildren({
@@ -24,6 +27,7 @@ export default function ButtonChildren({
   isOwner = false,
   children,
 }: ButtonProps) {
+  const { theme } = useTheme();
   const ActionIcon = iconSource[buttonType];
 
   // 보여줄 버튼이 없는 경우
@@ -40,19 +44,6 @@ export default function ButtonChildren({
     );
   }
 
-  // 버튼 타입이 dashboard인 경우
-  if (ActionIcon === IconArrowForward) {
-    return (
-      <ButtonChildrenLink
-        buttonType={buttonType}
-        isOwner={isOwner}
-        ActionIcon={ActionIcon}
-      >
-        {children}
-      </ButtonChildrenLink>
-    );
-  }
-
   return null;
 }
 
@@ -61,51 +52,15 @@ function ButtonChildrenAdd({
   children,
   ActionIcon,
 }: ButtonChildrenProps) {
+  const { theme } = useTheme();
   const iconSize = 22;
   return (
-    <div className={`${styles['standard-flex']} ${styles[buttonType]}`}>
+    <div
+      className={`${styles['standard-flex']} ${styles[buttonType]} ${styles[theme]}`}
+    >
       {children}
       <div style={{ width: iconSize, height: iconSize }}>
         <ChipAdd />
-      </div>
-    </div>
-  );
-}
-
-function ButtonChildrenLink({
-  buttonType,
-  isOwner,
-  children,
-  ActionIcon,
-}: ButtonChildrenProps) {
-  const iconSize = 18;
-  const CrownIcon = IconCrown;
-
-  return (
-    <div className={`${styles['standard-flex']} ${styles[buttonType]}`}>
-      <div
-        className={`${styles['standard-flex']} ${styles['dashboard-title-box']}`}
-      >
-        <div className={`${styles['circle']}`} />
-        <div
-          className={`${styles['standard-flex']} ${styles['dashboard-title-icon-gap']}`}
-        >
-          {children}
-          {isOwner && (
-            <div className={`${styles['crown-size']}`}>
-              <CrownIcon
-                style={{ width: '100%', height: '100%' }}
-                aria-label={`${buttonType} icon`}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-      <div style={{ width: iconSize, height: iconSize }}>
-        <ActionIcon
-          style={{ width: '100%', height: '100%' }}
-          aria-label={`${buttonType} icon`}
-        />
       </div>
     </div>
   );

@@ -6,6 +6,10 @@
   @include Flex(row, space-between, center);
   height: 40px;
 
+  @include mobile {
+    display: none;
+  }
+
   &.count1 {
     @include ResponsiveWidth(38px, 38px, 34px);
   }

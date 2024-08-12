@@ -1,5 +1,4 @@
 @use '@/styles/index.scss' as *;
-@import '@/styles/mixins/mixinButton';
 
 .common {
   border: 1px solid $gray-d9;
@@ -15,28 +14,43 @@
 .dashboard-button {
   border-radius: 8px;
   background: $white;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.3s color 0.3s ease;
   color: $black-33;
 
   @include ResponsivePadding(25px 20px, 24px 20px, 20px 20px);
   @include FontStyle(16, 600, 16, 14);
 
+  &.dark {
+    background: $dark-card;
+    color: rgba($white, 0.87);
+  }
+
   &:hover {
     background: $back-yellow;
+    cursor: pointer;
+
+    &.dark {
+      background: $dark-theme-hover;
+    }
   }
   &:active {
     background: $main-yellow-active;
+
+    &.dark {
+      background: $dark-theme-active;
+    }
   }
 }
 
 .dashboard {
-  @include Width(292px, 207px, 220px);
+  @include ResponsiveWidth(292px, 207px, 220px);
+  transition: background-color 0.3s color 0.3s ease;
 
   .dashboard-title-box {
-    @include Gap(16px, 12px, 12px);
+    @include ResponsiveGap(16, 12, 12);
 
     .dashboard-title-icon-gap {
-      @include Gap(8px, 6px, 4px);
+      @include ResponsiveGap(8, 6, 4);
 
       > p {
         @include ResponsiveMaxWidth(244px, 159px, 172px);
@@ -51,11 +65,20 @@
     width: 18px;
     height: 18px;
   }
+
+  &.dark {
+    color: rgba($white, 0.87);
+    > svg {
+      > path {
+        fill: currentColor;
+      }
+    }
+  }
 }
 
 .crown-size {
-  @include Width(20px, 18px, 15px);
-  @include Height(20px, 18px, 15px);
+  @include ResponsiveWidth(20px, 18px, 15px);
+  @include ResponsiveHeight(20px, 18px, 15px);
 
   > svg {
     width: 100%;

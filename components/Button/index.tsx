@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import ButtonChildren from './ButtonChildren';
+import { useTheme } from '@/hooks/useThemeContext';
 
 export default function Button({
   buttonType,
@@ -8,8 +9,12 @@ export default function Button({
   children = '',
   ...rest
 }: ButtonProps) {
+  const { theme } = useTheme();
   return (
-    <button className={`${styles['common']} ${styles[buttonType]}`} {...rest}>
+    <button
+      className={`${styles['common']} ${styles[buttonType]} ${styles[theme]}`}
+      {...rest}
+    >
       <ButtonChildren
         buttonType={buttonType}
         isOwner={isOwner}

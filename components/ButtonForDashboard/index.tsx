@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { IconCrown, IconArrowForward } from '@/assets/icongroup';
+import { useTheme } from '@/hooks/useThemeContext';
 
 export default function ButtonForDashboard({
   color,
@@ -8,12 +9,15 @@ export default function ButtonForDashboard({
   children = '',
   ...rest
 }: ButtonForDashboardProps) {
+  const { theme } = useTheme();
   return (
     <button
-      className={`${styles['common']} ${styles['dashboard-button']}`}
+      className={`${styles['common']} ${styles['dashboard-button']} ${styles[theme]}`}
       {...rest}
     >
-      <div className={`${styles['standard-flex']} ${styles['dashboard']}`}>
+      <div
+        className={`${styles['standard-flex']} ${styles['dashboard']} ${styles[theme]}`}
+      >
         <div
           className={`${styles['standard-flex']} ${styles['dashboard-title-box']}`}
         >

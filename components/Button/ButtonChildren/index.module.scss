@@ -13,6 +13,12 @@
 .add-board {
   gap: 12px;
   @include Height(22px, 22px, 20px);
+
+  &.dark {
+    svg {
+      color: rgba($white, 0.87);
+    }
+  }
 }
 
 .dashboard {

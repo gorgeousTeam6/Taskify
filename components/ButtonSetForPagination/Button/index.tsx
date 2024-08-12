@@ -1,4 +1,5 @@
 import { IconArrowForward } from '@/assets/icongroup';
+import { useTheme } from '@/hooks/useThemeContext';
 import React from 'react';
 import styles from './index.module.scss';
 
@@ -8,17 +9,18 @@ export default function ButtonSetForPagination({
   onClickToNext,
   ...rest
 }: ButtonSetForPaginationProps) {
+  const { theme } = useTheme();
   return (
     <div className={`${styles['button-set']} ${styles[size]}`}>
       <button
-        className={`${styles['button-pagination']} ${styles['left']}`}
+        className={`${styles['button-pagination']} ${styles['left']} ${styles[theme]}`}
         onClick={onClickToPrev}
         {...rest}
       >
         <IconArrowForward />
       </button>
       <button
-        className={`${styles['button-pagination']} ${styles['right']}`}
+        className={`${styles['button-pagination']} ${styles['right']} ${styles[theme]}`}
         onClick={onClickToNext}
         {...rest}
       >

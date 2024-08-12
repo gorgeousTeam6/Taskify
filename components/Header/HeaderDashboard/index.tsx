@@ -8,9 +8,9 @@ import { useInviteModalStore } from '@/stores/modalStore';
 import MemberList from './MemberList';
 import { useUserStore } from '@/store/useUserStore';
 import InviteModal from '@/containers/myDashboard/InviteModal';
-import { ProfileIcon } from '@/components/ProfileIcon/ProfileIcon';
 import ProfileDropdown from '@/components/ProfileDropdown';
 import ThemeSwitch from '@/components/ThemeSwitch';
+import { useTheme } from '@/hooks/useThemeContext';
 
 const fetchDashboards = async (dashboardId: string) => {
   const response = await instance.get(`/dashboards/${dashboardId}`);
@@ -18,6 +18,7 @@ const fetchDashboards = async (dashboardId: string) => {
 };
 
 export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
+  const { theme } = useTheme();
   const router = useRouter();
   const { id } = router.query;
   const currentId = dashboardId || String(id);
@@ -34,15 +35,13 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
 
   const { isModalOpen, setOpenModal } = useInviteModalStore();
 
-  const nickname = user?.nickname ?? '';
-
   const handleManageClick = () => {
     router.push(`/dashboard/${currentId}/edit`);
   };
 
   if (!data) {
     return (
-      <header className={`${styles['header-dashboard']}`}>
+      <header className={`${styles['header-dashboard']} ${styles[theme]}`}>
         <div
           className={`${styles['header-dashboard-container']} ${styles['flex-end-force']}`}
         >
@@ -54,10 +53,10 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
   }
 
   return (
-    <header className={`${styles['header-dashboard']}`}>
+    <header className={`${styles['header-dashboard']} ${styles[theme]}`}>
       <div className={`${styles['header-dashboard-container']}`}>
         <div className={`${styles['dashboard-title-container']}`}>
-          <p>{data.title}</p>
+          <p className={`${styles[theme]}`}>{data.title}</p>
           {data.createdByMe && (
             <div className={`${styles['crown-size']}`}>
               <IconCrown
@@ -71,10 +70,10 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
           <div className={`${styles['dashboard-manage-button-area']}`}>
             {data.createdByMe && (
               <button
-                className={`${styles['dashboard-manage-button']}`}
+                className={`${styles['dashboard-manage-button']} ${styles[theme]}`}
                 onClick={handleManageClick}
               >
-                <div>
+                <div className={`${styles[theme]}`}>
                   <IconSetting
                     style={{ width: '20px', height: '20px' }}
                     aria-label={`setting icon`}
@@ -84,10 +83,10 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
               </button>
             )}
             <button
-              className={`${styles['dashboard-manage-button']}`}
+              className={`${styles['dashboard-manage-button']} ${styles[theme]}`}
               onClick={setOpenModal}
             >
-              <div>
+              <div className={`${styles[theme]}`}>
                 <IconAddBox
                   style={{ width: '20px', height: '20px' }}
                   aria-label={`add box icon`}
@@ -97,7 +96,7 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
             </button>
           </div>
           <div className={`${styles['dashboard-member-area']}`}>
-            <MemberList dashboardId={currentId}></MemberList>
+            <MemberList dashboardId={currentId} />
             <div className={`${styles['dashboard-half-line']}`}></div>
             {user && <ProfileDropdown />}
             <ThemeSwitch />

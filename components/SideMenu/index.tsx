@@ -9,6 +9,7 @@ import Logo from '@/assets/logos/Logo.svg';
 import LogoMobile from '@/assets/logos/LogoImage.svg';
 import { useRouter } from 'next/router';
 import CreateDashboardModal from '@/containers/myDashboard/CreateDashboardModal';
+import { useTheme } from '@/hooks/useThemeContext';
 
 const fetchDashboards = async (cursorId: number, page: number) => {
   const response = await instance.get(
@@ -18,6 +19,7 @@ const fetchDashboards = async (cursorId: number, page: number) => {
 };
 
 export default function SideMenu({ onItemClick }: SideMenuProps) {
+  const { theme } = useTheme();
   const [page, setPage] = useState(1);
   const [cursorId, setCursorId] = useState(1);
   const { isModalOpen, setOpenModal } = useCreateDashboardModalStore();
@@ -44,7 +46,7 @@ export default function SideMenu({ onItemClick }: SideMenuProps) {
   };
 
   return (
-    <section className={`${styles['side-menu']}`}>
+    <section className={`${styles['side-menu']} ${styles[theme]}`}>
       <div className={`${styles['side-menu-container']}`}>
         <div className={`${styles['logo-container']}`}>
           <div
@@ -56,8 +58,12 @@ export default function SideMenu({ onItemClick }: SideMenuProps) {
           </div>
         </div>
         <div className={`${styles['dashboard-container']}`}>
-          <div className={`${styles['dashboard-header']}`}>
-            <p className={`${styles['dashboard-header-text']}`}>Dash Boards</p>
+          <div className={`${styles['dashboard-header']} ${styles[theme]}`}>
+            <p
+              className={`${styles['dashboard-header-text']} ${styles[theme]}`}
+            >
+              Dash Boards
+            </p>
             <IconAddBox
               className={`${styles['dashboard-header-icon']}`}
               onClick={setOpenModal}
