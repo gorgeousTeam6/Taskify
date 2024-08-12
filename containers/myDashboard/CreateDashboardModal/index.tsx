@@ -33,7 +33,7 @@ export default function CreateDashboardModal() {
   const createDashboardMutation = useMutation({
     mutationFn: () => axios.post(`/dashboards`, { title, color }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashboards'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       setCloseModal();
     },
   });
