@@ -37,15 +37,20 @@
 
 .logo-container {
   @include Flex(row, space-between, center);
-  @include ResponsiveWidth(109px, 109px, 24px);
+  @include ResponsiveWidth(200px, 108px, 36px);
   @include ResponsiveHeight(33px, 33px, 28px);
+  margin: 0 auto;
+
+  @include desktop {
+    padding-top: 20px;
+  }
 }
 
 .logo-icon-wrapper {
   position: relative;
 
-  @include ResponsiveWidth(144px, 144px, 36px);
-  @include ResponsiveHeight(36px, 36px, 36px);
+  @include ResponsiveWidth(200px, 108px, 36px);
+  @include ResponsiveHeight(50px, 27px, 36px);
 
   cursor: pointer;
 
@@ -60,6 +65,11 @@
     @include mobile {
       display: inline-block;
     }
+  }
+
+  > img {
+    @include ResponsiveWidth(200px, 108px, 0);
+    @include ResponsiveHeight(50px, 27px, 0);
   }
 
   > svg {

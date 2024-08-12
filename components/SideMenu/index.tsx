@@ -55,10 +55,15 @@ export default function SideMenu({ onItemClick }: SideMenuProps) {
             onClick={handleLogoClick}
           >
             {theme === 'light' && (
-              <Image src='/LogoBlack.png' alt='' width={108} height={33} />
+              <Image src='/LogoBlack.png' alt='' width={1080} height={330} />
             )}
             {theme === 'dark' && (
-              <Image src='/LogoLightGray.png' alt='' width={108} height={33} />
+              <Image
+                src='/LogoLightGray.png'
+                alt=''
+                width={1080}
+                height={330}
+              />
             )}
             <LogoMobile></LogoMobile>
           </div>
