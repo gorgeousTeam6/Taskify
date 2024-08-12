@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
 import styles from './HashtagsInput.module.scss';
 import ChipCard from '@/containers/dashboard/id/chips/ChipCard';
 import getRandomTagColor from '@/utils/getRandomTagColor';
-
+import { useTheme } from '@/hooks/useThemeContext';
 interface HashTagsInputProps {
   tags: string[];
   setTags: (tags: string[]) => void;
@@ -11,7 +11,7 @@ interface HashTagsInputProps {
 export default function HashTagsInput({ tags, setTags }: HashTagsInputProps) {
   const [textValue, setTextValue] = useState<string>('');
   const [error, setError] = useState<string>('');
-
+  const { theme } = useTheme();
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTextValue(e.target.value);
     setError('');
@@ -43,7 +43,7 @@ export default function HashTagsInput({ tags, setTags }: HashTagsInputProps) {
   return (
     <div className={styles.todoStyle}>
       <input
-        className={`${styles['tags-input']} ${
+        className={`${styles['tags-input']} ${styles[theme]} ${
           error ? styles['tags-input-error'] : styles['tags-input']
         }
         }`}

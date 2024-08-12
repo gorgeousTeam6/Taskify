@@ -32,6 +32,8 @@ function InvitedDashboard() {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
+  if (isLoading) return <p>Loading...</p>;
+
   return (
     <div className={styles['container']}>
       <h2 className={styles['title']}>초대받은 대시보드</h2>

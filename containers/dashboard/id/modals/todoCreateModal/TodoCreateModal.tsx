@@ -12,12 +12,15 @@ import useToast from '@/hooks/useToast';
 import getDate from '@/utils/getDate';
 import useTodoCreateModalStore from '@/stores/TodoCreateModalStore';
 import HashTagsInput from '../components/hastagsInput/HashtagsInput';
+import { useTheme } from '@/hooks/useThemeContext';
 
 export default function TodoCreateModal({ columnId }: { columnId: number }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [tags, setTags] = useState<string[]>([]);
   const { toast } = useToast();
+  const { theme } = useTheme();
+
   const {
     register,
     handleSubmit,
@@ -137,7 +140,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
   if (TodoCreateModalId !== columnId) return <></>;
   return (
     <ModalPortal onClose={setCloseTodoCreateModal}>
-      <div className={styles['container']}>
+      <div className={`${styles['container']} ${styles[theme]}`}>
         <form
           className={styles['form']}
           onSubmit={handleSubmit(onSubmit)}

@@ -14,6 +14,28 @@
   border-radius: 16px;
   background-color: $white;
   padding: 32px;
+
+  &.dark {
+    background-color: $dark-card;
+    color: rgba($white, 0.87);
+    .form-label {
+      color: rgba($white, 0.87);
+    }
+    .form-input {
+      background-color: $gray-d9;
+    }
+
+    .button {
+      background-color: $dark-secondary-btn;
+      border: none;
+      &.yellow {
+        background-color: $main-yellow;
+      }
+    }
+    .date-input {
+      background-color: $gray-d9;
+    }
+  }
 }
 
 .form {
@@ -73,7 +95,9 @@
   color: $black-33;
   resize: none;
   position: relative;
-
+  &::placeholder {
+    color: $gray-78;
+  }
   &:focus {
     border-color: $main-yellow;
     outline: none;
@@ -99,9 +123,17 @@
   color: $black-33;
   font-weight: 400;
   resize: none;
+  &::placeholder {
+    color: $gray-d9;
+    opacity: 0.7;
+  }
   &:focus {
     border-color: $main-yellow;
     outline: none;
+  }
+  &::-webkit-calendar-picker-indicator {
+    background-color: transparent;
+    cursor: pointer;
   }
 }
 
@@ -147,7 +179,7 @@
 @include mobile {
   .container {
     padding: 24px 16px;
-    width: 327px;
+    width: 70%;
   }
 
   .modal-title {

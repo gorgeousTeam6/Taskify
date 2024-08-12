@@ -14,6 +14,7 @@ import ImageInput from '@/components/Input/ImageInput';
 import getDate from '@/utils/getDate';
 import useToast from '@/hooks/useToast';
 import HashTagsInput from '@/containers/dashboard/id/modals/components/hastagsInput/HashtagsInput';
+import { useTheme } from '@/hooks/useThemeContext';
 
 export default function TodoEditModal({ card }: { card: ICard }) {
   const {
@@ -33,6 +34,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   const [tags, setTags] = useState<string[]>(initialTags); // 태그 상태 관리
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const { toast } = useToast();
+  const { theme } = useTheme();
   const {
     register,
     handleSubmit,
@@ -136,6 +138,11 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   });
 
   useEffect(() => {
+    const initialFormValid = title?.trim() !== '' && description?.trim() !== '';
+    setIsFormValid(initialFormValid);
+  }, []);
+
+  useEffect(() => {
     const subscription = watch((value) => {
       const titleValue = value.title?.trim() !== '';
       const descriptionValue = value.description?.trim() !== '';
@@ -171,7 +178,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
 
   return (
     <ModalPortal onClose={setCloseEditModal}>
-      <div className={styles['container']}>
+      <div className={`${styles['container']} ${styles[theme]}`}>
         <form className={styles['form']} onSubmit={handleSubmit(onSubmit)}>
           <p className={styles['modal-title']}>할 일 수정</p>
           <div className={styles['status-and-owner']}>
@@ -242,7 +249,10 @@ export default function TodoEditModal({ card }: { card: ICard }) {
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>태그</label>
-            <HashTagsInput tags={tags} setTags={setTags} />{' '}
+            <HashTagsInput
+              tags={tags}
+              setTags={setTags}
+            />{' '}
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>이미지</label>

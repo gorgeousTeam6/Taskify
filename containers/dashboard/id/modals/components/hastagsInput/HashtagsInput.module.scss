@@ -11,6 +11,9 @@
     border-color: $main-yellow;
     outline: none;
   }
+  &.dark {
+    background-color: $gray-d9;
+  }
 }
 
 .tags-input-error {
