@@ -1,7 +1,6 @@
 @use '@/styles/index.scss' as *;
 @use '@/styles/_levels.scss' as *;
 
-
 .header-container {
   position: fixed;
   top: 0;
@@ -20,9 +19,11 @@
 
   box-sizing: border-box;
 
+  transition: background-color 0.3s ease, color 0.3s ease;
+
   &.dark {
-    background: $black;
-    color: $white;
+    background-color: $dark-theme;
+    color: rgba($white, 0.87);
   }
 }
 
@@ -43,10 +44,6 @@
       display: inline-block;
     }
   }
-}
-
-.dark .logo-container {
-  filter: brightness(0) invert(1);
 }
 
 .sign-container {

@@ -4,10 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '@/assets/logos/Logo.svg';
 import LogoMobile from '@/assets/logos/LogoImage.svg';
+import { useTheme } from '@/hooks/useThemeContext';
 
-export default function HeaderMain({ mode = '' }) {
+export default function HeaderMain() {
+  const { theme } = useTheme();
   return (
-    <header className={`${styles['header-container']} ${styles[mode]}`}>
+    <header className={`${styles['header-container']} ${styles[theme]}`}>
       <Link href='/'>
         <div className={`${styles['logo-container']}`}>
           <Logo></Logo>
