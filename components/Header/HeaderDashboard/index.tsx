@@ -10,6 +10,7 @@ import { useUserStore } from '@/store/useUserStore';
 import InviteModal from '@/containers/myDashboard/InviteModal';
 import { ProfileIcon } from '@/components/ProfileIcon/ProfileIcon';
 import ProfileDropdown from '@/components/ProfileDropdown';
+import ThemeSwitch from '@/components/ThemeSwitch';
 
 const fetchDashboards = async (dashboardId: string) => {
   const response = await instance.get(`/dashboards/${dashboardId}`);
@@ -46,6 +47,7 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
           className={`${styles['header-dashboard-container']} ${styles['flex-end-force']}`}
         >
           {user && <ProfileDropdown />}
+          <ThemeSwitch />
         </div>
       </header>
     );
@@ -98,6 +100,7 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
             <MemberList dashboardId={currentId}></MemberList>
             <div className={`${styles['dashboard-half-line']}`}></div>
             {user && <ProfileDropdown />}
+            <ThemeSwitch />
           </div>
         </div>
       </div>
