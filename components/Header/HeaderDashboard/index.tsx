@@ -8,9 +8,9 @@ import { useInviteModalStore } from '@/stores/modalStore';
 import MemberList from './MemberList';
 import { useUserStore } from '@/store/useUserStore';
 import InviteModal from '@/containers/myDashboard/InviteModal';
-import DropdownProfile from '@/components/DropdownProfile';
 import ThemeSwitch from '@/components/ThemeSwitch';
 import { useTheme } from '@/hooks/useThemeContext';
+import DropdownProfile from '@/components/DropdownProfile';
 
 const fetchDashboards = async (dashboardId: string) => {
   const response = await instance.get(`/dashboards/${dashboardId}`);

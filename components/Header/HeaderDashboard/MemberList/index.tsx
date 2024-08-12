@@ -6,7 +6,7 @@ import { ProfileIcon } from '@/components/ProfileIcon/ProfileIcon';
 
 const fetchDashboardMembers = async (dashboardId: string) => {
   const response = await instance.get(
-    `/members?page=1&size=2&dashboardId=${dashboardId}`,
+    `/members?page=1&size=5&dashboardId=${dashboardId}`,
   );
   return response.data;
 };

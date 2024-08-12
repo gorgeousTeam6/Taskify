@@ -9,8 +9,10 @@ import ColorCircleList from '@/components/ColorCircleList';
 import ModalPortal from '@/components/ModalPortal';
 import { useRouter } from 'next/router';
 import useToast from '@/hooks/useToast';
+import { useTheme } from '@/hooks/useThemeContext';
 
 export default function CreateDashboardModal() {
+  const { theme } = useTheme();
   const router = useRouter();
   const { isModalOpen, setCloseModal } = useCreateDashboardModalStore();
   const queryClient = useQueryClient();
@@ -52,11 +54,11 @@ export default function CreateDashboardModal() {
 
   return (
     <ModalPortal onClose={setCloseModal}>
-      <section className={`${styles['modal-container']}`}>
+      <section className={`${styles['modal-container']} ${styles[theme]}`}>
         <h2>새로운 대시보드</h2>
         <label className={`${styles['label-container']}`}>
           <p>대시보드 이름</p>
-          <input type='text' onChange={handleOnTitleChange} />
+          <input type='text' onChange={handleOnTitleChange} maxLength={20} />
         </label>
         <ColorCircleList onClick={handleOnColorClick} />
         <ButtonSet buttonSetType='primary' widthFill={true}>

@@ -19,7 +19,16 @@
   border: 1px solid $gray-d9;
   font-family: 'Pretendard', sans-serif;
   background: $white;
+  color: $black-33;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.dark {
+    border: 1px solid $dark-card;
+    border-left: 1px solid $dark-theme;
+    background: $dark-card;
+    color: rgba($white, 0.87);
+  }
 
   &.left {
     transform: rotate(180deg);
@@ -28,6 +37,10 @@
   svg {
     width: 16px;
     height: 16px;
+
+    > path {
+      fill: currentColor;
+    }
   }
 
   &:hover {
@@ -35,14 +48,14 @@
     cursor: pointer;
 
     &.dark {
-      background: $dark-theme-hover;
+      background: $dark-card-hover;
     }
   }
   &:active {
     background: $main-yellow-active;
 
     &.dark {
-      background: $dark-theme-active;
+      background: $dark-card-active;
     }
   }
 }

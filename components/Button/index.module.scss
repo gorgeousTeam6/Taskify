@@ -35,10 +35,6 @@
 
   @include ResponsivePadding(7px 29px, 6px 23px, 7px 37px);
   @include FontStyle(14, 500, 14, 12);
-
-  &.dark {
-    @include ResponsivePadding(8px 30px, 7px 24px, 8px 38px);
-  }
 }
 
 .secondary {
@@ -51,8 +47,9 @@
 
   transition: background-color 0.3s ease, color 0.3s ease;
   &.dark {
-    @include ResponsivePadding(8px 30px, 7px 24px, 8px 38px);
+    border: 1px solid $dark-secondary-btn;
     background-color: $dark-secondary-btn;
+    color: rgba($white, 0.87);
   }
 }
 
@@ -94,7 +91,7 @@
 
   transition: background-color 0.3s ease, color 0.3s ease;
   &.dark {
-    @include ResponsivePadding(10px 146px, 10px 261px, 7px 132px);
+    border: 1px solid $dark-card;
     background-color: $dark-card;
     color: rgba($white, 0.87);
   }

@@ -10,6 +10,7 @@ import LogoMobile from '@/assets/logos/LogoImage.svg';
 import { useRouter } from 'next/router';
 import CreateDashboardModal from '@/containers/myDashboard/CreateDashboardModal';
 import { useTheme } from '@/hooks/useThemeContext';
+import Image from 'next/image';
 
 const fetchDashboards = async (cursorId: number, page: number) => {
   const response = await instance.get(
@@ -53,7 +54,12 @@ export default function SideMenu({ onItemClick }: SideMenuProps) {
             className={`${styles['logo-icon-wrapper']}`}
             onClick={handleLogoClick}
           >
-            <Logo></Logo>
+            {theme === 'light' && (
+              <Image src='/LogoBlack.png' alt='' width={108} height={33} />
+            )}
+            {theme === 'dark' && (
+              <Image src='/LogoLightGray.png' alt='' width={108} height={33} />
+            )}
             <LogoMobile></LogoMobile>
           </div>
         </div>

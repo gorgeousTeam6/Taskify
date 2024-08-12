@@ -20,6 +20,13 @@
     cursor: not-allowed;
     background-color: $gray-d9;
   }
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.dark {
+    background: $dark-card;
+    color: rgba($white, 0.87);
+  }
 }
 
 .label-container {

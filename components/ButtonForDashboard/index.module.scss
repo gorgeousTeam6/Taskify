@@ -3,8 +3,11 @@
 .common {
   border: 1px solid $gray-d9;
   line-height: 1.2em;
-  box-sizing: border-box;
   white-space: nowrap;
+
+  &.dark {
+    border: 1px solid $dark-card;
+  }
 }
 
 .standard-flex {
@@ -14,7 +17,7 @@
 .dashboard-button {
   border-radius: 8px;
   background: $white;
-  transition: background-color 0.3s color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   color: $black-33;
 
   @include ResponsivePadding(25px 20px, 24px 20px, 20px 20px);
@@ -44,7 +47,7 @@
 
 .dashboard {
   @include ResponsiveWidth(292px, 207px, 220px);
-  transition: background-color 0.3s color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   .dashboard-title-box {
     @include ResponsiveGap(16, 12, 12);
@@ -53,7 +56,7 @@
       @include ResponsiveGap(8, 6, 4);
 
       > p {
-        @include ResponsiveMaxWidth(244px, 159px, 172px);
+        @include ResponsiveMaxWidth(214px, 139px, 152px);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
