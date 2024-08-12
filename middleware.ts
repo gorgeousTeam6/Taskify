@@ -8,6 +8,9 @@ export function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
+  console.log('token');
+  console.log(token);
+
   // 로그인이 되어있지 않고 보호된 페이지에 접근하려는 경우
   if (!token) {
     if (
@@ -26,6 +29,8 @@ export function middleware(request: NextRequest) {
 
   // 기본적으로 요청을 그대로 반환
   return NextResponse.next();
+
+  //   return NextResponse.redirect(new URL('/about-2', request.url));
 }
 
 // See "Matching Paths" below to learn more
