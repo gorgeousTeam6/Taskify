@@ -10,7 +10,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
 
-function ProfileDropdown({}) {
+function DropdownProfile({}) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { isOpen, setIsOpen } = useDetectClose(dropdownRef, false);
   const queryClient = useQueryClient();
@@ -72,4 +72,4 @@ function ProfileDropdown({}) {
   );
 }
 
-export default ProfileDropdown;
+export default DropdownProfile;

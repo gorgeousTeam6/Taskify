@@ -8,7 +8,7 @@ import { useInviteModalStore } from '@/stores/modalStore';
 import MemberList from './MemberList';
 import { useUserStore } from '@/store/useUserStore';
 import InviteModal from '@/containers/myDashboard/InviteModal';
-import ProfileDropdown from '@/components/ProfileDropdown';
+import DropdownProfile from '@/components/DropdownProfile';
 import ThemeSwitch from '@/components/ThemeSwitch';
 import { useTheme } from '@/hooks/useThemeContext';
 
@@ -45,7 +45,7 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
         <div
           className={`${styles['header-dashboard-container']} ${styles['flex-end-force']}`}
         >
-          {user && <ProfileDropdown />}
+          {user && <DropdownProfile />}
           <ThemeSwitch />
         </div>
       </header>
@@ -98,7 +98,7 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
           <div className={`${styles['dashboard-member-area']}`}>
             <MemberList dashboardId={currentId} />
             <div className={`${styles['dashboard-half-line']}`}></div>
-            {user && <ProfileDropdown />}
+            {user && <DropdownProfile />}
             <ThemeSwitch />
           </div>
         </div>
