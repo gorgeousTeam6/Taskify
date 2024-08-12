@@ -11,11 +11,21 @@ import { useEffect, useState } from 'react';
 import useToast from '@/hooks/useToast';
 import getDate from '@/utils/getDate';
 import useTodoCreateModalStore from '@/stores/TodoCreateModalStore';
+import HashTagsInput from '../components/\bhastagsInput/HashtagsInput';
 
 export default function TodoCreateModal({ columnId }: { columnId: number }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [tags, setTags] = useState<string[]>([]);
   const { toast } = useToast();
-  const { register, handleSubmit, reset, setValue } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+    formState: { errors, isValid },
+  } = useForm<FormValues>({ mode: 'onChange' });
   const queryClient = useQueryClient();
   const router = useRouter();
   const { id: dashboardId } = router.query;
@@ -26,6 +36,14 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
 
   const [selectedAssigneeValue, setSelectedAssigneeValue] =
     useState<IMember | null>(null);
+
+  /*폼 유효성 검사*/
+
+  useEffect(() => {
+    const title = watch('title');
+    const description = watch('description');
+    setIsFormValid(title?.trim() !== '' && description?.trim() !== '');
+  }, [watch('title'), watch('description')]);
 
   useEffect(() => {
     if (imageUrl) {
@@ -55,6 +73,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
       return res;
     } catch (e: any) {
       console.error(e.message);
+      toast('error', '이미지 업로드에 실패했습니다.');
     }
   }
 
@@ -78,36 +97,38 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
         queryKey: ['getCardList', columnId],
       });
 
-      toast('success', '데이터 넣기 성공');
+      toast('success', '할 일이 성공적으로 생성되었습니다.');
       reset(); // 폼 초기화
       setCloseTodoCreateModal();
     },
     onError: (error) => {
       console.error('Create Error:', error);
-      toast('error', error.message);
+      toast('error', '할 일 생성에 실패했습니다.');
     },
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const { title, description, tags, dueDate, imageUrl } = data;
+    const { title, description, dueDate, imageUrl } = data;
 
-    // 선택된 담당자의 ID 추가
     const assigneeUserId =
       selectedAssigneeValue?.userId ?? selectedAssigneeValue?.id;
 
-    // 전송할 데이터 생성
     const requestData: FormValues = {
       assigneeUserId,
       dashboardId: Number(dashboardId),
-      columnId: columnId, // 필요한 경우 columnId 추가
+      columnId: columnId,
       title,
       description,
-      tags: tags.length === 0 ? [] : tags,
+      tags: tags,
       imageUrl: imageUrl,
     };
 
     if (dueDate) {
       requestData.dueDate = getDate(dueDate, true);
+    }
+
+    if (!isFormValid) {
+      toast('error', '모든 필수 입력 항목을 입력해주세요.');
     }
 
     postTodoMutation.mutate(requestData); // 폼 데이터 전송
@@ -141,11 +162,16 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
               <label className={styles['form-label']}>제목</label>
               <label className={styles['essential']}>*</label>
             </div>
-            <textarea
-              className={styles['form-input']}
+            <input
+              className={`${styles['form-input']} ${
+                errors.title ? styles['error-border'] : ''
+              }`}
               placeholder='제목을 입력해주세요'
-              {...register('title', { required: true })}
-            ></textarea>
+              {...register('title', { required: '* 필수 입력 항목입니다' })}
+            />
+            {errors.title && (
+              <p className={styles['error-message']}>{errors.title.message}</p>
+            )}
           </div>
           <div className={styles['label-and-form']}>
             <div className={styles['label-with-star']}>
@@ -153,10 +179,19 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
               <label className={styles['essential']}>*</label>
             </div>
             <textarea
-              className={`${styles['form-input']} ${styles['form-description']}`}
+              className={`${styles['form-input']} ${
+                styles['form-description']
+              } ${errors.description ? styles['error-border'] : ''}`}
               placeholder='설명을 입력해주세요'
-              {...register('description', { required: true })}
+              {...register('description', {
+                required: '* 필수 입력 항목입니다',
+              })}
             ></textarea>
+            {errors.description && (
+              <p className={styles['error-message']}>
+                {errors.description.message}
+              </p>
+            )}
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>마감일</label>
@@ -168,11 +203,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>태그</label>
-            <textarea
-              className={styles['date-input']}
-              placeholder='라벨칩'
-              {...register('tags')}
-            />
+            <HashTagsInput tags={tags} setTags={setTags} />
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>이미지</label>
@@ -190,6 +221,7 @@ export default function TodoCreateModal({ columnId }: { columnId: number }) {
             <button
               type='submit'
               className={`${styles['button']} ${styles['yellow']}`}
+              disabled={!isFormValid}
             >
               생성
             </button>

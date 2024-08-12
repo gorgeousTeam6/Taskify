@@ -1,7 +1,6 @@
+import React, { useState, ChangeEvent, KeyboardEvent, useEffect } from 'react';
 import styles from './TodoEditModal.module.scss';
-
-import { useForm, SubmitHandler } from 'react-hook-form'; // 수정: SubmitHandler 추가
-import { useState, useEffect, ChangeEvent, MouseEventHandler } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import useImageStore from '@/stores/ImageInputStore';
 import ModalPortal from '@/components/ModalPortal';
 import useTodoEditModalStore from '@/stores/useTodoEditModalStore';
@@ -14,6 +13,7 @@ import SelectAssigneeDropdown from '@/containers/dashboard/id/dropdown/SelectAss
 import ImageInput from '@/components/Input/ImageInput';
 import getDate from '@/utils/getDate';
 import useToast from '@/hooks/useToast';
+import HashTagsInput from '@/containers/dashboard/id/modals/components/hastagsInput/HashtagsInput';
 
 export default function TodoEditModal({ card }: { card: ICard }) {
   const {
@@ -22,16 +22,24 @@ export default function TodoEditModal({ card }: { card: ICard }) {
     description,
     columnId,
     dueDate,
-    tags,
+    tags: initialTags,
     imageUrl,
     assignee,
   } = card;
+
   const [currentImageUrl, setCurrentImageUrl] = useState<string | null>(
     imageUrl,
   );
-
+  const [tags, setTags] = useState<string[]>(initialTags); // 태그 상태 관리
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const { toast } = useToast();
-  const { register, handleSubmit, setValue } = useForm<FormValues>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors, isValid },
+  } = useForm<FormValues>({
     defaultValues: {
       title: title,
       description: description,
@@ -39,6 +47,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       tags: tags.length === 0 ? [] : tags,
       imageUrl: currentImageUrl ?? null,
     },
+    mode: 'onChange',
   });
 
   const queryClient = useQueryClient();
@@ -85,6 +94,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       return res;
     } catch (e: any) {
       console.error(e.message);
+      toast('error', '이미지 업로드에 실패했습니다.');
     }
   }
 
@@ -99,8 +109,8 @@ export default function TodoEditModal({ card }: { card: ICard }) {
   const handleImageDelete = () => {
     setCurrentImageUrl(null);
   };
-  /*put*/
 
+  /*put*/
   const updateColumnMutation = useMutation({
     mutationFn: (data: IPostData) => {
       console.log('Request Data:', data);
@@ -116,32 +126,46 @@ export default function TodoEditModal({ card }: { card: ICard }) {
       queryClient.invalidateQueries({
         queryKey: ['getCardList', selectedProgressValue.id],
       });
-
+      toast('success', '할 일이 성공적으로 수정되었습니다.');
       setCloseEditModal();
     },
     onError: (error) => {
       console.error('Update Error:', error);
+      toast('error', '할 일 수정에 실패했습니다.');
     },
   });
 
+  useEffect(() => {
+    const subscription = watch((value) => {
+      const titleValue = value.title?.trim() !== '';
+      const descriptionValue = value.description?.trim() !== '';
+      setIsFormValid(titleValue && descriptionValue);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
   // onSubmit 핸들러 추가
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const { title, description, dueDate, imageUrl, tags } = data;
+    const { title, description, dueDate, imageUrl } = data;
 
     const requestData: IPostData = {
       title: title,
       description: description,
       columnId: selectedProgressValue.id,
       assigneeUserId: selectedAssigneeValue
-        ? 'userId' in selectedAssigneeValue!
+        ? 'userId' in selectedAssigneeValue
           ? selectedAssigneeValue?.userId ?? null
           : selectedAssigneeValue?.id ?? null
         : null,
       tags: tags,
+
       dueDate: dueDate ? getDate(dueDate, true) : null,
       imageUrl: currentImageUrl ?? null,
     };
-
+    if (!isFormValid) {
+      toast('error', '모든 필수 입력 항목을 입력해주세요.');
+    }
+    
     updateColumnMutation.mutate(requestData);
   };
 
@@ -149,7 +173,6 @@ export default function TodoEditModal({ card }: { card: ICard }) {
     <ModalPortal onClose={setCloseEditModal}>
       <div className={styles['container']}>
         <form className={styles['form']} onSubmit={handleSubmit(onSubmit)}>
-          {' '}
           <p className={styles['modal-title']}>할 일 수정</p>
           <div className={styles['status-and-owner']}>
             <div
@@ -178,11 +201,16 @@ export default function TodoEditModal({ card }: { card: ICard }) {
               <label className={styles['form-label']}>제목</label>
               <label className={styles['essential']}>*</label>
             </div>
-            <textarea
-              className={styles['form-input']}
+            <input
+              className={`${styles['form-input']} ${
+                errors.title ? styles['error-border'] : ''
+              }`}
               placeholder='제목을 입력해주세요'
-              {...register('title')}
-            ></textarea>
+              {...register('title', { required: '* 필수 입력 항목입니다' })}
+            />
+            {errors.title && (
+              <p className={styles['error-message']}>{errors.title.message}</p>
+            )}
           </div>
           <div className={styles['label-and-form']}>
             <div className={styles['label-with-star']}>
@@ -190,10 +218,19 @@ export default function TodoEditModal({ card }: { card: ICard }) {
               <label className={styles['essential']}>*</label>
             </div>
             <textarea
-              className={`${styles['form-input']} ${styles['form-description']}`}
+              className={`${styles['form-input']} ${
+                styles['form-description']
+              } ${errors.description ? styles['error-border'] : ''}`}
               placeholder='설명을 입력해주세요'
-              {...register('description')}
+              {...register('description', {
+                required: '* 필수 입력 항목입니다',
+              })}
             ></textarea>
+            {errors.description && (
+              <p className={styles['error-message']}>
+                {errors.description.message}
+              </p>
+            )}
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>마감일</label>
@@ -205,19 +242,15 @@ export default function TodoEditModal({ card }: { card: ICard }) {
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>태그</label>
-            <textarea
-              className={styles['date-input']}
-              placeholder='라벨칩'
-              {...register('tags')}
-            />
+            <HashTagsInput tags={tags} setTags={setTags} />{' '}
           </div>
           <div className={styles['label-and-form']}>
             <label className={styles['form-label']}>이미지</label>
             <ImageInput
               name='user-profile'
-              value={currentImageUrl} // 수정: storedImageUrl 상태 전달
-              onChange={handleImageChange} // 수정: handleImageChange 함수 전달
-              onDeleteClick={handleImageDelete} // 수정: handleImageDelete 함수 전달
+              value={currentImageUrl}
+              onChange={handleImageChange}
+              onDeleteClick={handleImageDelete}
             />
           </div>
           <div className={styles['button-group']}>
@@ -231,6 +264,7 @@ export default function TodoEditModal({ card }: { card: ICard }) {
             <button
               type='submit'
               className={`${styles['button']} ${styles['yellow']}`}
+              disabled={!isFormValid}
             >
               수정
             </button>
