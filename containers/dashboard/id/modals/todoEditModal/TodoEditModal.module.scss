@@ -75,6 +75,10 @@
   line-height: 26px;
   color: $black-33;
   resize: none;
+  &:focus {
+    border-color: $main-yellow;
+    outline: none;
+  }
 }
 
 .form-input.form-description {
@@ -93,6 +97,10 @@
   color: $black-33;
   font-weight: 400;
   resize: none;
+  &:focus {
+    border-color: $main-yellow;
+    outline: none;
+  }
 }
 
 .sampleImg {
@@ -120,7 +128,21 @@
     color: $white;
     background-color: $main-yellow;
     border: 1px solid $main-yellow;
+
+    &:disabled {
+      background-color: $gray-d9 !important;
+      border: 1px solid $gray-d9;
+      color: $gray-78;
+      cursor: auto;
+    }
   }
+}
+.error-message {
+  color: $red;
+}
+
+.error-border {
+  border: 1px solid $red;
 }
 
 @include mobile {

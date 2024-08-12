@@ -1,9 +1,10 @@
 @use '@/styles/index.scss' as *;
 @import '@/styles/mixins/mixinChip';
+@import '@/styles/animations';
 
 .column {
   width: 355px;
-  height: 1010px;
+  height: 92vh;
   border-right: 1px solid $gray-ee;
   padding: 20px;
   @include Flex(column, null, null);
@@ -11,6 +12,21 @@
 
   &.is-dragging-over {
     outline: 1.5px solid $main-yellow;
+  }
+
+  &.dark {
+    border-right: 2px solid $dark-card;
+
+    @include tablet {
+      border-bottom: 2px solid $dark-card;
+    }
+    .setting-icon {
+      fill: rgba($white, 0.87);
+    }
+
+    .column-title {
+      color: rgba($white, 0.87);
+    }
   }
 
   @include tablet {
@@ -24,7 +40,7 @@
     padding: 16px 12px 12px;
   }
 
-  svg {
+  .circle-chip {
     @include GetCircleColor('violet');
   }
 
@@ -40,11 +56,11 @@
   .title {
     @include Flex(row, null, center);
     gap: 12px;
-    .column-title {
-      @include FontStyle(18, 700, 16, 14);
-      @include ResponsiveLineHeight(21.5, 21.5, 19);
-      color: $black-33;
-    }
+  }
+  .column-title {
+    @include FontStyle(18, 700, 16, 14);
+    @include ResponsiveLineHeight(21.5, 21.5, 19);
+    color: $black-33;
   }
 }
 
@@ -53,7 +69,6 @@
   overscroll-behavior: none;
   @include Flex(column, null, null);
   @include ResponsiveGap(16, 16, 10);
-  margin-bottom: 50px;
 
   button > div {
     justify-content: center;
@@ -61,15 +76,20 @@
 }
 
 .setting-icon {
+  fill: $gray-78;
+  transition: transform 0.3s ease;
+
   &:hover {
     cursor: pointer;
+    animation: rotateClockwise 0.5s ease;
+    transform: rotate(90deg); // 호버가 끝난 후 최종 위치
   }
 }
 
 .empty-column {
   margin-top: 30px;
   @include Flex(column, center, center);
-  opacity: 50%;
+  opacity: 35%;
 
   .big-logo {
     fill: $black-33;
@@ -89,4 +109,13 @@
   box-sizing: border-box;
   width: 100%;
   height: 2px;
+}
+
+.column-empty {
+  width: 100%;
+  height: 60vh;
+  @include Flex(row, center, center);
+  @include tablet {
+    height: 50vh;
+  }
 }
