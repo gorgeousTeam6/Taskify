@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './index.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '@/assets/logos/Logo.svg';
 import LogoMobile from '@/assets/logos/LogoImage.svg';
 import { useTheme } from '@/hooks/useThemeContext';
+import ThemeSwitch from '@/components/ThemeSwitch';
 
 export default function HeaderMain() {
   const { theme } = useTheme();
@@ -12,7 +12,12 @@ export default function HeaderMain() {
     <header className={`${styles['header-container']} ${styles[theme]}`}>
       <Link href='/'>
         <div className={`${styles['logo-container']}`}>
-          <Logo></Logo>
+          {theme === 'light' && (
+            <Image src='/LogoBlack.png' alt='' width={1080} height={330} />
+          )}
+          {theme === 'dark' && (
+            <Image src='/LogoLightGray.png' alt='' width={1080} height={330} />
+          )}
           <LogoMobile></LogoMobile>
         </div>
       </Link>
@@ -23,6 +28,7 @@ export default function HeaderMain() {
         <Link href='/signup'>
           <p>회원가입</p>
         </Link>
+        <ThemeSwitch />
       </div>
     </header>
   );

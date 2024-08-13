@@ -45,6 +45,11 @@
       display: inline-block;
     }
   }
+
+  > img {
+    @include ResponsiveWidth(144px, 144px, 36px);
+    @include ResponsiveHeight(36px, 36px, 36px);
+  }
 }
 
 .sign-container {
