@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.module.scss';
 import { IconCrown } from '@/assets/icongroup';
 import { useTheme } from '@/hooks/useThemeContext';
+import { useRouter } from 'next/router';
 
 export default function SideMenuItem({
   dashboardId,
@@ -10,10 +11,15 @@ export default function SideMenuItem({
   children,
 }: SideMenuItemProps) {
   const { theme } = useTheme();
+  const router = useRouter();
+  const { id } = router.query;
+
+  const isSelectedItem = String(dashboardId) === String(id) ? 'selected' : '';
+
   return (
     <div
       data-id={dashboardId}
-      className={`${styles['side-menu-item']} ${styles[theme]}`}
+      className={`${styles['side-menu-item']} ${styles[theme]} ${styles[isSelectedItem]}`}
     >
       <div className={`${styles['side-menu-item-container']}`}>
         <div

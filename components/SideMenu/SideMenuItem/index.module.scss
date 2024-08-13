@@ -10,6 +10,14 @@
 
   transition: background-color 0.3s ease;
 
+  &.selected {
+    background: rgba($back-yellow, 0.6);
+
+    &.dark {
+      background: rgba($dark-theme-hover, 0.6);
+    }
+  }
+
   &:hover {
     cursor: pointer;
     background: $back-yellow;
