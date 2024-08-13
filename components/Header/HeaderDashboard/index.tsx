@@ -28,7 +28,7 @@ export default function HeaderDashboard({ dashboardId }: HeaderDashboardProps) {
   }));
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ['dashboardDetail', currentId],
+    queryKey: ['dashboard', currentId],
     queryFn: () => fetchDashboards(currentId),
     enabled: currentId != 'undefined',
   });
